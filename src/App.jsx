@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import profileImage from './assets/profile.JPG';
 
 export default function App() {
   const [dark, setDark] = useState(false);
@@ -10,9 +11,9 @@ export default function App() {
   const [cursorVariant, setCursorVariant] = useState('default');
   const [scrollProgress, setScrollProgress] = useState(0);
   const [currentSection, setCurrentSection] = useState('home');
-  const [activeCard, setActiveCard] = useState(null);
   const [particles, setParticles] = useState([]);
-
+  const [typedText, setTypedText] = useState('');
+  const [showCursor, setShowCursor] = useState(true);
 
   const { scrollYProgress } = useScroll();
   const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
@@ -70,12 +71,43 @@ export default function App() {
   ];
 
   const skills = {
-    frontend: ["Vue.js", "Nuxt 3", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Bootstrap"],
-    backend: ["Node.js", "Express.js", "REST APIs", "Firebase", "MySQL"],
-    mobile: ["Flutter", "Dart", "Firebase Integration"],
-    tools: ["Git", "GitHub", "Google Cloud Platform", "Project Management", "Team Collaboration"],
-    databases: ["MySQL", "Firebase Firestore"],
-    languages: ["Burmese (Native)", "English (Fluent)", "Thai (Basic)", "Chinese (Basic)"]
+    frontend: [
+      { name: "Vue.js", level: 5 },
+      { name: "Nuxt 3", level: 5 },
+      { name: "JavaScript", level: 5 },
+      { name: "HTML5", level: 5 },
+      { name: "CSS3", level: 5 },
+      { name: "Tailwind CSS", level: 5 },
+      { name: "Bootstrap", level: 5 }
+    ],
+    backend: [
+      { name: "Node.js", level: 4 },
+      { name: "Express.js", level: 4 },
+      { name: "REST APIs", level: 3 },
+      { name: "Firebase", level: 5 },
+      { name: "MySQL", level: 4 }
+    ],
+    mobile: [
+      { name: "Flutter", level: 5 },
+      { name: "React", level: 3 }
+    ],
+    tools: [
+      { name: "Git", level: 4 },
+      { name: "GitHub", level: 5 },
+      { name: "Google Cloud Platform", level: 4 },
+      { name: "Firebase", level: 5 }
+    ],
+    databases: [
+      { name: "MySQL", level: 4 },
+      { name: "Firebase Firestore", level: 5 },
+      { name: "CloudSQL", level: 4 }
+    ],
+    languages: [
+      { name: "Burmese (Native)", level: 5 },
+      { name: "English (Fluent)", level: 4 },
+      { name: "Thai (Basic)", level: 2 },
+      { name: "Chinese (Basic)", level: 2 }
+    ]
   };
 
   const education = [
@@ -217,22 +249,44 @@ export default function App() {
     };
   }, []);
 
-  // Particle system
+  // Optimized particle system with reduced count
   useEffect(() => {
-    const generateParticles = () => {
-      // Generate fewer particles for better performance
-      const newParticles = Array.from({ length: 20 }, (_, i) => ({
-        id: i,
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        size: 2,
-        speedX: (Math.random() - 0.5) * 1,
-        speedY: (Math.random() - 0.5) * 1,
-        opacity: 0.4,
-      }));
-      setParticles(newParticles);
+    // Reduce particles further for better performance
+    const newParticles = Array.from({ length: 12 }, (_, i) => ({
+      id: i,
+      x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
+      y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
+      size: 1.5,
+      speedX: (Math.random() - 0.5) * 0.5,
+      speedY: (Math.random() - 0.5) * 0.5,
+      opacity: 0.3,
+    }));
+    setParticles(newParticles);
+  }, []);
+
+  // Typing effect for "Full-Stack Developer"
+  useEffect(() => {
+    const text = "Full-Stack Developer";
+    let currentIndex = 0;
+    
+    const typeTimer = setInterval(() => {
+      if (currentIndex <= text.length) {
+        setTypedText(text.slice(0, currentIndex));
+        currentIndex++;
+      } else {
+        clearInterval(typeTimer);
+      }
+    }, 100);
+
+    // Cursor blinking effect
+    const cursorTimer = setInterval(() => {
+      setShowCursor(prev => !prev);
+    }, 500);
+
+    return () => {
+      clearInterval(typeTimer);
+      clearInterval(cursorTimer);
     };
-    generateParticles();
   }, []);
 
   useEffect(() => {
@@ -489,16 +543,12 @@ export default function App() {
                   }}
                   transition={{ duration: 3, repeat: Infinity }}
                 >
-                  MIN THEIN
+                  MIN THEIN{" "}
+                  <span className="text-cyan-400">(Leo)</span>
                 </motion.span>
               </h1>
               
-              {/* Glitch overlay effect */}
-              <div className="absolute inset-0 opacity-0 hover:opacity-20 transition-opacity duration-300">
-                <div className="text-6xl lg:text-8xl font-black text-red-500 transform translate-x-1 -translate-y-1">
-                  PHYO MIN THEIN
-                </div>
-              </div>
+
             </motion.div>
 
             {/* Static Professional Title */}
@@ -510,7 +560,8 @@ export default function App() {
                 transition={{ duration: 0.8 }}
               >
                 <span className="bg-gradient-to-r from-emerald-400 to-cyan-500 bg-clip-text text-transparent">
-                  Full-Stack Developer & Software Engineer
+                  {typedText}
+                  {showCursor && <span className="animate-pulse">|</span>}
                 </span>
               </motion.div>
             </div>
@@ -563,7 +614,7 @@ export default function App() {
               </motion.a>
 
               <motion.a
-                href="mailto:phyominthein.leo@gmail.com"
+href="mailto:phyominthein.leo@gmail.com"
                 className="group px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-bold rounded-2xl hover:bg-white/20 transition-all duration-300 shadow-lg border border-white/20"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
@@ -593,60 +644,17 @@ export default function App() {
                   whileHover={{ z: 50 }}
                   style={{ transformStyle: "preserve-3d" }}
                 >
-                  {/* Floating Code Elements */}
-                  <div className="absolute inset-0 p-8 flex flex-col justify-center items-center space-y-6">
-                    {['Vue.js', 'Node.js', 'Flutter', 'Firebase', 'MySQL'].map((tech, index) => (
-                      <motion.div
-                        key={tech}
-                        className="bg-gradient-to-r from-cyan-500/20 to-blue-600/20 backdrop-blur-sm px-4 py-2 rounded-full border border-cyan-400/30 text-cyan-300 font-semibold"
-                        animate={{
-                          y: [0, -10, 0],
-                          rotate: [0, 5, 0],
-                        }}
-                        transition={{
-                          duration: 2 + index * 0.5,
-                          repeat: Infinity,
-                          delay: index * 0.2,
-                        }}
-                        whileHover={{ scale: 1.1, z: 20 }}
-                      >
-                        {tech}
-                      </motion.div>
-                    ))}
+                  {/* Profile Photo */}
+                  <div className="absolute inset-0 overflow-hidden rounded-3xl">
+                    <img
+                      src={profileImage}
+                      alt="Phyo Min Thein (Leo)"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-
-                  {/* Animated Avatar */}
-                  <motion.div
-                    className="absolute top-8 right-8 w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full flex items-center justify-center text-2xl shadow-lg"
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  >
-                    👨‍💻
-                  </motion.div>
                 </motion.div>
 
-                {/* Floating Elements Around Card */}
-                {[...Array(8)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute w-3 h-3 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
-                    animate={{
-                      x: [0, Math.cos(i * 45 * Math.PI / 180) * 100],
-                      y: [0, Math.sin(i * 45 * Math.PI / 180) * 100],
-                      scale: [1, 0.5, 1],
-                      opacity: [0.7, 0.3, 0.7],
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      delay: i * 0.5,
-                    }}
-                    style={{
-                      left: '50%',
-                      top: '50%',
-                    }}
-                  />
-                ))}
+
               </motion.div>
             </div>
           </motion.div>
@@ -703,8 +711,8 @@ export default function App() {
               {/* Left Side - Floating Text Cards */}
               <div className="space-y-8">
                 {[
-                  "I'm a dedicated software engineering student with a passion for building web, mobile, and backend applications. My experience spans from Vue.js and Node.js development to Flutter mobile apps and cloud platforms.",
-                  "I've gained real-world experience through marketing and customer service roles, which taught me the importance of user-centered design and effective communication in technology solutions."
+                  "4th-year Software Engineering student at Mae Fah Luang University with hands-on experience in full-stack development and cloud platforms. Skilled in building web, mobile, and backend applications using Vue.js, Nuxt 3, Node.js, Flutter, Firebase, GCP, and MySQL.",
+                  "Passionate about solving problems, developing scalable solutions, and continuously learning emerging technologies. Eager to contribute to a development team and gain real-world industry experience."
                 ].map((text, index) => (
                   <motion.div
                     key={index}
@@ -1110,195 +1118,155 @@ export default function App() {
         </div>
       </section>
 
-      {/* Revolutionary Skills Matrix */}
-      <section id="skills" className="py-20 px-6 relative overflow-hidden">
-        {/* Matrix Background Effect */}
-        <div className="absolute inset-0 opacity-5">
+      {/* Professional Skills Matrix */}
+      <section id="skills" className="py-20 px-6 relative overflow-hidden bg-gradient-to-br from-slate-50/5 to-gray-100/5">
+        {/* Subtle Grid Background */}
+        <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
             backgroundImage: `
-              radial-gradient(circle at 25% 25%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
-              radial-gradient(circle at 75% 75%, rgba(139, 92, 246, 0.1) 0%, transparent 50%)
+              linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px)
             `,
+            backgroundSize: '40px 40px'
           }} />
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 100 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 0.8 }}
           >
-            {/* Holographic Title */}
-            <motion.h2 
-              className="text-6xl lg:text-8xl font-black text-center mb-20 bg-gradient-to-r from-green-400 via-cyan-500 to-blue-600 bg-clip-text text-transparent"
-              animate={{ 
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-              }}
-              transition={{ duration: 6, repeat: Infinity }}
-            >
-              SKILLS MATRIX
-            </motion.h2>
+            {/* Professional Title */}
+            <div className="text-center mb-16">
+              <motion.h2 
+                className="text-4xl lg:text-6xl font-bold mb-4 text-white"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                Technical <span className="text-cyan-400">Skills</span>
+              </motion.h2>
+              <motion.p 
+                className="text-xl text-gray-300 max-w-2xl mx-auto"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                Comprehensive expertise across modern development technologies
+              </motion.p>
+            </div>
 
-            {/* Hexagonal Skills Grid */}
-            <div className="grid lg:grid-cols-3 gap-12">
-              {Object.entries(skills).map(([category, skillList], categoryIndex) => (
-                <motion.div
-                  key={category}
-                  className="relative group"
-                  initial={{ opacity: 0, scale: 0.5, rotateY: -90 }}
-                  whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1, delay: categoryIndex * 0.2 }}
-                  whileHover={{ scale: 1.05, z: 30 }}
-                  style={{ transformStyle: "preserve-3d" }}
-                >
-                  {/* Category Glow */}
-                  <div className={`absolute inset-0 bg-gradient-to-r ${
-                    categoryIndex === 0 ? 'from-green-500/20 to-emerald-500/20' :
-                    categoryIndex === 1 ? 'from-cyan-500/20 to-blue-500/20' :
-                    categoryIndex === 2 ? 'from-blue-500/20 to-indigo-500/20' :
-                    categoryIndex === 3 ? 'from-indigo-500/20 to-purple-500/20' :
-                    categoryIndex === 4 ? 'from-purple-500/20 to-pink-500/20' :
-                    'from-pink-500/20 to-red-500/20'
-                  } rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500`} />
-                  
-                  {/* Main Skills Container */}
-                  <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:border-cyan-400/50 transition-all duration-300 min-h-[400px]">
-                    {/* Category Icon & Title */}
-                    <div className="text-center mb-8">
-                      <motion.div
-                        className={`w-20 h-20 mx-auto mb-4 bg-gradient-to-br ${
-                          categoryIndex === 0 ? 'from-green-400 to-emerald-600' :
-                          categoryIndex === 1 ? 'from-cyan-400 to-blue-600' :
-                          categoryIndex === 2 ? 'from-blue-400 to-indigo-600' :
-                          categoryIndex === 3 ? 'from-indigo-400 to-purple-600' :
-                          categoryIndex === 4 ? 'from-purple-400 to-pink-600' :
-                          'from-pink-400 to-red-600'
-                        } rounded-2xl flex items-center justify-center text-3xl shadow-2xl`}
-                        animate={{ 
-                          rotateY: [0, 360],
-                          scale: [1, 1.1, 1]
-                        }}
-                        transition={{ 
-                          duration: 8, 
-                          repeat: Infinity,
-                          delay: categoryIndex * 0.5
-                        }}
-                      >
-                        {categoryIndex === 0 ? '🎨' : 
-                         categoryIndex === 1 ? '⚡' : 
-                         categoryIndex === 2 ? '📱' : 
-                         categoryIndex === 3 ? '🛠️' : 
-                         categoryIndex === 4 ? '💾' : '🌍'}
-                      </motion.div>
+            {/* Professional Skills Grid */}
+            <div className="grid lg:grid-cols-3 gap-8">
+              {Object.entries(skills).map(([category, skillList], categoryIndex) => {
+                const getIcon = (index) => {
+                  const icons = ['⚛️', '⚙️', '📱', '🛠️', '🗄️', '🌍'];
+                  return icons[index] || '🔧';
+                };
+                
+                const getColor = (index) => {
+                  const colors = [
+                    'from-emerald-500 to-teal-600',
+                    'from-blue-500 to-indigo-600', 
+                    'from-purple-500 to-violet-600',
+                    'from-orange-500 to-red-600',
+                    'from-pink-500 to-rose-600',
+                    'from-cyan-500 to-blue-600'
+                  ];
+                  return colors[index] || 'from-gray-500 to-gray-600';
+                };
 
-                      <motion.h3 
-                        className="text-2xl font-black capitalize bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
-                        whileHover={{ scale: 1.05 }}
-                      >
-                        {category}
-                      </motion.h3>
-                    </div>
+                return (
+                  <motion.div
+                    key={category}
+                    className="relative group"
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
+                  >
+                    {/* Professional Card */}
+                    <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-cyan-400/30 transition-all duration-300 h-full">
+                      {/* Header */}
+                      <div className="flex items-center mb-6">
+                        <div className={`w-12 h-12 bg-gradient-to-r ${getColor(categoryIndex)} rounded-xl flex items-center justify-center text-xl mr-4 shadow-lg`}>
+                          {getIcon(categoryIndex)}
+                        </div>
+                        <h3 className="text-xl font-bold text-white capitalize">
+                          {category}
+                        </h3>
+                      </div>
 
-                    {/* Skills Hexagon Grid */}
-                    <div className="grid grid-cols-2 gap-3">
-                      {skillList.map((skill, skillIndex) => (
-                        <motion.div
-                          key={skill}
-                          className="group/skill relative"
-                          initial={{ opacity: 0, scale: 0 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ 
-                            delay: categoryIndex * 0.2 + skillIndex * 0.1, 
-                            duration: 0.5,
-                            type: "spring",
-                            stiffness: 200
-                          }}
-                          whileHover={{ 
-                            scale: 1.1, 
-                            z: 20,
-                            rotateY: 10
-                          }}
-                          onMouseEnter={() => setActiveCard(`${category}-${skillIndex}`)}
-                          onMouseLeave={() => setActiveCard(null)}
-                        >
-                          {/* Skill Glow */}
-                          <div className={`absolute inset-0 bg-gradient-to-r ${
-                            categoryIndex === 0 ? 'from-green-400/30 to-emerald-400/30' :
-                            categoryIndex === 1 ? 'from-cyan-400/30 to-blue-400/30' :
-                            categoryIndex === 2 ? 'from-blue-400/30 to-indigo-400/30' :
-                            categoryIndex === 3 ? 'from-indigo-400/30 to-purple-400/30' :
-                            categoryIndex === 4 ? 'from-purple-400/30 to-pink-400/30' :
-                            'from-pink-400/30 to-red-400/30'
-                          } rounded-xl blur-lg opacity-0 group-hover/skill:opacity-100 transition-all duration-300`} />
-                          
-                          {/* Skill Badge */}
-                          <div className={`relative bg-gradient-to-r ${
-                            categoryIndex === 0 ? 'from-green-500/20 to-emerald-500/20' :
-                            categoryIndex === 1 ? 'from-cyan-500/20 to-blue-500/20' :
-                            categoryIndex === 2 ? 'from-blue-500/20 to-indigo-500/20' :
-                            categoryIndex === 3 ? 'from-indigo-500/20 to-purple-500/20' :
-                            categoryIndex === 4 ? 'from-purple-500/20 to-pink-500/20' :
-                            'from-pink-500/20 to-red-500/20'
-                          } backdrop-blur-sm border border-white/10 rounded-xl p-3 text-center hover:border-white/30 transition-all duration-300`}>
-                            <span className="text-sm font-bold text-white">
-                              {skill}
+                      {/* Skills List */}
+                      <div className="space-y-3">
+                        {skillList.map((skill, skillIndex) => (
+                          <motion.div
+                            key={skill.name}
+                            className="flex items-center justify-between p-3 bg-white/5 rounded-lg border border-white/5 hover:bg-white/10 hover:border-cyan-400/20 transition-all duration-300"
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ 
+                              duration: 0.4, 
+                              delay: 0.2 + skillIndex * 0.05
+                            }}
+                          >
+                            <span className="text-gray-200 font-medium text-sm">
+                              {skill.name}
                             </span>
                             
-                            {/* Animated Border */}
-                            <motion.div
-                              className={`absolute inset-0 rounded-xl border-2 ${
-                                categoryIndex === 0 ? 'border-green-400' :
-                                categoryIndex === 1 ? 'border-cyan-400' :
-                                categoryIndex === 2 ? 'border-blue-400' :
-                                categoryIndex === 3 ? 'border-indigo-400' :
-                                categoryIndex === 4 ? 'border-purple-400' :
-                                'border-pink-400'
-                              } opacity-0 group-hover/skill:opacity-100`}
-                              animate={activeCard === `${category}-${skillIndex}` ? {
-                                scale: [1, 1.05, 1],
-                                opacity: [0, 1, 0]
-                              } : {}}
-                              transition={{ duration: 1, repeat: Infinity }}
-                            />
-                          </div>
-                        </motion.div>
-                      ))}
+                            {/* Professional Skill Level Indicator */}
+                            <div className="flex items-center space-x-1">
+                              {[1, 2, 3, 4, 5].map((level) => (
+                                <motion.div
+                                  key={level}
+                                  className={`w-2 h-2 rounded-full ${
+                                    level <= skill.level 
+                                      ? `bg-gradient-to-r ${getColor(categoryIndex)}` 
+                                      : 'bg-white/20'
+                                  }`}
+                                  initial={{ scale: 0 }}
+                                  whileInView={{ scale: 1 }}
+                                  viewport={{ once: true }}
+                                  transition={{ 
+                                    duration: 0.3, 
+                                    delay: 0.4 + skillIndex * 0.05 + level * 0.02
+                                  }}
+                                />
+                              ))}
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
                     </div>
-
-                    {/* Optimized Tech Particles */}
-                    {[...Array(2)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        className={`absolute w-1 h-1 bg-gradient-to-r ${
-                          categoryIndex === 0 ? 'from-green-400 to-emerald-400' :
-                          categoryIndex === 1 ? 'from-cyan-400 to-blue-400' :
-                          categoryIndex === 2 ? 'from-blue-400 to-indigo-400' :
-                          categoryIndex === 3 ? 'from-indigo-400 to-purple-400' :
-                          categoryIndex === 4 ? 'from-purple-400 to-pink-400' :
-                          'from-pink-400 to-red-400'
-                        } rounded-full`}
-                        animate={{
-                          scale: [1, 0.5, 1],
-                          opacity: [0.5, 0.2, 0.5],
-                        }}
-                        transition={{
-                          duration: 4,
-                          repeat: Infinity,
-                          delay: i * 1,
-                        }}
-                        style={{
-                          left: i === 0 ? '30%' : '70%',
-                          top: '40%',
-                        }}
-                      />
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                );
+              })}
             </div>
+            
+            {/* Professional Summary */}
+            <motion.div 
+              className="mt-16 text-center"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+            >
+              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 max-w-4xl mx-auto">
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  Technical Proficiency
+                </h3>
+                <p className="text-gray-300 leading-relaxed">
+                  Experienced in full-stack development with expertise spanning modern frontend frameworks, 
+                  robust backend systems, cross-platform mobile development, and cloud infrastructure. 
+                  Committed to writing clean, maintainable code and following industry best practices.
+                </p>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -1974,15 +1942,6 @@ export default function App() {
               <p className="text-gray-400 mb-2">
                 &copy; 2025 <span className="text-cyan-400 font-semibold">Phyo Min Thein</span>. 
                 All rights reserved.
-              </p>
-              <p className="text-gray-500 text-sm">
-                Crafted with <motion.span 
-                  className="text-red-400"
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 1, repeat: Infinity }}
-                >
-                  ❤️
-                </motion.span> using React, Framer Motion & Tailwind CSS
               </p>
             </motion.div>
           </motion.div>
