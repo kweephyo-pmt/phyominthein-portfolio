@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import profileImage from './assets/profile.JPG';
+import cvFile from './assets/Phyo Min Thein(CV).jpg';
 
 export default function App() {
   const [dark, setDark] = useState(false);
@@ -620,6 +621,24 @@ href="mailto:phyominthein.leo@gmail.com"
                 whileTap={{ scale: 0.95 }}
               >
                 📧 Email Me
+              </motion.a>
+
+              <motion.a
+                href={cvFile}
+                download="Phyo_Min_Thein_CV.jpg"
+                className="group px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-600 text-white font-bold rounded-2xl overflow-hidden shadow-2xl hover:shadow-purple-500/25 transition-all duration-300"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  📄 Download CV
+                </span>
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-pink-600 to-purple-700"
+                  initial={{ x: "100%" }}
+                  whileHover={{ x: "0%" }}
+                  transition={{ duration: 0.3 }}
+                />
               </motion.a>
             </motion.div>
           </motion.div>
