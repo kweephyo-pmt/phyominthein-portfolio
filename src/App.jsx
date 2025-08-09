@@ -626,19 +626,11 @@ href="mailto:phyominthein.leo@gmail.com"
               <motion.a
                 href={cvFile}
                 download="Phyo_Min_Thein_CV.jpg"
-                className="group px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-600 text-white font-bold rounded-2xl overflow-hidden shadow-2xl hover:shadow-purple-500/25 transition-all duration-300"
+                className="group px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold rounded-2xl hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <span className="relative z-10 flex items-center gap-2">
-                  📄 Download CV
-                </span>
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-pink-600 to-purple-700"
-                  initial={{ x: "100%" }}
-                  whileHover={{ x: "0%" }}
-                  transition={{ duration: 0.3 }}
-                />
+                📄 Download CV
               </motion.a>
             </motion.div>
           </motion.div>
@@ -1839,7 +1831,7 @@ href="mailto:phyominthein.leo@gmail.com"
                 </p>
                 
                 {/* Tech Stack Badges */}
-                <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
+                <div className="flex flex-wrap gap-2 justify-center lg:justify-start mb-6">
                   {['React', 'Node.js', 'Python', 'TypeScript'].map((tech, index) => (
                     <motion.span
                       key={tech}
@@ -1854,6 +1846,38 @@ href="mailto:phyominthein.leo@gmail.com"
                     </motion.span>
                   ))}
                 </div>
+
+                {/* Download CV Button */}
+                <motion.div
+                  className="flex justify-center lg:justify-start"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.8 }}
+                >
+                  <motion.a
+                    href={cvFile}
+                    download="Phyo_Min_Thein_CV.jpg"
+                    className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 group"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <svg 
+                      className="w-5 h-5 mr-2 group-hover:animate-bounce" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth={2} 
+                        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" 
+                      />
+                    </svg>
+                    Download CV
+                  </motion.a>
+                </motion.div>
               </motion.div>
 
               {/* Quick Links */}
