@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favicon Generator - Leo's Portfolio</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f172a;
+            color: white;
+            padding: 40px;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #06b6d4;
+            margin-bottom: 40px;
+        }
+        
+        .favicon-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .favicon-item {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #334155;
+        }
+        
+        .favicon-display {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .size-label {
+            font-weight: 600;
+            color: #06b6d4;
+            margin-bottom: 10px;
+        }
+        
+        .instructions {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid #334155;
+        }
+        
+        .instructions h2 {
+            color: #06b6d4;
+            margin-top: 0;
+        }
+        
+        .step {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .step:before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #06b6d4;
+            color: #0f172a;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .instructions ol {
+            counter-reset: step-counter;
+            list-style: none;
+            padding: 0;
+        }
+        
+        code {
+            background: #0f172a;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #06b6d4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Leo's Portfolio Favicon Generator</h1>
+        
+        <div class="favicon-preview">
+            <div class="favicon-item">
+                <div class="size-label">16x16 - Browser Tab</div>
+                <div class="favicon-display">
+                    <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="grad16" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <rect width="16" height="16" rx="3" fill="url(#grad16)"/>
+                        <text x="8" y="12" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">L</text>
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="favicon-item">
+                <div class="size-label">32x32 - Browser Tab</div>
+                <div class="favicon-display">
+                    <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="grad32" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <rect width="32" height="32" rx="6" fill="url(#grad32)"/>
+                        <text x="16" y="22" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">L</text>
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="favicon-item">
+                <div class="size-label">180x180 - Apple Touch</div>
+                <div class="favicon-display">
+                    <svg width="60" height="60" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="grad180" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <rect width="180" height="180" rx="32" fill="url(#grad180)"/>
+                        <text x="90" y="120" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="100" font-weight="bold">L</text>
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="favicon-item">
+                <div class="size-label">192x192 - Android</div>
+                <div class="favicon-display">
+                    <svg width="60" height="60" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="grad192" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <rect width="192" height="192" rx="34" fill="url(#grad192)"/>
+                        <text x="96" y="130" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="110" font-weight="bold">L</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h2>📋 How to Generate Your Favicons</h2>
+            <ol>
+                <li class="step">Right-click on each SVG above and select <code>"Save image as..."</code></li>
+                <li class="step">Save them with these exact names:
+                    <ul style="margin-top: 10px;">
+                        <li><code>favicon-16x16.png</code> (16x16 version)</li>
+                        <li><code>favicon-32x32.png</code> (32x32 version)</li>
+                        <li><code>apple-touch-icon.png</code> (180x180 version)</li>
+                        <li><code>android-chrome-192x192.png</code> (192x192 version)</li>
+                    </ul>
+                </li>
+                <li class="step">Create a main <code>favicon.ico</code> using an online converter like <code>favicon.io</code></li>
+                <li class="step">Place all files in your <code>/public/</code> folder</li>
+                <li class="step">Update your HTML head section with the favicon links</li>
+            </ol>
+            
+            <h3 style="color: #06b6d4; margin-top: 30px;">🔗 HTML Head Tags to Add:</h3>
+            <pre style="background: #0f172a; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 14px;"><code>&lt;link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png"&gt;
+&lt;link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png"&gt;
+&lt;link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png"&gt;
+&lt;link rel="icon" type="image/png" sizes="192x192" href="%PUBLIC_URL%/android-chrome-192x192.png"&gt;</code></pre>
+        </div>
+    </div>
+</body>
+</html>
