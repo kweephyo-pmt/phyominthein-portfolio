@@ -309,7 +309,7 @@ export default function App() {
 
 
   return (
-    <div className={`min-h-screen font-sans transition-all duration-700 ${dark ? 'bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 text-gray-900' : 'bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 text-white'} relative overflow-hidden`}>
+    <div className={`min-h-screen font-sans transition-all duration-700 ${dark ? 'bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 text-white' : 'bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 text-gray-900'} relative overflow-hidden`}>
       
       {/* Enhanced Custom Cursor */}
       <motion.div
@@ -569,7 +569,7 @@ export default function App() {
 
             {/* Enhanced Description */}
             <motion.p 
-              className="text-xl lg:text-2xl leading-relaxed text-gray-300 dark:text-gray-800 max-w-2xl"
+              className="text-xl lg:text-2xl leading-relaxed text-gray-700 dark:text-gray-300 max-w-2xl"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
@@ -607,7 +607,7 @@ export default function App() {
 
               <motion.a
                 href="#contact"
-                className="group px-8 py-4 border-2 border-cyan-400 text-cyan-400 font-bold rounded-2xl backdrop-blur-sm hover:bg-cyan-400 hover:text-gray-900 transition-all duration-300 shadow-lg"
+                className="group px-8 py-4 bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-bold rounded-2xl hover:from-purple-600 hover:to-indigo-700 transition-all duration-300 shadow-lg"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -615,10 +615,10 @@ export default function App() {
               </motion.a>
 
               <motion.a
-href="mailto:phyominthein.leo@gmail.com"
-                className="group px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-bold rounded-2xl hover:bg-white/20 transition-all duration-300 shadow-lg border border-white/20"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
+              href="mailto:phyominthein.leo@gmail.com"
+              className="group px-8 py-4 bg-gradient-to-r from-slate-600 to-gray-700 text-white font-bold rounded-2xl hover:from-slate-700 hover:to-gray-800 transition-all duration-300 shadow-lg"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
               >
                 📧 Email Me
               </motion.a>
@@ -736,7 +736,7 @@ href="mailto:phyominthein.leo@gmail.com"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300" />
                     <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 hover:border-cyan-400/50 transition-all duration-300">
-                      <p className="text-xl leading-relaxed text-gray-200 dark:text-gray-800">
+                      <p className="text-xl leading-relaxed text-gray-700 dark:text-gray-200">
                         {text}
                       </p>
                     </div>
@@ -792,7 +792,7 @@ href="mailto:phyominthein.leo@gmail.com"
                           >
                             {item.title}
                           </motion.h3>
-                          <p className="text-gray-300 dark:text-gray-800 leading-relaxed">
+                          <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                             {item.value}
                           </p>
                         </div>
@@ -919,7 +919,7 @@ href="mailto:phyominthein.leo@gmail.com"
                                     animate={{ scale: [1, 1.2, 1] }}
                                     transition={{ duration: 2, repeat: Infinity, delay: idx * 0.2 }}
                                   />
-                                  <p className="text-gray-200 dark:text-gray-800 leading-relaxed">
+                                  <p className="text-gray-700 dark:text-gray-200 leading-relaxed">
                                     {resp}
                                   </p>
                                 </motion.div>
@@ -1092,7 +1092,7 @@ href="mailto:phyominthein.leo@gmail.com"
                           {edu.period}
                         </motion.div>
                         
-                        <p className="text-gray-300 dark:text-gray-800 flex items-center justify-center gap-2">
+                        <p className="text-gray-700 dark:text-gray-300 flex items-center justify-center gap-2">
                           <span>📍</span>
                           {edu.location}
                         </p>
@@ -1152,7 +1152,7 @@ href="mailto:phyominthein.leo@gmail.com"
             {/* Professional Title */}
             <div className="text-center mb-16">
               <motion.h2 
-                className="text-4xl lg:text-6xl font-bold mb-4 text-white"
+                className="text-4xl lg:text-6xl font-bold mb-4 text-gray-900 dark:text-white"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -1207,7 +1207,7 @@ href="mailto:phyominthein.leo@gmail.com"
                         <div className={`w-12 h-12 bg-gradient-to-r ${getColor(categoryIndex)} rounded-xl flex items-center justify-center text-xl mr-4 shadow-lg`}>
                           {getIcon(categoryIndex)}
                         </div>
-                        <h3 className="text-xl font-bold text-white capitalize">
+                        <h3 className="text-xl font-bold text-gray-900 dark:text-white capitalize">
                           {category}
                         </h3>
                       </div>
@@ -1226,7 +1226,7 @@ href="mailto:phyominthein.leo@gmail.com"
                               delay: 0.2 + skillIndex * 0.05
                             }}
                           >
-                            <span className="text-gray-200 font-medium text-sm">
+                            <span className="text-gray-800 dark:text-gray-200 font-medium text-sm">
                               {skill.name}
                             </span>
                             
@@ -1268,10 +1268,10 @@ href="mailto:phyominthein.leo@gmail.com"
               transition={{ duration: 0.6, delay: 0.8 }}
             >
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 max-w-4xl mx-auto">
-                <h3 className="text-2xl font-bold text-white mb-4">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                   Technical Proficiency
                 </h3>
-                <p className="text-gray-300 leading-relaxed">
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                   Experienced in full-stack development with expertise spanning modern frontend frameworks, 
                   robust backend systems, cross-platform mobile development, and cloud infrastructure. 
                   Committed to writing clean, maintainable code and following industry best practices.
@@ -1406,14 +1406,14 @@ href="mailto:phyominthein.leo@gmail.com"
 
                       {/* Project Title */}
                       <motion.h3 
-                        className="text-2xl font-black mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+                        className="text-2xl font-black mb-4 bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent"
                         whileHover={{ scale: 1.02 }}
                       >
                         {project.title}
                       </motion.h3>
 
                       {/* Project Description */}
-                      <p className="text-gray-300 dark:text-gray-800 mb-6 leading-relaxed flex-grow">
+                      <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed flex-grow">
                         {project.desc}
                       </p>
 
@@ -1531,7 +1531,7 @@ href="mailto:phyominthein.leo@gmail.com"
 
             {/* Subtitle */}
             <motion.p 
-              className="text-xl text-center mb-16 text-gray-300 max-w-3xl mx-auto leading-relaxed"
+              className="text-xl text-center mb-16 text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -1578,14 +1578,14 @@ href="mailto:phyominthein.leo@gmail.com"
                         🌐 LET'S CONNECT
                       </motion.h3>
                       <motion.p 
-                        className="text-xl text-gray-300 dark:text-gray-700 max-w-2xl mx-auto leading-relaxed"
+                        className="text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed"
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: 0.4 }}
                       >
                         Ready to collaborate on exciting projects or discuss opportunities? 
-                        <span className="text-cyan-400 font-semibold"> Reach out through any of these channels!</span>
+                        <span className="text-blue-600 dark:text-cyan-400 font-semibold"> Reach out through any of these channels!</span>
                       </motion.p>
                     </motion.div>
 
@@ -1660,14 +1660,14 @@ href="mailto:phyominthein.leo@gmail.com"
                               
                               <div className="flex-1 min-w-0">
                                 <motion.h4 
-                                  className="text-lg font-bold text-white mb-1"
+                                  className="text-lg font-bold text-gray-900 dark:text-white mb-1"
                                   whileHover={{ x: 5 }}
                                 >
                                   {contact.label}
                                 </motion.h4>
-                                <p className="text-sm text-gray-400 mb-2">{contact.description}</p>
+                                <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">{contact.description}</p>
                                 <motion.p
-                                  className="text-cyan-400 hover:text-purple-400 font-semibold transition-colors duration-300 break-all text-sm"
+                                  className="text-blue-600 dark:text-cyan-400 hover:text-purple-600 dark:hover:text-purple-400 font-semibold transition-colors duration-300 break-all text-sm"
                                   whileHover={{ scale: 1.02 }}
                                 >
                                   {contact.value}
@@ -1675,7 +1675,7 @@ href="mailto:phyominthein.leo@gmail.com"
                               </div>
                               
                               <motion.div
-                                className="text-cyan-400/60 text-xl"
+                                className="text-blue-600/60 dark:text-cyan-400/60 text-xl"
                                 animate={{ 
                                   rotate: [0, 15, 0],
                                   scale: [1, 1.1, 1]
@@ -1725,7 +1725,7 @@ href="mailto:phyominthein.leo@gmail.com"
                         >
                           ⚡
                         </motion.span>
-                        <span className="text-lg font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+                        <span className="text-blue-600 dark:text-cyan-400 font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
                           Available for exciting opportunities!
                         </span>
                         <motion.span
@@ -1827,7 +1827,7 @@ href="mailto:phyominthein.leo@gmail.com"
                 </motion.h3>
                 <p className="text-gray-300 leading-relaxed mb-6">
                   Full-Stack Developer crafting the future with innovative web solutions. 
-                  <span className="text-cyan-400 font-semibold"> Ready to build tomorrow's technology today.</span>
+                  <span className="text-blue-600 dark:text-cyan-400 font-semibold"> Ready to build tomorrow's technology today.</span>
                 </p>
                 
                 {/* Tech Stack Badges */}
@@ -1888,7 +1888,7 @@ href="mailto:phyominthein.leo@gmail.com"
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                <h4 className="text-xl font-bold mb-6 text-white">Quick Navigation</h4>
+                <h4 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">Quick Navigation</h4>
                 <div className="space-y-3">
                   {['About', 'Experience', 'Skills', 'Projects', 'Contact'].map((item, index) => (
                     <motion.a
@@ -1915,7 +1915,7 @@ href="mailto:phyominthein.leo@gmail.com"
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                <h4 className="text-xl font-bold mb-6 text-white">Let's Connect</h4>
+                <h4 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">Let's Connect</h4>
                 
                 {/* Social Links */}
                 <div className="flex gap-4 justify-center lg:justify-end mb-6">
