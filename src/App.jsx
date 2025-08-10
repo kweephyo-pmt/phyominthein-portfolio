@@ -313,7 +313,7 @@ export default function App() {
       
       {/* Enhanced Custom Cursor */}
       <motion.div
-        className="fixed pointer-events-none z-50"
+        className="fixed pointer-events-none z-50 hidden md:block"
         animate={{ 
           x: mousePosition.x - (cursorVariant === 'hover' ? 20 : 12), 
           y: mousePosition.y - (cursorVariant === 'hover' ? 20 : 12) 
