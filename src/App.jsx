@@ -4,7 +4,7 @@ import profileImage from './assets/profile.JPG';
 import cvFile from './assets/Phyo Min Thein(CV).jpg';
 
 export default function App() {
-  const [dark, setDark] = useState(false);
+  const [dark, setDark] = useState(true);
   const [showTop, setShowTop] = useState(false);
   const [filter, setFilter] = useState("all");
 
