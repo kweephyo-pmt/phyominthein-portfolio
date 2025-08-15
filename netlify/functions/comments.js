@@ -2,8 +2,8 @@ const { Pool } = require('pg');
 
 // Initialize PostgreSQL connection pool
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+  connectionString: process.env.DATABASE_URL || 'postgresql://neondb_owner:npg_Ckarm2wiKYL4@ep-patient-block-aew7smru-pooler.c-2.us-east-2.aws.neon.tech/neondb?channel_binding=require&sslmode=require',
+  ssl: { rejectUnauthorized: false },
 });
 
 exports.handler = async (event, context) => {
@@ -24,6 +24,10 @@ exports.handler = async (event, context) => {
 
   try {
     if (event.httpMethod === 'GET') {
+      // Debug logging
+      console.log('DATABASE_URL exists:', !!process.env.DATABASE_URL);
+      console.log('Connection string preview:', process.env.DATABASE_URL ? process.env.DATABASE_URL.substring(0, 30) + '...' : 'fallback used');
+      
       // Test database connection first
       await pool.query('SELECT 1');
       
