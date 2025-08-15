@@ -47,6 +47,17 @@ export default function App() {
   
   // Comments hook
   const { comments, loading: commentsLoading, error: commentsError, addComment, formatTimeAgo } = useComments();
+  
+  // Notification state
+  const [notification, setNotification] = useState({ show: false, message: '', type: 'success' });
+  
+  // Show custom notification
+  const showNotification = (message, type = 'success') => {
+    setNotification({ show: true, message, type });
+    setTimeout(() => {
+      setNotification({ show: false, message: '', type: 'success' });
+    }, 4000);
+  };
 
   const { scrollYProgress } = useScroll();
   const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
@@ -2042,7 +2053,7 @@ export default function App() {
                   if (photoFile && photoFile.size > 0) {
                     // Check file size (5MB limit)
                     if (photoFile.size > 5 * 1024 * 1024) {
-                      alert('Photo size must be less than 5MB');
+                      showNotification('Photo size must be less than 5MB', 'error');
                       return;
                     }
                     
@@ -2055,7 +2066,7 @@ export default function App() {
                         reader.readAsDataURL(photoFile);
                       });
                     } catch (error) {
-                      alert('Failed to process photo. Please try again.');
+                      showNotification('Failed to process photo. Please try again.', 'error');
                       return;
                     }
                   }
@@ -2067,17 +2078,24 @@ export default function App() {
                   };
                   
                   if (!commentData.name || !commentData.message) {
-                    alert('Please fill in both name and message fields.');
+                    showNotification('Please fill in both name and message fields.', 'error');
                     return;
                   }
                   
                   const result = await addComment(commentData);
                   
                   if (result.success) {
-                    alert('Comment posted successfully!');
+                    showNotification('Comment posted successfully!', 'success');
                     form.reset();
+                    // Reset photo preview
+                    const preview = form.querySelector('.photo-preview');
+                    const placeholder = form.querySelector('.upload-placeholder');
+                    if (preview && placeholder) {
+                      preview.classList.add('hidden');
+                      placeholder.classList.remove('hidden');
+                    }
                   } else {
-                    alert(result.message || 'Failed to post comment. Please try again.');
+                    showNotification(result.message || 'Failed to post comment. Please try again.', 'error');
                   }
                 }}
               >
@@ -2156,7 +2174,7 @@ export default function App() {
              
               
               {/* Recent Comments */}
-              <div className="space-y-4">
+              <div className={`space-y-4 ${comments.length > 5 ? 'max-h-96 overflow-y-auto pr-2 comments-scroll' : ''}`}>
                 {commentsLoading ? (
                   <div className="text-center py-8">
                     <div className="animate-spin w-6 h-6 border-2 border-purple-500 border-t-transparent rounded-full mx-auto mb-2"></div>
@@ -2467,6 +2485,35 @@ export default function App() {
           </motion.div>
         </div>
       </footer>
+      
+      {/* Custom Notification */}
+      {notification.show && (
+        <motion.div
+          initial={{ opacity: 0, y: -50, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -50, scale: 0.9 }}
+          className="fixed top-4 right-4 z-50 max-w-sm"
+        >
+          <div className={`p-4 rounded-lg shadow-lg backdrop-blur-sm border ${
+            notification.type === 'success' 
+              ? 'bg-green-900/90 border-green-500/50 text-green-100' 
+              : 'bg-red-900/90 border-red-500/50 text-red-100'
+          }`}>
+            <div className="flex items-center space-x-3">
+              {notification.type === 'success' ? (
+                <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                </svg>
+              )}
+              <p className="text-sm font-medium">{notification.message}</p>
+            </div>
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 }
