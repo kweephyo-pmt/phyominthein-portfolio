@@ -1289,14 +1289,14 @@ export default function App() {
 
             {/* Tab Navigation */}
             <motion.div 
-              className="flex justify-center mb-12"
+              className="flex justify-center mb-12 px-4"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-3">
-                <div className="flex gap-3">
+              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-2 sm:p-3 w-full max-w-4xl overflow-x-auto">
+                <div className="flex gap-2 sm:gap-3 min-w-max sm:min-w-0 justify-center">
                   {
                     [
                       { 
@@ -1343,7 +1343,7 @@ export default function App() {
                       <motion.button
                         key={tab.key}
                         onClick={() => setActiveTab(tab.key)}
-                        className={`relative px-12 py-6 rounded-2xl font-bold text-lg transition-all duration-300 ${
+                        className={`relative px-4 sm:px-8 lg:px-12 py-3 sm:py-4 lg:py-6 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-base lg:text-lg transition-all duration-300 ${
                           activeTab === tab.key
                             ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-2xl'
                             : 'text-gray-300 hover:text-white hover:bg-white/10'
@@ -1351,9 +1351,9 @@ export default function App() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <span className="flex items-center gap-4">
-                          <span className="text-2xl">{tab.icon}</span>
-                          {tab.label}
+                        <span className="flex items-center gap-2 sm:gap-3 lg:gap-4">
+                          <span className="text-lg sm:text-xl lg:text-2xl">{tab.icon}</span>
+                          <span className="hidden sm:inline">{tab.label}</span>
                         </span>
                       {activeTab === tab.key && (
                         <motion.div
@@ -1378,7 +1378,7 @@ export default function App() {
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 max-w-7xl mx-auto">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-8 max-w-7xl mx-auto px-4">
                     {techStack.map((tech, index) => (
                       <motion.div
                         key={tech.name}
@@ -1401,7 +1401,7 @@ export default function App() {
                         <div className={`absolute inset-0 bg-gradient-to-r ${tech.color} rounded-3xl blur-xl opacity-0 group-hover:opacity-40 transition-all duration-500`} />
                         
                         {/* Tech Card */}
-                        <div className="relative bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8 hover:border-blue-400/50 transition-all duration-300 text-center min-h-[180px] flex flex-col justify-center hover:bg-gray-700/50">
+                        <div className="relative bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 hover:border-blue-400/50 transition-all duration-300 text-center min-h-[120px] sm:min-h-[150px] lg:min-h-[180px] flex flex-col justify-center hover:bg-gray-700/50">
                           {/* Tech Icon */}
                           <motion.div
                             className="mb-4 flex justify-center"
@@ -1412,7 +1412,7 @@ export default function App() {
                           </motion.div>
                           
                           {/* Tech Name */}
-                          <h3 className="text-base font-bold text-gray-200 group-hover:text-white transition-colors duration-300">
+                          <h3 className="text-xs sm:text-sm lg:text-base font-bold text-gray-200 group-hover:text-white transition-colors duration-300">
                             {tech.name}
                           </h3>
                           
@@ -1765,19 +1765,22 @@ export default function App() {
             transition={{ duration: 0.8 }}
           >
             <motion.h2 
-              className="text-5xl lg:text-6xl font-black mb-6 bg-gradient-to-r from-purple-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent"
-              whileHover={{ scale: 1.02 }}
+              className="text-4xl lg:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-600 bg-clip-text text-transparent"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
             >
               Let's Connect
             </motion.h2>
             <motion.p 
-              className="text-xl text-gray-300 max-w-2xl mx-auto"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              className="text-xl text-gray-300 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Ready to build something amazing together? Drop me a message!
+              Ready to build something amazing together? Drop me a message and let's create the future!
             </motion.p>
           </motion.div>
 
@@ -1787,7 +1790,7 @@ export default function App() {
             <div className="space-y-8">
               {/* Contact Form */}
               <motion.div
-                className="bg-gray-800/50 backdrop-blur-xl border border-gray-700/50 rounded-2xl p-8"
+                className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8"
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -1899,7 +1902,7 @@ export default function App() {
 
               {/* Connect With Me */}
               <motion.div
-                className="bg-gray-800/50 backdrop-blur-xl border border-gray-700/50 rounded-2xl p-8"
+                className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8"
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -1915,7 +1918,7 @@ export default function App() {
                   href="https://www.linkedin.com/in/phyo-min-thein-605168361/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full bg-gray-700/50 hover:bg-gray-700/70 border border-gray-600/50 rounded-xl p-6 mb-4 transition-all duration-300 group"
+                  className="block w-full bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl p-6 mb-4 transition-all duration-300 group"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -1939,7 +1942,7 @@ export default function App() {
                     href="https://instagram.com/kweephyoe_pmt"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-gray-700/50 hover:bg-gray-700/70 border border-gray-600/50 rounded-xl p-6 transition-all duration-300 group"
+                    className="bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl p-6 transition-all duration-300 group"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -1961,7 +1964,7 @@ export default function App() {
                     href="https://github.com/kweephyo-pmt"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-gray-700/50 hover:bg-gray-700/70 border border-gray-600/50 rounded-xl p-6 transition-all duration-300 group"
+                    className="bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl p-6 transition-all duration-300 group"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -1981,7 +1984,7 @@ export default function App() {
                   {/* Personal Email */}
                   <motion.a
                     href="mailto:phyominthein.leo@gmail.com"
-                    className="bg-gray-700/50 hover:bg-gray-700/70 border border-gray-600/50 rounded-xl p-6 transition-all duration-300 group"
+                    className="bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl p-6 transition-all duration-300 group"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -2001,7 +2004,7 @@ export default function App() {
                   {/* University Email */}
                   <motion.a
                     href="mailto:6531503172@lamduan.mfu.ac.th"
-                    className="bg-gray-700/50 hover:bg-gray-700/70 border border-gray-600/50 rounded-xl p-6 transition-all duration-300 group"
+                    className="bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl p-6 transition-all duration-300 group"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >

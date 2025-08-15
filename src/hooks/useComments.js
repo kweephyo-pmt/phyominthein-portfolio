@@ -6,9 +6,9 @@ const useComments = () => {
   const [error, setError] = useState(null);
 
   // Fetch comments from API
-  const fetchComments = async () => {
+  const fetchComments = async (silent = false) => {
     try {
-      setLoading(true);
+      if (!silent) setLoading(true);
       const response = await fetch('/.netlify/functions/comments');
       const data = await response.json();
       
@@ -22,7 +22,7 @@ const useComments = () => {
       setError('Failed to load comments');
       console.error('Error fetching comments:', err);
     } finally {
-      setLoading(false);
+      if (!silent) setLoading(false);
     }
   };
 
@@ -66,6 +66,13 @@ const useComments = () => {
 
   useEffect(() => {
     fetchComments();
+    
+    // Set up polling to check for new comments every 30 seconds (silent updates)
+    const interval = setInterval(() => {
+      fetchComments(true);
+    }, 30000);
+    
+    return () => clearInterval(interval);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return {
