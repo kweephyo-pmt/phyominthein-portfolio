@@ -2035,10 +2035,35 @@ export default function App() {
                   const form = e.target;
                   const formData = new FormData(form);
                   
+                  // Handle photo upload
+                  const photoFile = formData.get('photo');
+                  let photoData = null;
+                  
+                  if (photoFile && photoFile.size > 0) {
+                    // Check file size (5MB limit)
+                    if (photoFile.size > 5 * 1024 * 1024) {
+                      alert('Photo size must be less than 5MB');
+                      return;
+                    }
+                    
+                    // Convert to base64
+                    try {
+                      photoData = await new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.onload = () => resolve(reader.result);
+                        reader.onerror = reject;
+                        reader.readAsDataURL(photoFile);
+                      });
+                    } catch (error) {
+                      alert('Failed to process photo. Please try again.');
+                      return;
+                    }
+                  }
+                  
                   const commentData = {
                     name: formData.get('name'),
                     message: formData.get('message'),
-                    photo: formData.get('photo')
+                    photo: photoData
                   };
                   
                   if (!commentData.name || !commentData.message) {
@@ -2080,15 +2105,37 @@ export default function App() {
                   <div>
                     <label className="block text-sm font-medium text-gray-300 mb-2">Profile Photo (optional)</label>
                     <div className="flex items-center justify-center w-full">
-                      <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-600 border-dashed rounded-xl cursor-pointer bg-gray-700/20 hover:bg-gray-700/30 transition-colors">
-                        <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                      <label className="relative flex flex-col items-center justify-center w-full h-32 border-2 border-gray-600 border-dashed rounded-xl cursor-pointer bg-gray-700/20 hover:bg-gray-700/30 transition-colors overflow-hidden">
+                        <div className="upload-placeholder flex flex-col items-center justify-center pt-5 pb-6 z-10">
                           <svg className="w-8 h-8 mb-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                           </svg>
                           <p className="mb-2 text-sm text-purple-400 font-semibold">Choose Profile Photo</p>
-                          <p className="text-xs text-gray-400">Max file size: 5MB</p>
+                          <p className="text-xs text-gray-400">Max file size: 5MB (JPG, PNG, GIF)</p>
                         </div>
-                        <input type="file" name="photo" accept="image/*" className="hidden" />
+                        <input 
+                          type="file" 
+                          name="photo" 
+                          accept="image/*" 
+                          className="hidden"
+                          onChange={(e) => {
+                            const file = e.target.files[0];
+                            if (file) {
+                              const reader = new FileReader();
+                              reader.onload = (event) => {
+                                const preview = e.target.parentElement.querySelector('.photo-preview');
+                                const placeholder = e.target.parentElement.querySelector('.upload-placeholder');
+                                if (preview && placeholder) {
+                                  preview.src = event.target.result;
+                                  preview.classList.remove('hidden');
+                                  placeholder.classList.add('hidden');
+                                }
+                              };
+                              reader.readAsDataURL(file);
+                            }
+                          }}
+                        />
+                        <img className="photo-preview hidden absolute inset-0 w-full h-full object-cover rounded-lg" alt="Preview" />
                       </label>
                     </div>
                   </div>
@@ -2136,12 +2183,20 @@ export default function App() {
                       }`}
                     >
                       <div className="flex items-start gap-3">
-                        <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold ${
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold overflow-hidden ${
                           comment.isPinned 
                             ? 'bg-gradient-to-r from-yellow-500 to-orange-500' 
                             : 'bg-gradient-to-r from-purple-500 to-indigo-500'
                         }`}>
-                          {comment.avatar}
+                          {comment.photo ? (
+                            <img 
+                              src={comment.photo} 
+                              alt={`${comment.name}'s avatar`}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            comment.avatar
+                          )}
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">
