@@ -14,8 +14,9 @@ const useComments = () => {
       
       if (data.success) {
         setComments(data.comments);
+        setError(null);
       } else {
-        setError(data.message);
+        setError(data.message || 'Failed to load comments');
       }
     } catch (err) {
       setError('Failed to load comments');
@@ -65,7 +66,7 @@ const useComments = () => {
 
   useEffect(() => {
     fetchComments();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return {
     comments,

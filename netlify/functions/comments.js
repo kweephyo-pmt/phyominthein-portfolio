@@ -1,12 +1,10 @@
-const { getStore } = require('@netlify/blobs');
+const { Pool } = require('pg');
 
-// Initialize Netlify Blobs store
-const getCommentsStore = () => {
-  return getStore({
-    name: 'comments',
-    consistency: 'strong'
-  });
-};
+// Initialize PostgreSQL connection pool
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+});
 
 exports.handler = async (event, context) => {
   const headers = {
@@ -25,12 +23,20 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    const store = getCommentsStore();
-
     if (event.httpMethod === 'GET') {
-      // Get all comments from Netlify Blobs
-      const commentsData = await store.get('all-comments', { type: 'json' });
-      const comments = commentsData || [];
+      // Test database connection first
+      await pool.query('SELECT 1');
+      
+      // Get all comments from PostgreSQL database
+      const query = `
+        SELECT id, name, message, avatar, photo, created_at, is_pinned
+        FROM comments 
+        ORDER BY is_pinned DESC, created_at DESC 
+        LIMIT 50
+      `;
+      
+      const result = await pool.query(query);
+      const comments = result.rows;
 
       return {
         statusCode: 200,
@@ -38,12 +44,13 @@ exports.handler = async (event, context) => {
         body: JSON.stringify({
           success: true,
           comments: comments.map(comment => ({
-            id: comment.id,
+            id: comment.id.toString(),
             name: comment.name,
             message: comment.message,
             avatar: comment.avatar || comment.name.charAt(0).toUpperCase(),
-            createdAt: comment.createdAt,
-            isPinned: comment.isPinned || false,
+            photo: comment.photo,
+            createdAt: comment.created_at,
+            isPinned: comment.is_pinned || false,
           }))
         }),
       };
@@ -65,25 +72,27 @@ exports.handler = async (event, context) => {
         };
       }
 
-      // Get existing comments
-      const existingComments = await store.get('all-comments', { type: 'json' }) || [];
+      // Insert new comment into PostgreSQL database
+      const insertQuery = `
+        INSERT INTO comments (name, message, avatar, photo, ip_address, user_agent)
+        VALUES ($1, $2, $3, $4, $5, $6)
+        RETURNING id, name, message, avatar, photo, created_at, is_pinned
+      `;
 
-      // Create new comment object
-      const newComment = {
-        id: Date.now().toString(),
-        name: name.trim(),
-        message: message.trim(),
-        avatar: name.charAt(0).toUpperCase(),
-        photo: photo || null,
-        createdAt: new Date().toISOString(),
-        isPinned: false,
-      };
+      const clientIP = event.headers['x-forwarded-for'] || event.headers['x-real-ip'] || 'unknown';
+      const userAgent = event.headers['user-agent'] || 'unknown';
 
-      // Add new comment to the beginning of the array
-      const updatedComments = [newComment, ...existingComments].slice(0, 50); // Keep only latest 50
+      const values = [
+        name.trim(),
+        message.trim(),
+        name.charAt(0).toUpperCase(),
+        photo || null,
+        clientIP,
+        userAgent
+      ];
 
-      // Save updated comments
-      await store.set('all-comments', JSON.stringify(updatedComments));
+      const result = await pool.query(insertQuery, values);
+      const newComment = result.rows[0];
 
       return {
         statusCode: 201,
@@ -109,7 +118,7 @@ exports.handler = async (event, context) => {
       headers,
       body: JSON.stringify({
         success: false,
-        message: 'Internal server error'
+        message: `Database error: ${error.message}`
       }),
     };
   }

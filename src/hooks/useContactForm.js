@@ -40,18 +40,22 @@ const useContactForm = () => {
         throw new Error('Please enter a valid email address');
       }
 
-      // Submit to Netlify function
-      const response = await fetch('/.netlify/functions/contact', {
+      // Create FormData for FormSubmit.co
+      const formDataToSubmit = new FormData();
+      formDataToSubmit.append('name', formData.name);
+      formDataToSubmit.append('email', formData.email);
+      formDataToSubmit.append('message', formData.message);
+      formDataToSubmit.append('_subject', `Portfolio Contact: Message from ${formData.name}`);
+      formDataToSubmit.append('_captcha', 'false'); // Disable captcha for better UX
+      formDataToSubmit.append('_template', 'table'); // Use table template for better formatting
+
+      // Submit to FormSubmit.co - replace with your email
+      const response = await fetch('https://formsubmit.co/phyominthein.leo@gmail.com', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+        body: formDataToSubmit,
       });
 
-      const data = await response.json();
-
-      if (data.success) {
+      if (response.ok) {
         setSuccess(true);
         // Reset form
         setFormData({
@@ -60,7 +64,7 @@ const useContactForm = () => {
           message: '',
         });
       } else {
-        throw new Error(data.message || 'Failed to send message');
+        throw new Error('Failed to send message. Please try again.');
       }
     } catch (err) {
       setError(err.message);

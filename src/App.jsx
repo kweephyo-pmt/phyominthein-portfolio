@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import profileImage from './assets/profile.JPG';
 import cvFile from './assets/Phyo Min Thein(CV).jpg';
+import useContactForm from './hooks/useContactForm';
+import useComments from './hooks/useComments';
 
 // Tech Stack Icons
 import htmlIcon from './assets/HTML Icon.svg';
@@ -39,6 +41,12 @@ export default function App() {
   const [particles, setParticles] = useState([]);
   const [typedText, setTypedText] = useState('');
   const [showCursor, setShowCursor] = useState(true);
+
+  // Contact form hook
+  const { formData, loading, success, error, handleChange, submitForm } = useContactForm();
+  
+  // Comments hook
+  const { comments, loading: commentsLoading, error: commentsError, addComment, formatTimeAgo } = useComments();
 
   const { scrollYProgress } = useScroll();
   const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
@@ -1779,68 +1787,30 @@ export default function App() {
                   <p className="text-gray-400">Feel free to contact me. I'm excited to hear from you!</p>
                 </div>
                 <form 
-                  name="contact" 
-                  method="POST" 
-                  data-netlify="true" 
-                  netlify-honeypot="bot-field"
                   className="space-y-6"
-                  onSubmit={async (e) => {
-                    e.preventDefault();
-                    const form = e.target;
-                    const formData = new FormData(form);
-                    
-                    // Check if we're in production (Netlify)
-                    if (window.location.hostname.includes('netlify.app') || window.location.hostname.includes('netlify.com')) {
-                      // Try Netlify Function first
-                      try {
-                        const data = {
-                          name: formData.get('name'),
-                          email: formData.get('email'),
-                          message: formData.get('message')
-                        };
-                        
-                        const response = await fetch('/.netlify/functions/contact', {
-                          method: 'POST',
-                          headers: { 'Content-Type': 'application/json' },
-                          body: JSON.stringify(data)
-                        });
-                        
-                        if (response.ok) {
-                          const result = await response.json();
-                          if (result.success) {
-                            alert('Message sent successfully!');
-                            form.reset();
-                            return;
-                          }
-                        }
-                      } catch (error) {
-                        console.log('Function failed, falling back to Netlify Forms');
-                      }
-                    }
-                    
-                    // Fallback to Netlify Forms
-                    try {
-                      const response = await fetch('/', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                        body: new URLSearchParams(formData).toString()
-                      });
-                      
-                      if (response.ok) {
-                        alert('Message sent successfully via Netlify Forms!');
-                        form.reset();
-                      } else {
-                        throw new Error('Form submission failed');
-                      }
-                    } catch (error) {
-                      alert('Failed to send message. Please try again or contact directly via email.');
-                    }
-                  }}
+                  onSubmit={submitForm}
                 >
-                  <input type="hidden" name="form-name" value="contact" />
-                  <div className="hidden">
-                    <input name="bot-field" />
-                  </div>
+                  {/* Success Message */}
+                  {success && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-4 bg-green-600/20 border border-green-500/50 rounded-xl text-green-400 text-center"
+                    >
+                      ✅ Message sent successfully! I'll get back to you soon.
+                    </motion.div>
+                  )}
+                  
+                  {/* Error Message */}
+                  {error && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-4 bg-red-600/20 border border-red-500/50 rounded-xl text-red-400 text-center"
+                    >
+                      ❌ {error}
+                    </motion.div>
+                  )}
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
                       <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -1851,6 +1821,8 @@ export default function App() {
                       type="text"
                       name="name"
                       placeholder="Your Name"
+                      value={formData.name}
+                      onChange={handleChange}
                       required
                       className="flex-1 px-4 py-4 bg-gray-700/30 border-0 rounded-xl text-white placeholder-gray-400 focus:bg-gray-700/50 focus:outline-none transition-all duration-300"
                     />
@@ -1865,6 +1837,8 @@ export default function App() {
                       type="email"
                       name="email"
                       placeholder="Your Email"
+                      value={formData.email}
+                      onChange={handleChange}
                       required
                       className="flex-1 px-4 py-4 bg-gray-700/30 border-0 rounded-xl text-white placeholder-gray-400 focus:bg-gray-700/50 focus:outline-none transition-all duration-300"
                     />
@@ -1879,20 +1853,35 @@ export default function App() {
                       name="message"
                       rows="6"
                       placeholder="Your Message"
+                      value={formData.message}
+                      onChange={handleChange}
                       required
                       className="flex-1 px-4 py-4 bg-gray-700/30 border-0 rounded-xl text-white placeholder-gray-400 focus:bg-gray-700/50 focus:outline-none transition-all duration-300 resize-none"
                     ></textarea>
                   </div>
                   <motion.button
                     type="submit"
-                    className="w-full py-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 flex items-center justify-center gap-2"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    disabled={loading}
+                    className={`w-full py-4 ${loading ? 'bg-gray-600' : 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700'} text-white font-semibold rounded-xl transition-all duration-300 flex items-center justify-center gap-2 disabled:cursor-not-allowed`}
+                    whileHover={!loading ? { scale: 1.02 } : {}}
+                    whileTap={!loading ? { scale: 0.98 } : {}}
                   >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                    </svg>
-                    Send Message
+                    {loading ? (
+                      <>
+                        <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                        </svg>
+                        Send Message
+                      </>
+                    )}
                   </motion.button>
                 </form>
               </motion.div>
@@ -2035,74 +2024,38 @@ export default function App() {
                     <path d="M21.99 4c0-1.1-.89-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM18 14H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold text-white">Comments (3)</h3>
+                <h3 className="text-2xl font-bold text-white">Comments ({comments.length})</h3>
               </div>
               
               {/* Comment Form */}
               <form 
-                name="comments" 
-                method="POST" 
-                data-netlify="true" 
-                netlify-honeypot="bot-field"
                 className="mb-8"
                 onSubmit={async (e) => {
                   e.preventDefault();
                   const form = e.target;
                   const formData = new FormData(form);
                   
-                  // Check if we're in production (Netlify)
-                  if (window.location.hostname.includes('netlify.app') || window.location.hostname.includes('netlify.com')) {
-                    // Try Netlify Function first
-                    try {
-                      const data = {
-                        name: formData.get('name'),
-                        message: formData.get('message'),
-                        photo: formData.get('photo')
-                      };
-                      
-                      const response = await fetch('/.netlify/functions/comments', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(data)
-                      });
-                      
-                      if (response.ok) {
-                        const result = await response.json();
-                        if (result.success) {
-                          alert('Comment posted successfully!');
-                          form.reset();
-                          window.location.reload();
-                          return;
-                        }
-                      }
-                    } catch (error) {
-                      console.log('Function failed, falling back to Netlify Forms');
-                    }
+                  const commentData = {
+                    name: formData.get('name'),
+                    message: formData.get('message'),
+                    photo: formData.get('photo')
+                  };
+                  
+                  if (!commentData.name || !commentData.message) {
+                    alert('Please fill in both name and message fields.');
+                    return;
                   }
                   
-                  // Fallback to Netlify Forms
-                  try {
-                    const response = await fetch('/', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                      body: new URLSearchParams(formData).toString()
-                    });
-                    
-                    if (response.ok) {
-                      alert('Comment submitted successfully via Netlify Forms!');
-                      form.reset();
-                    } else {
-                      throw new Error('Form submission failed');
-                    }
-                  } catch (error) {
-                    alert('Failed to post comment. Please try again.');
+                  const result = await addComment(commentData);
+                  
+                  if (result.success) {
+                    alert('Comment posted successfully!');
+                    form.reset();
+                  } else {
+                    alert(result.message || 'Failed to post comment. Please try again.');
                   }
                 }}
               >
-                <input type="hidden" name="form-name" value="comments" />
-                <div className="hidden">
-                  <input name="bot-field" />
-                </div>
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-300 mb-2">Name *</label>
@@ -2155,11 +2108,44 @@ export default function App() {
 
              
               
-              {/* Recent Comments - Will be populated dynamically */}
+              {/* Recent Comments */}
               <div className="space-y-4">
-                <div className="text-center py-8">
-                  <p className="text-gray-400 text-sm">No comments yet. Be the first to leave a comment!</p>
-                </div>
+                {commentsLoading ? (
+                  <div className="text-center py-8">
+                    <div className="animate-spin w-6 h-6 border-2 border-purple-500 border-t-transparent rounded-full mx-auto mb-2"></div>
+                    <p className="text-gray-400 text-sm">Loading comments...</p>
+                  </div>
+                ) : commentsError ? (
+                  <div className="text-center py-8">
+                    <p className="text-red-400 text-sm">Error loading comments: {commentsError}</p>
+                  </div>
+                ) : comments.length === 0 ? (
+                  <div className="text-center py-8">
+                    <p className="text-gray-400 text-sm">No comments yet. Be the first to leave a comment!</p>
+                  </div>
+                ) : (
+                  comments.map((comment) => (
+                    <motion.div
+                      key={comment.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="bg-gray-700/30 rounded-xl p-4 border border-gray-600/30"
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full flex items-center justify-center text-white font-semibold">
+                          {comment.avatar}
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-2">
+                            <h4 className="font-semibold text-white">{comment.name}</h4>
+                            <span className="text-gray-400 text-sm">{formatTimeAgo(comment.createdAt)}</span>
+                          </div>
+                          <p className="text-gray-300 text-sm leading-relaxed">{comment.message}</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))
+                )}
               </div>
             </motion.div>
           </div>
