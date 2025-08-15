@@ -457,9 +457,9 @@ export default function App() {
   return (
     <div className={`min-h-screen font-sans transition-all duration-700 ${dark ? 'bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 text-white' : 'bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 text-gray-900'} relative overflow-hidden`}>
       
-      {/* Custom Cursor */}
+      {/* Custom Cursor - Hidden on Mobile */}
       <motion.div
-        className="fixed top-0 left-0 w-6 h-6 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full pointer-events-none z-[9999] mix-blend-difference"
+        className="fixed top-0 left-0 w-6 h-6 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full pointer-events-none z-[9999] mix-blend-difference hidden md:block"
         style={{
           x: mousePosition.x - 12,
           y: mousePosition.y - 12,
@@ -471,6 +471,7 @@ export default function App() {
           type: "spring",
           stiffness: 500,
           damping: 28,
+          mass: 0.5,
         }}
       />
 
@@ -585,7 +586,7 @@ export default function App() {
               window.history.pushState({}, '', window.location.pathname);
             }}
           >
-            PMT
+            LEO
           </motion.button>
           <div className="hidden md:flex items-center gap-6">
             {['About', 'Experience', 'Projects', 'Contact'].map((item) => (
