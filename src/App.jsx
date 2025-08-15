@@ -2129,15 +2129,31 @@ export default function App() {
                       key={comment.id}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="bg-gray-700/30 rounded-xl p-4 border border-gray-600/30"
+                      className={`rounded-xl p-4 border ${
+                        comment.isPinned 
+                          ? 'bg-gradient-to-r from-purple-600/20 to-indigo-600/20 border-purple-500/50' 
+                          : 'bg-gray-700/30 border-gray-600/30'
+                      }`}
                     >
                       <div className="flex items-start gap-3">
-                        <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full flex items-center justify-center text-white font-semibold">
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold ${
+                          comment.isPinned 
+                            ? 'bg-gradient-to-r from-yellow-500 to-orange-500' 
+                            : 'bg-gradient-to-r from-purple-500 to-indigo-500'
+                        }`}>
                           {comment.avatar}
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">
                             <h4 className="font-semibold text-white">{comment.name}</h4>
+                            {comment.isPinned && (
+                              <span className="inline-flex items-center gap-1 px-2 py-1 bg-yellow-500/20 text-yellow-400 text-xs rounded-full">
+                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                                  <path d="M16,12V4H17V2H7V4H8V12L6,14V16H11.2V22H12.8V16H18V14L16,12Z" />
+                                </svg>
+                                Pinned
+                              </span>
+                            )}
                             <span className="text-gray-400 text-sm">{formatTimeAgo(comment.createdAt)}</span>
                           </div>
                           <p className="text-gray-300 text-sm leading-relaxed">{comment.message}</p>

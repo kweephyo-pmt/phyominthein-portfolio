@@ -83,7 +83,9 @@ exports.handler = async (event, context) => {
         RETURNING id, name, message, avatar, photo, created_at, is_pinned
       `;
 
-      const clientIP = event.headers['x-forwarded-for'] || event.headers['x-real-ip'] || 'unknown';
+      // Parse IP address - take only the first one if multiple IPs are present
+      const rawIP = event.headers['x-forwarded-for'] || event.headers['x-real-ip'] || 'unknown';
+      const clientIP = rawIP === 'unknown' ? null : rawIP.split(',')[0].trim();
       const userAgent = event.headers['user-agent'] || 'unknown';
 
       const values = [
