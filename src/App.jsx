@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import profileImage from './assets/profile.JPG';
+import softwareEngineeringGif from './assets/software enginnering.gif';
 import cvFile from './assets/Phyo Min Thein(CV).jpg';
 import useContactForm from './hooks/useContactForm';
 import useComments from './hooks/useComments';
@@ -657,22 +658,42 @@ export default function App() {
               className="relative"
               whileHover={{ scale: 1.02 }}
             >
-              <h1 className="text-6xl lg:text-8xl font-black mb-4 relative">
-                <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent animate-pulse">
-                  PHYO
-                </span>
-                <br />
-                <motion.span 
-                  className="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent"
-                  animate={{ 
-                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                  }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                >
-                  MIN THEIN{" "}
-                  <span className="text-cyan-400">(Leo)</span>
-                </motion.span>
-              </h1>
+              <div className="relative">
+                <h1 className="text-6xl lg:text-8xl font-black mb-4 relative">
+                  <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent animate-pulse">
+                    PHYO
+                  </span>
+                  <br />
+                  <motion.span 
+                    className="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent"
+                    animate={{ 
+                      backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                    }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                  >
+                    MIN THEIN{" "}
+                  </motion.span>
+                </h1>
+                
+                {/* Reflection Effect */}
+                <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+                  <h1 className="text-6xl lg:text-8xl font-black mb-4 relative transform scale-y-[-1] translate-y-full opacity-30 blur-[1px] italic" 
+                      style={{
+                        background: 'linear-gradient(to bottom, transparent 0%, rgba(6, 182, 212, 0.3) 50%, transparent 100%)',
+                        WebkitBackgroundClip: 'text',
+                        backgroundClip: 'text',
+                        filter: 'blur(1px) brightness(0.7)'
+                      }}>
+                    <span className="bg-gradient-to-r from-cyan-400/50 via-blue-500/50 to-purple-600/50 bg-clip-text text-transparent">
+                      PHYO
+                    </span>
+                    <br />
+                    <span className="bg-gradient-to-r from-purple-400/50 via-pink-500/50 to-red-500/50 bg-clip-text text-transparent">
+                      MIN THEIN{" "}
+                    </span>
+                  </h1>
+                </div>
+              </div>
               
 
             </motion.div>
@@ -739,24 +760,56 @@ export default function App() {
                 Let's Connect
               </motion.a>
 
-              <motion.a
-              href="mailto:phyominthein.leo@gmail.com"
-              className="group px-8 py-4 bg-gradient-to-r from-slate-600 to-gray-700 text-white font-bold rounded-2xl hover:from-slate-700 hover:to-gray-800 transition-all duration-300 shadow-lg"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
+              {/* Social Media Buttons */}
+              <motion.div 
+                className="flex gap-4 mt-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.2, duration: 0.8 }}
               >
-                📧 Email Me
-              </motion.a>
+                {/* GitHub Button */}
+                <motion.a
+                  href="https://github.com/kweephyo-pmt/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group p-4 bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-xl hover:from-gray-700 hover:to-gray-800 transition-all duration-300 shadow-lg"
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                </motion.a>
 
-              <motion.a
-                href={cvFile}
-                download="Phyo_Min_Thein_CV.jpg"
-                className="group px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold rounded-2xl hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                📄 Download CV
-              </motion.a>
+                {/* LinkedIn Button */}
+                <motion.a
+                  href="https://www.linkedin.com/in/phyo-min-thein-605168361/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group p-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 shadow-lg"
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                </motion.a>
+
+                {/* Instagram Button */}
+                <motion.a
+                  href="https://instagram.com/kweephyoe_pmt"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group p-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-xl hover:from-pink-400 hover:to-purple-500 transition-all duration-300 shadow-lg"
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                  </svg>
+                </motion.a>
+              </motion.div>
+
             </motion.div>
           </motion.div>
 
@@ -769,28 +822,79 @@ export default function App() {
           >
             <div className="relative">
               {/* Main 3D Card */}
+              {/* Software Engineering GIF with Hover Effects */}
               <motion.div
-                className="relative w-96 h-96 perspective-1000"
-                whileHover={{ rotateY: 10, rotateX: 5 }}
+                className="relative w-96 h-96 group"
+                initial={{ opacity: 0, scale: 0.8, rotateY: 30 }}
+                animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
+                whileHover={{ 
+                  scale: 1.05,
+                  rotateY: -5,
+                  rotateX: 5,
+                  z: 50
+                }}
                 style={{ transformStyle: "preserve-3d" }}
               >
-                {/* Card Front */}
+                {/* Animated Glow Effect */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-blue-600/20 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl"
-                  whileHover={{ z: 50 }}
-                  style={{ transformStyle: "preserve-3d" }}
+                  className="absolute -inset-6 bg-gradient-to-r from-cyan-400/20 via-blue-500/20 to-purple-600/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100"
+                  animate={{ 
+                    rotate: [0, 360],
+                    scale: [1, 1.2, 1]
+                  }}
+                  transition={{ 
+                    rotate: { duration: 15, repeat: Infinity, ease: "linear" },
+                    scale: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+                  }}
+                />
+                
+                {/* GIF Container */}
+                <motion.div
+                  className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl"
+                  animate={{ 
+                    y: [0, -8, 0]
+                  }}
+                  transition={{ 
+                    duration: 4, 
+                    repeat: Infinity, 
+                    ease: "easeInOut" 
+                  }}
                 >
-                  {/* Profile Photo */}
-                  <div className="absolute inset-0 overflow-hidden rounded-3xl">
-                    <img
-                      src={profileImage}
-                      alt="Phyo Min Thein (Leo)"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+                  <motion.img
+                    src={softwareEngineeringGif}
+                    alt="Software Engineering Animation"
+                    className="w-full h-full object-cover"
+                    style={{ 
+                      imageRendering: 'auto'
+                    }}
+                    whileHover={{
+                      scale: 1.1,
+                      filter: 'brightness(1.2) contrast(1.1) saturate(1.3)',
+                      transition: { duration: 0.4 }
+                    }}
+                  />
+                  
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-50 transition-opacity duration-500 pointer-events-none" />
+                  
+                  {/* Decorative Corner Elements */}
+                  <div className="absolute top-4 right-4 w-3 h-3 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute bottom-4 left-4 w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  {/* Animated Border on Hover */}
+                  <motion.div
+                    className="absolute inset-0 rounded-3xl border-2 border-cyan-400/30 opacity-0 group-hover:opacity-80 transition-opacity duration-500 pointer-events-none"
+                    animate={{
+                      borderColor: ['rgba(6, 182, 212, 0.3)', 'rgba(59, 130, 246, 0.3)', 'rgba(147, 51, 234, 0.3)', 'rgba(6, 182, 212, 0.3)']
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "linear"
+                    }}
+                  />
                 </motion.div>
-
-
               </motion.div>
             </div>
           </motion.div>
@@ -813,17 +917,42 @@ export default function App() {
       </section>
 
       {/* Revolutionary About Section */}
-      <section id="about" className="py-20 px-6 relative overflow-hidden">
-        {/* Animated Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/20 via-purple-900/20 to-pink-900/20" />
+      <section id="about" className="py-32 px-6 relative overflow-hidden">
+        {/* Enhanced Animated Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/30 to-cyan-900/20" />
+        
+        {/* Multiple Floating Orbs */}
         <motion.div
-          className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-cyan-400/10 to-blue-600/10 rounded-full blur-3xl"
+          className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-cyan-400/15 to-blue-600/15 rounded-full blur-3xl"
           animate={{ 
-            scale: [1, 1.2, 1],
+            scale: [1, 1.3, 1],
             rotate: [0, 180, 360],
+            x: [0, 50, 0],
+            y: [0, -30, 0]
           }}
-          transition={{ duration: 20, repeat: Infinity }}
+          transition={{ duration: 25, repeat: Infinity }}
         />
+        <motion.div
+          className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-purple-400/10 to-pink-600/10 rounded-full blur-2xl"
+          animate={{ 
+            scale: [1.2, 1, 1.2],
+            rotate: [360, 180, 0],
+            x: [0, -40, 0],
+            y: [0, 20, 0]
+          }}
+          transition={{ duration: 30, repeat: Infinity }}
+        />
+        
+        {/* Animated Grid Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `
+              linear-gradient(rgba(6, 182, 212, 0.3) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(6, 182, 212, 0.3) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px'
+          }} />
+        </div>
         
         <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
@@ -832,99 +961,185 @@ export default function App() {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            {/* Holographic Title */}
-            <motion.h2 
-              className="text-6xl lg:text-8xl font-black text-center mb-16 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent"
-              animate={{ 
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-              }}
-              transition={{ duration: 5, repeat: Infinity }}
-            >
-              ABOUT ME
-            </motion.h2>
+            {/* Enhanced Holographic Title */}
+            <div className="text-center mb-20 relative">
+              <motion.h2 
+                className="text-7xl lg:text-9xl font-black bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent relative z-10"
+                initial={{ opacity: 0, y: 50, scale: 0.8 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
+                animate={{ 
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                }}
+                style={{
+                  backgroundSize: '200% 200%'
+                }}
+              >
+                ABOUT ME
+              </motion.h2>
+              
+              {/* Glowing Underline */}
+              <motion.div
+                className="h-2 bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full mx-auto mt-6"
+                initial={{ width: 0, opacity: 0 }}
+                whileInView={{ width: '200px', opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.8, duration: 1 }}
+              />
+            </div>
 
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              {/* Left Side - Floating Text Cards */}
-              <div className="space-y-8">
+            <div className="grid lg:grid-cols-2 gap-16 items-start">
+              {/* Left Side - Enhanced Floating Text Cards */}
+              <div className="space-y-10">
                 {[
-                  "4th-year Software Engineering student at Mae Fah Luang University with hands-on experience in full-stack development and cloud platforms. Skilled in building web, mobile, and backend applications using Vue.js, Nuxt 3, Node.js, Flutter, Firebase, GCP, and MySQL.",
-                  "Passionate about solving problems, developing scalable solutions, and continuously learning emerging technologies. Eager to contribute to a development team and gain real-world industry experience."
-                ].map((text, index) => (
-                  <motion.div
-                    key={index}
-                    className="relative group"
-                    initial={{ opacity: 0, x: -100 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.3, duration: 0.8 }}
-                    whileHover={{ scale: 1.02, z: 20 }}
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300" />
-                    <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 hover:border-cyan-400/50 transition-all duration-300">
-                      <p className="text-xl leading-relaxed text-gray-700 dark:text-gray-200">
-                        {text}
-                      </p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* Right Side - 3D Info Cards */}
-              <div className="space-y-6">
-                {[
-                  { icon: "📍", title: "Location", value: "Chiang Rai, Thailand", color: "from-emerald-400 to-cyan-500" },
-                  { icon: "🎓", title: "Education", value: "Software Engineering, Mae Fah Luang University", color: "from-blue-400 to-indigo-500" },
-                  { icon: "💼", title: "Status", value: "Open to opportunities", color: "from-purple-400 to-pink-500" }
+                  {
+                    title: "🎓 Academic Journey",
+                    text: "4th-year Software Engineering student at Mae Fah Luang University with hands-on experience in full-stack development and cloud platforms. Skilled in building web, mobile, and backend applications using Vue.js, Nuxt 3, Node.js, Flutter, Firebase, GCP, and MySQL.",
+                    gradient: "from-cyan-500/20 to-blue-600/20",
+                    borderGradient: "from-cyan-400/50 to-blue-500/50"
+                  },
+                  {
+                    title: "🚀 Passion & Vision",
+                    text: "Passionate about solving problems, developing scalable solutions, and continuously learning emerging technologies. Eager to contribute to a development team and gain real-world industry experience.",
+                    gradient: "from-purple-500/20 to-pink-600/20",
+                    borderGradient: "from-purple-400/50 to-pink-500/50"
+                  }
                 ].map((item, index) => (
                   <motion.div
                     key={index}
-                    className="group relative"
-                    initial={{ opacity: 0, x: 100, rotateY: -30 }}
+                    className="relative group"
+                    initial={{ opacity: 0, x: -100, rotateY: -15 }}
                     whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.2, duration: 0.8 }}
+                    transition={{ delay: index * 0.4, duration: 1, ease: "easeOut" }}
                     whileHover={{ 
-                      scale: 1.05, 
-                      rotateY: 5,
-                      z: 30 
+                      scale: 1.03, 
+                      z: 30,
+                      rotateY: 2,
+                      rotateX: 2
                     }}
                     style={{ transformStyle: "preserve-3d" }}
                   >
-                    {/* Glow Effect */}
-                    <div className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-20 rounded-2xl blur-xl transition-all duration-500`} />
+                    {/* Enhanced Glow Effect */}
+                    <div className={`absolute inset-0 bg-gradient-to-r ${item.gradient} rounded-3xl blur-xl group-hover:blur-2xl opacity-60 group-hover:opacity-80 transition-all duration-500`} />
                     
-                    {/* Main Card */}
-                    <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 group-hover:border-white/40 transition-all duration-300">
-                      <div className="flex items-center gap-6">
-                        {/* 3D Icon */}
-                        <motion.div
-                          className={`w-16 h-16 bg-gradient-to-br ${item.color} rounded-2xl flex items-center justify-center text-2xl shadow-2xl`}
-                          whileHover={{ 
-                            rotateY: 180,
-                            scale: 1.1 
-                          }}
-                          transition={{ duration: 0.6 }}
-                          style={{ transformStyle: "preserve-3d" }}
-                        >
-                          <span className="drop-shadow-lg">{item.icon}</span>
-                        </motion.div>
-                        
-                        {/* Content */}
-                        <div className="flex-1">
-                          <motion.h3 
-                            className="text-xl font-bold mb-2 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
-                            whileHover={{ scale: 1.05 }}
-                          >
-                            {item.title}
-                          </motion.h3>
-                          <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                            {item.value}
-                          </p>
-                        </div>
-                      </div>
+                    {/* Main Card with Better Design */}
+                    <div className="relative bg-white/8 backdrop-blur-2xl border border-white/15 rounded-3xl p-8 group-hover:bg-white/12 transition-all duration-500 shadow-2xl">
+                      {/* Card Header */}
+                      <motion.h3 
+                        className={`text-2xl font-bold mb-4 bg-gradient-to-r ${item.borderGradient} bg-clip-text text-transparent`}
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        {item.title}
+                      </motion.h3>
+                      
+                      {/* Enhanced Text */}
+                      <p className="text-lg leading-relaxed text-gray-200 group-hover:text-white transition-colors duration-300">
+                        {item.text}
+                      </p>
+                      
+                      {/* Decorative Corner Elements */}
+                      <div className="absolute top-4 right-4 w-2 h-2 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+                      <div className="absolute bottom-4 left-4 w-1 h-1 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full opacity-40 group-hover:opacity-80 transition-opacity duration-300" />
                     </div>
                   </motion.div>
                 ))}
+                
+                {/* Download CV Button */}
+                <motion.div
+                  className="flex justify-start"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 1, duration: 0.8 }}
+                >
+                  <motion.a
+                    href={cvFile}
+                    download="Phyo_Min_Thein_CV.jpg"
+                    className="group px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-2xl hover:from-cyan-600 hover:to-blue-700 transition-all duration-300 shadow-lg"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    📄 Download CV
+                  </motion.a>
+                </motion.div>
+              </div>
+
+              {/* Right Side - Profile Photo */}
+              <div className="flex justify-center lg:justify-end">
+                <motion.div
+                  className="relative group"
+                  initial={{ opacity: 0, scale: 0.8, rotateY: 30 }}
+                  whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.2, ease: "easeOut" }}
+                  whileHover={{ 
+                    scale: 1.05,
+                    rotateY: -5,
+                    rotateX: 5,
+                    z: 50
+                  }}
+                  style={{ transformStyle: "preserve-3d" }}
+                >
+                  {/* Animated Glow Ring */}
+                  <motion.div
+                    className="absolute -inset-4 bg-gradient-to-r from-cyan-400/30 via-blue-500/30 to-purple-600/30 rounded-full blur-2xl"
+                    animate={{ 
+                      rotate: [0, 360],
+                      scale: [1, 1.1, 1]
+                    }}
+                    transition={{ 
+                      rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+                      scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+                    }}
+                  />
+                  
+                  {/* Profile Photo Container */}
+                  <motion.div
+                    className="relative w-80 h-80 lg:w-96 lg:h-96 rounded-3xl overflow-hidden bg-gradient-to-br from-cyan-400/20 to-purple-600/20 backdrop-blur-xl border border-white/20 shadow-2xl"
+                    animate={{ 
+                      y: [0, -10, 0]
+                    }}
+                    transition={{ 
+                      duration: 6, 
+                      repeat: Infinity, 
+                      ease: "easeInOut" 
+                    }}
+                  >
+                    {/* Profile Image */}
+                    <motion.img
+                      src={profileImage}
+                      alt="Phyo Min Thein"
+                      className="w-full h-full object-cover"
+                      whileHover={{
+                        scale: 1.1,
+                        filter: 'brightness(1.1) contrast(1.1) saturate(1.2)',
+                        transition: { duration: 0.4 }
+                      }}
+                    />
+                    
+                    {/* Overlay Gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none" />
+                    
+                    {/* Decorative Corner Elements */}
+                    <div className="absolute top-4 right-4 w-3 h-3 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute bottom-4 left-4 w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+                    
+                    {/* Animated Border */}
+                    <motion.div
+                      className="absolute inset-0 rounded-3xl border-2 border-cyan-400/30 opacity-0 group-hover:opacity-70 transition-opacity duration-500 pointer-events-none"
+                      animate={{
+                        borderColor: ['rgba(6, 182, 212, 0.3)', 'rgba(59, 130, 246, 0.3)', 'rgba(147, 51, 234, 0.3)', 'rgba(6, 182, 212, 0.3)']
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                    />
+                  </motion.div>
+                </motion.div>
               </div>
             </div>
           </motion.div>
@@ -1113,25 +1328,48 @@ export default function App() {
         </div>
       </section>
 
-      {/* Holographic Education Section */}
-      <section className="py-20 px-6 relative overflow-hidden">
-        {/* Optimized Floating Geometric Shapes */}
+      {/* Enhanced Education Section */}
+      <section className="py-32 px-6 relative overflow-hidden">
+        {/* Dynamic Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
-          {[...Array(3)].map((_, i) => (
+          {/* Animated Grid */}
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-blue-500/5 to-purple-500/5" />
+          <motion.div 
+            className="absolute inset-0 opacity-20"
+            style={{
+              backgroundImage: `radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.3) 1px, transparent 0)`,
+              backgroundSize: '50px 50px'
+            }}
+            animate={{
+              backgroundPosition: ['0px 0px', '50px 50px'],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
+          
+          {/* Floating Orbs */}
+          {[...Array(6)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-16 h-16 border border-cyan-400/15 rounded-lg"
+              className="absolute rounded-full bg-gradient-to-r from-cyan-400/20 to-blue-500/20 blur-xl"
               animate={{
-                rotate: 360,
+                x: [0, Math.cos(i * 60 * Math.PI / 180) * 100],
+                y: [0, Math.sin(i * 60 * Math.PI / 180) * 100],
+                scale: [1, 1.2, 1],
               }}
               transition={{
-                duration: 20 + i * 5,
+                duration: 15 + i * 2,
                 repeat: Infinity,
-                ease: "linear"
+                ease: "easeInOut"
               }}
               style={{
-                left: `${25 + i * 25}%`,
-                top: `${20 + i * 30}%`,
+                width: `${60 + i * 20}px`,
+                height: `${60 + i * 20}px`,
+                left: `${20 + i * 12}%`,
+                top: `${15 + i * 15}%`,
               }}
             />
           ))}
@@ -1144,101 +1382,137 @@ export default function App() {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            {/* Holographic Title */}
+            {/* Enhanced Holographic Title */}
             <motion.h2 
-              className="text-6xl lg:text-8xl font-black text-center mb-20 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent"
+              className="text-7xl lg:text-9xl font-black text-center mb-24 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent relative"
               animate={{ 
                 backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
               }}
-              transition={{ duration: 3, repeat: Infinity }}
+              transition={{ duration: 4, repeat: Infinity }}
             >
               EDUCATION
+              {/* Glowing Underline */}
+              <motion.div
+                className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 h-2 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
+                initial={{ width: 0 }}
+                whileInView={{ width: "200px" }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5, duration: 1.2 }}
+              />
             </motion.h2>
 
-            {/* 3D Education Cards */}
-            <div className="grid lg:grid-cols-2 gap-12">
+            {/* Enhanced Education Cards */}
+            <div className="grid lg:grid-cols-2 gap-16">
               {education.map((edu, index) => (
                 <motion.div
                   key={index}
-                  className="relative group perspective-1000"
-                  initial={{ opacity: 0, rotateY: index % 2 === 0 ? -90 : 90 }}
-                  whileInView={{ opacity: 1, rotateY: 0 }}
+                  className="relative group"
+                  initial={{ opacity: 0, y: 100, rotateX: -15 }}
+                  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 1, delay: index * 0.3 }}
+                  transition={{ duration: 0.8, delay: index * 0.2 }}
                   whileHover={{ 
-                    rotateY: index % 2 === 0 ? 5 : -5,
-                    scale: 1.05,
-                    z: 50 
+                    y: -10,
+                    rotateX: 5,
+                    rotateY: index % 2 === 0 ? 3 : -3,
+                    scale: 1.02
                   }}
                   style={{ transformStyle: "preserve-3d" }}
                 >
-                  {/* Holographic Glow */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-red-500/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500" />
+                  {/* Enhanced Glow Effects */}
+                  <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 rounded-3xl blur-2xl group-hover:blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-700" />
+                  <div className="absolute -inset-2 bg-gradient-to-r from-cyan-400/10 to-blue-500/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500" />
                   
-                  {/* Main Card */}
-                  <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:border-purple-400/50 transition-all duration-300 min-h-[300px] flex flex-col justify-between">
-                    {/* University Icon */}
+                  {/* Main Card with Glass Effect */}
+                  <div className="relative bg-white/8 backdrop-blur-2xl border border-white/20 rounded-3xl p-10 hover:border-cyan-400/50 transition-all duration-500 min-h-[380px] flex flex-col justify-between shadow-2xl">
+                    
+                    {/* Decorative Corner Elements */}
+                    <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-cyan-400/50 rounded-tl-lg" />
+                    <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-cyan-400/50 rounded-tr-lg" />
+                    <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-cyan-400/50 rounded-bl-lg" />
+                    <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-cyan-400/50 rounded-br-lg" />
+
+                    {/* Enhanced University Icon */}
                     <motion.div
-                      className="w-20 h-20 bg-gradient-to-br from-purple-400 to-pink-600 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-2xl mx-auto"
-                      animate={{ 
-                        rotateY: [0, 180, 360],
-                        scale: [1, 1.1, 1]
-                      }}
-                      transition={{ 
-                        duration: 6, 
-                        repeat: Infinity,
-                        delay: index * 0.5
-                      }}
+                      className="relative mx-auto mb-8"
+                      whileHover={{ scale: 1.1 }}
                     >
-                      🎓
+                      <motion.div
+                        className="w-24 h-24 bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-4xl shadow-2xl relative overflow-hidden"
+                        animate={{ 
+                          rotateY: [0, 360],
+                        }}
+                        transition={{ 
+                          duration: 8, 
+                          repeat: Infinity,
+                          ease: "linear"
+                        }}
+                      >
+                        🎓
+                        {/* Inner Glow */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-2xl" />
+                      </motion.div>
+                      
+                      {/* Rotating Ring */}
+                      <motion.div
+                        className="absolute inset-0 border-2 border-cyan-400/30 rounded-2xl"
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+                      />
                     </motion.div>
 
-                    {/* Content */}
-                    <div className="text-center space-y-4">
+                    {/* Content with Better Typography */}
+                    <div className="text-center space-y-6 flex-1">
                       <motion.h3 
-                        className="text-2xl font-black bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent"
+                        className="text-2xl lg:text-3xl font-black bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent leading-tight"
                         whileHover={{ scale: 1.05 }}
                       >
                         {edu.degree}
                       </motion.h3>
 
                       <motion.p 
-                        className="text-xl font-bold text-cyan-400"
-                        whileHover={{ scale: 1.05 }}
+                        className="text-xl lg:text-2xl font-bold text-white/90 mb-6"
+                        whileHover={{ scale: 1.02, color: "#06b6d4" }}
+                        transition={{ duration: 0.3 }}
                       >
                         {edu.school}
                       </motion.p>
 
-                      <div className="space-y-2">
+                      <div className="space-y-4">
                         <motion.div
-                          className="inline-block bg-gradient-to-r from-purple-500 to-pink-600 text-white px-4 py-2 rounded-full text-sm font-bold"
-                          whileHover={{ scale: 1.1 }}
+                          className="inline-block bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 py-3 rounded-full text-sm font-bold shadow-lg"
+                          whileHover={{ scale: 1.1, y: -2 }}
+                          whileTap={{ scale: 0.95 }}
                         >
                           {edu.period}
                         </motion.div>
                         
-                        <p className="text-gray-700 dark:text-gray-300 flex items-center justify-center gap-2">
-                          <span>📍</span>
+                        <motion.p 
+                          className="text-white/70 flex items-center justify-center gap-3 text-lg"
+                          whileHover={{ color: "#ffffff", scale: 1.05 }}
+                        >
+                          <span className="text-2xl">📍</span>
                           {edu.location}
-                        </p>
+                        </motion.p>
                       </div>
                     </div>
 
-                    {/* Floating Particles */}
-                    {[...Array(5)].map((_, i) => (
+                    {/* Enhanced Floating Particles */}
+                    {[...Array(8)].map((_, i) => (
                       <motion.div
                         key={i}
-                        className="absolute w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full"
+                        className="absolute w-1.5 h-1.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full opacity-60"
                         animate={{
-                          x: [0, Math.cos(i * 72 * Math.PI / 180) * 40],
-                          y: [0, Math.sin(i * 72 * Math.PI / 180) * 40],
-                          scale: [1, 0.5, 1],
-                          opacity: [0.7, 0.3, 0.7],
+                          x: [0, Math.cos(i * 45 * Math.PI / 180) * 60],
+                          y: [0, Math.sin(i * 45 * Math.PI / 180) * 60],
+                          scale: [0.5, 1, 0.5],
+                          opacity: [0.6, 0.2, 0.6],
                         }}
                         transition={{
-                          duration: 4,
+                          duration: 6 + i * 0.5,
                           repeat: Infinity,
-                          delay: i * 0.2,
+                          delay: i * 0.3,
+                          ease: "easeInOut"
                         }}
                         style={{
                           left: '50%',
