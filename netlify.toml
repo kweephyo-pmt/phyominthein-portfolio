@@ -1,6 +1,7 @@
 [build]
   publish = "build"
   command = "npm run build"
+  functions = "netlify/functions"
 
 [[redirects]]
   from = "/*"
@@ -10,6 +11,10 @@
 [build.environment]
   NODE_VERSION = "18"
   NPM_VERSION = "9"
+
+# Enable Netlify Forms
+[build.processing]
+  skip_processing = false
 
 [[headers]]
   for = "/*"
