@@ -752,12 +752,13 @@ export default function App() {
               </motion.a>
 
               <motion.a
-                href="#contact"
+                href={cvFile}
+                download="Phyo_Min_Thein_CV.jpg"
                 className="group px-8 py-4 bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-bold rounded-2xl hover:from-purple-600 hover:to-indigo-700 transition-all duration-300 shadow-lg"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Let's Connect
+                Download CV
               </motion.a>
 
               {/* Social Media Buttons */}
@@ -822,80 +823,38 @@ export default function App() {
           >
             <div className="relative">
               {/* Main 3D Card */}
-              {/* Software Engineering GIF with Hover Effects */}
-              <motion.div
-                className="relative w-96 h-96 group"
-                initial={{ opacity: 0, scale: 0.8, rotateY: 30 }}
-                animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                transition={{ duration: 1.2, ease: "easeOut" }}
-                whileHover={{ 
+              {/* Software Engineering GIF */}
+              <motion.img
+                src={softwareEngineeringGif}
+                alt="Software Engineering Animation"
+                className="w-96 h-96 object-cover rounded-2xl"
+                initial={{ opacity: 0, scale: 0.8, rotateY: 15 }}
+                animate={{ 
+                  opacity: 1, 
+                  scale: 1, 
+                  rotateY: 0,
+                  y: [0, -10, 0]
+                }}
+                transition={{ 
+                  opacity: { duration: 1.2, ease: "easeOut" },
+                  scale: { duration: 1.2, ease: "easeOut" },
+                  rotateY: { duration: 1.2, ease: "easeOut" },
+                  y: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+                }}
+                whileHover={{
                   scale: 1.05,
                   rotateY: -5,
-                  rotateX: 5,
-                  z: 50
+                  filter: 'brightness(1.1) saturate(1.2)',
+                  transition: { duration: 0.3 }
                 }}
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                {/* Animated Glow Effect */}
-                <motion.div
-                  className="absolute -inset-6 bg-gradient-to-r from-cyan-400/20 via-blue-500/20 to-purple-600/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100"
-                  animate={{ 
-                    rotate: [0, 360],
-                    scale: [1, 1.2, 1]
-                  }}
-                  transition={{ 
-                    rotate: { duration: 15, repeat: Infinity, ease: "linear" },
-                    scale: { duration: 3, repeat: Infinity, ease: "easeInOut" }
-                  }}
-                />
-                
-                {/* GIF Container */}
-                <motion.div
-                  className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl"
-                  animate={{ 
-                    y: [0, -8, 0]
-                  }}
-                  transition={{ 
-                    duration: 4, 
-                    repeat: Infinity, 
-                    ease: "easeInOut" 
-                  }}
-                >
-                  <motion.img
-                    src={softwareEngineeringGif}
-                    alt="Software Engineering Animation"
-                    className="w-full h-full object-cover"
-                    style={{ 
-                      imageRendering: 'auto'
-                    }}
-                    whileHover={{
-                      scale: 1.1,
-                      filter: 'brightness(1.2) contrast(1.1) saturate(1.3)',
-                      transition: { duration: 0.4 }
-                    }}
-                  />
-                  
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-50 transition-opacity duration-500 pointer-events-none" />
-                  
-                  {/* Decorative Corner Elements */}
-                  <div className="absolute top-4 right-4 w-3 h-3 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute bottom-4 left-4 w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
-                  {/* Animated Border on Hover */}
-                  <motion.div
-                    className="absolute inset-0 rounded-3xl border-2 border-cyan-400/30 opacity-0 group-hover:opacity-80 transition-opacity duration-500 pointer-events-none"
-                    animate={{
-                      borderColor: ['rgba(6, 182, 212, 0.3)', 'rgba(59, 130, 246, 0.3)', 'rgba(147, 51, 234, 0.3)', 'rgba(6, 182, 212, 0.3)']
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "linear"
-                    }}
-                  />
-                </motion.div>
-              </motion.div>
+                whileTap={{
+                  scale: 0.98
+                }}
+                style={{ 
+                  imageRendering: 'auto',
+                  transformStyle: "preserve-3d"
+                }}
+              />
             </div>
           </motion.div>
         </div>
@@ -1046,24 +1005,7 @@ export default function App() {
                   </motion.div>
                 ))}
                 
-                {/* Download CV Button */}
-                <motion.div
-                  className="flex justify-start"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 1, duration: 0.8 }}
-                >
-                  <motion.a
-                    href={cvFile}
-                    download="Phyo_Min_Thein_CV.jpg"
-                    className="group px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-2xl hover:from-cyan-600 hover:to-blue-700 transition-all duration-300 shadow-lg"
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    📄 Download CV
-                  </motion.a>
-                </motion.div>
+  
               </div>
 
               {/* Right Side - Profile Photo */}
