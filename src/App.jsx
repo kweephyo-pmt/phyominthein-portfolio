@@ -941,7 +941,7 @@ export default function App() {
                 {/* Glow Effect */}
                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400/30 to-blue-500/30 rounded-3xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500" />
                 <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl px-8 py-10 flex flex-col items-center shadow-2xl group-hover:bg-white/15 group-hover:border-cyan-400/40 transition-all duration-500">
-                  <div className="text-4xl font-black text-cyan-400 mb-3 group-hover:scale-110 transition-transform duration-300">3</div>
+                  <div className="text-4xl font-black text-cyan-400 mb-3 group-hover:scale-110 transition-transform duration-300">4</div>
                   <div className="uppercase text-sm font-bold text-white/90 mb-2 tracking-widest group-hover:text-cyan-300 transition-colors duration-300">Total Projects</div>
                   <div className="text-sm text-white/60 text-center group-hover:text-white/80 transition-colors duration-300">Innovative web solutions crafted</div>
                   {/* Icon */}
@@ -965,7 +965,7 @@ export default function App() {
                 {/* Glow Effect */}
                 <div className="absolute -inset-1 bg-gradient-to-r from-purple-400/30 to-pink-500/30 rounded-3xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500" />
                 <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl px-8 py-10 flex flex-col items-center shadow-2xl group-hover:bg-white/15 group-hover:border-purple-400/40 transition-all duration-500">
-                  <div className="text-4xl font-black text-purple-400 mb-3 group-hover:scale-110 transition-transform duration-300">6</div>
+                  <div className="text-4xl font-black text-purple-400 mb-3 group-hover:scale-110 transition-transform duration-300">3</div>
                   <div className="uppercase text-sm font-bold text-white/90 mb-2 tracking-widest group-hover:text-purple-300 transition-colors duration-300">Certificates</div>
                   <div className="text-sm text-white/60 text-center group-hover:text-white/80 transition-colors duration-300">Professional skills validated</div>
                   {/* Icon */}
@@ -989,7 +989,7 @@ export default function App() {
                 {/* Glow Effect */}
                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-400/30 to-cyan-500/30 rounded-3xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500" />
                 <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl px-8 py-10 flex flex-col items-center shadow-2xl group-hover:bg-white/15 group-hover:border-blue-400/40 transition-all duration-500">
-                  <div className="text-4xl font-black text-blue-400 mb-3 group-hover:scale-110 transition-transform duration-300">3</div>
+                  <div className="text-4xl font-black text-blue-400 mb-3 group-hover:scale-110 transition-transform duration-300">5</div>
                   <div className="uppercase text-sm font-bold text-white/90 mb-2 tracking-widest group-hover:text-blue-300 transition-colors duration-300">Years of Experience</div>
                   <div className="text-sm text-white/60 text-center group-hover:text-white/80 transition-colors duration-300">Continuous learning journey</div>
                   {/* Icon */}
