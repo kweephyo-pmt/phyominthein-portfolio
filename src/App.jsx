@@ -2261,7 +2261,7 @@ export default function App() {
              
               
               {/* Recent Comments */}
-              <div className="space-y-4 overflow-y-auto pr-2 comments-scroll">
+              <div className="space-y-4 max-h-96 overflow-y-auto pr-2 comments-scroll">
                 {commentsLoading ? (
                   <div className="text-center py-8">
                     <div className="animate-spin w-6 h-6 border-2 border-purple-500 border-t-transparent rounded-full mx-auto mb-2"></div>
