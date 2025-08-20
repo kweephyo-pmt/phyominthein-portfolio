@@ -1596,7 +1596,7 @@ export default function App() {
                                 className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${
                                   project.id === 'reclaimify' ? 'bg-gradient-to-br from-blue-50 to-gray-100 p-4' : ''
                                 } ${
-                                  project.id === 'portfolio' ? 'object-contain bg-gray-900 p-2' : ''
+                                  project.id === 'portfolio' ? 'object-cover' : ''
                                 }`}
                               />
                             ) : (
