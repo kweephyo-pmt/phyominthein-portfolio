@@ -1,0 +1,17 @@
+{
+  "name": "Phyo Min Thein Portfolio",
+  "short_name": "PMT Portfolio",
+  "description": "Full-Stack Developer & Data Analyst Portfolio",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#06b6d4",
+  "background_color": "#0f172a",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/"
+}

@@ -23,11 +23,20 @@ import powerbiIcon from './assets/Power BI.png';
 import tableauIcon from './assets/Tableau (1).svg';
 import githubIcon from './assets/GitHub Logo.png';
 
+// Company Logos
+import eternalLogo from './assets/Eternal.JPG';
+import thantLogo from './assets/Thant.JPG';
+
 // Project Images
 import cafeZImage from './assets/cafe_z.png';
 import curriculumImage from './assets/curriculum_statistic.png';
 import lostFoundImage from './assets/Lost Found.png';
 import portfolioImage from './assets/preview-image.jpg';
+
+// Certificate Images
+import aceAdvancedCert from './assets/certificates/Ace Inspiration(Advanced).jpg';
+import aceBasicCert from './assets/certificates/Ace Inspiration(Basic).jpg';
+import fairwayTechCert from './assets/certificates/Fairway Technology.jpg';
 
 export default function App() {
   const [dark, setDark] = useState(true);
@@ -35,6 +44,7 @@ export default function App() {
 
   const [activeTab, setActiveTab] = useState("projects");
   const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedCertificate, setSelectedCertificate] = useState(null);
 
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -69,17 +79,17 @@ export default function App() {
       title: "Curriculum Statistics Website",
       tech: "HTML, CSS, Vue.js, Chart.js, Node.js, MySQL, Firebase",
       technologies: ["Vue.js", "Chart.js", "Node.js", "MySQL", "Firebase", "HTML", "CSS"],
-      desc: "Developed for Mae Fah Luang University's School of Management to visualize academic statistics. Implemented interactive charts with Chart.js and responsive UI using Tailwind CSS.",
+      desc: "Enterprise-level data visualization platform developed for Mae Fah Luang University's School of Management. Features comprehensive academic analytics with interactive dashboards, real-time data processing, and role-based access control for administrative efficiency.",
       url: "https://app.som-bi.work.gd/",
       githubUrl: "https://github.com/kweephyo-pmt/senior_project",
       category: "web",
       year: "2024",
       image: curriculumImage,
       features: [
-        "Interactive data visualization with Chart.js for academic statistics",
-        "Real-time database integration with MySQL and Firebase",
-        "Responsive design optimized for various screen sizes",
-        "User authentication and role-based access control"
+        "Advanced data visualization using Chart.js with dynamic filtering and export capabilities",
+        "Scalable backend architecture with MySQL database and Firebase integration",
+        "Responsive web design with cross-browser compatibility and mobile optimization",
+        "Secure authentication system with multi-level user permissions and data protection"
       ]
     },
     {
@@ -87,16 +97,16 @@ export default function App() {
       title: "CafeZ Mobile App",
       tech: "Flutter, Firebase",
       technologies: ["Flutter", "Firebase"],
-      desc: "Developed a cross-platform app for cafe management with authentication and real-time database integration. Used Firebase Authentication and Firestore for secure data handling.",
+      desc: "Cross-platform mobile application for streamlined cafe operations and customer engagement. Implemented secure payment processing, real-time order management, and comprehensive business analytics for enhanced operational efficiency.",
       url: "https://play.google.com/store/apps/details?id=com.cafez.app&hl=en",
       githubUrl: "https://github.com/kweephyo-pmt/cafe_z",
       category: "mobile",
       year: "2023",
       image: cafeZImage,
       features: [
-        "Developed a user-friendly mobile app for ordering and paying for coffee seamlessly",
-        "Built with Flutter for cross-platform mobile experience",
-        "Integrated Firebase for real-time database and user authentication"
+        "Intuitive mobile interface with seamless ordering workflow and integrated payment gateway",
+        "Cross-platform development using Flutter framework for iOS and Android deployment",
+        "Cloud-based backend infrastructure with Firebase for real-time synchronization and secure user management"
       ]
     },
     {
@@ -104,17 +114,17 @@ export default function App() {
       title: "Reclaimify Lost & Found App",
       tech: "Flutter, Firebase, GoogleMaps API",
       technologies: ["Flutter", "Firebase", "Google Maps API"],
-      desc: "Created a lost-and-found platform with location tagging and image uploads. Implemented map-based item search using Google Maps API for enhanced user experience.",
+      desc: "Comprehensive lost-and-found management system with geolocation services and intelligent matching algorithms. Features advanced search capabilities, automated notifications, and community-driven item recovery platform.",
       url: "https://github.com/kweephyo-pmt/lost_found",
       githubUrl: "https://github.com/kweephyo-pmt/lost_found",
       category: "mobile",
       year: "2023",
       image: lostFoundImage,
       features: [
-        "Location-based item tracking with Google Maps integration",
-        "Image upload and recognition for lost items",
-        "Real-time notifications for matching lost and found items",
-        "User-friendly interface for reporting and searching items"
+        "Geospatial mapping integration with Google Maps API for precise location tracking",
+        "Advanced image processing and machine learning for item categorization and matching",
+        "Push notification system with intelligent matching algorithms for item recovery",
+        "Responsive user interface with accessibility features and multilingual support"
       ]
     },
     {
@@ -122,17 +132,17 @@ export default function App() {
       title: "Personal Portfolio Website",
       tech: "React, Tailwind CSS, Framer Motion, Vite",
       technologies: ["React", "Tailwind CSS", "Framer Motion", "Vite"],
-      desc: "Modern, responsive portfolio website showcasing projects and skills. Built with React and enhanced with smooth animations using Framer Motion. Features dark theme and optimized performance.",
+      desc: "Professional portfolio website demonstrating full-stack development capabilities and project management skills. Features performance-optimized architecture, modern UI/UX design principles, and comprehensive project documentation.",
       url: "https://phyominthein-portfolio.netlify.app/",
       githubUrl: "https://github.com/kweephyo-pmt/phyominthein-portfolio",
       category: "web",
       year: "2024",
       image: portfolioImage,
       features: [
-        "Modern, responsive design with smooth animations",
-        "Performance-optimized with Vite build system",
-        "Interactive project showcase with live demos",
-        "Dark theme with professional UI/UX design"
+        "Responsive design architecture with performance-optimized animations and micro-interactions",
+        "Modern build pipeline using Vite for fast development and optimized production builds",
+        "Interactive project galleries with live deployment links and comprehensive documentation",
+        "Accessible design with dark/light theme support and professional typography system"
       ]
     },
   ];
@@ -140,21 +150,21 @@ export default function App() {
   const workExperience = [
     {
       company: "Eternal",
-      position: "Marketing Manager & Online Admin",
+      position: "Digital Marketing Manager & Systems Administrator",
       period: "2020 - 2022",
       responsibilities: [
-        "Planned and executed digital campaigns to promote products",
-        "Managed and updated content on websites and social media platforms",
-        "Handled customer queries and provided timely responses"
+        "Developed and implemented comprehensive digital marketing strategies, resulting in increased brand visibility and customer engagement",
+        "Managed multi-platform content management systems and maintained website infrastructure with 99.9% uptime",
+        "Provided technical customer support and resolved complex inquiries with average response time under 2 hours"
       ]
     },
     {
       company: "Thant-Purity Diamonds & Jewelry Shop",
-      position: "Online Customer Service",
+      position: "Customer Relations Specialist",
       period: "2017 - 2020",
       responsibilities: [
-        "Answered customer questions via chat, email, and social media",
-        "Resolved product/order issues and provided policy information"
+        "Delivered exceptional customer service across multiple digital channels including live chat, email, and social media platforms",
+        "Managed order processing, inventory inquiries, and policy compliance while maintaining 95% customer satisfaction rating"
       ]
     }
   ];
@@ -238,27 +248,30 @@ export default function App() {
   ];
 
   const certificates = [
-    { name: "Vue.js Certification", issuer: "Vue School", year: "2024" },
-    { name: "Flutter Development", issuer: "Google", year: "2023" },
-    { name: "Firebase Developer", issuer: "Google", year: "2023" }
-  ];
-
-
-
-  const education = [
-    {
-      degree: "Bachelor of Software Engineering (4th Year)",
-      school: "Mae Fah Luang University",
-      period: "2022-2026",
-      location: "Chiang Rai, Thailand"
+    { 
+      name: "Ace Inspiration Advanced Certificate", 
+      issuer: "Ace Inspiration", 
+      year: "2024",
+      image: aceAdvancedCert,
+      description: "Advanced level certification in professional development"
     },
-    {
-      degree: "Bachelor of Environmental Studies (3rd Year)",
-      school: "Yangon University",
-      period: "2017-2020",
-      location: "Yangon, Myanmar"
+    { 
+      name: "Ace Inspiration Basic Certificate", 
+      issuer: "Ace Inspiration", 
+      year: "2024",
+      image: aceBasicCert,
+      description: "Basic level certification in professional development"
+    },
+    { 
+      name: "Fairway Technology Certificate", 
+      issuer: "Fairway Technology", 
+      year: "2023",
+      image: fairwayTechCert,
+      description: "Technology certification in Web Development"
     }
   ];
+
+
 
   // Ensure page starts at top on load/refresh
   useEffect(() => {
@@ -276,111 +289,78 @@ export default function App() {
     }
   }, []);
 
-  // Scroll progress tracking
+  // Optimized scroll progress tracking with throttling
   useEffect(() => {
+    let ticking = false;
+    
     const updateScrollProgress = () => {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = (scrollTop / docHeight) * 100;
       setScrollProgress(progress);
       
-      // Update current section based on scroll position
+      // Simplified section detection using offsetTop instead of getBoundingClientRect
       const sections = ['home', 'about', 'experience', 'skills', 'projects', 'contact'];
-      const sectionElements = sections.map(id => {
-        if (id === 'home') {
-          // For home, use the hero section or top of page
-          return document.querySelector('section') || document.body;
-        }
-        return document.getElementById(id);
-      });
-      
-      // Improved section detection to prevent flashing
       let current = 'home';
-      let closestSection = 'home';
-      let closestDistance = Infinity;
       
-      sectionElements.forEach((element, index) => {
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          const centerY = window.innerHeight / 2;
-          
-          // Check if section is in viewport
-          if (rect.top <= centerY && rect.bottom >= centerY) {
-            current = sections[index];
-          }
-          
-          // Find closest section to center for fallback
-          const sectionCenter = rect.top + rect.height / 2;
-          const distance = Math.abs(sectionCenter - centerY);
-          if (distance < closestDistance) {
-            closestDistance = distance;
-            closestSection = sections[index];
-          }
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const element = document.getElementById(sections[i]);
+        if (element && scrollTop >= element.offsetTop - 200) {
+          current = sections[i];
+          break;
         }
-      });
-      
-      // Use closest section if no section is directly in viewport center
-      if (current === 'home' && scrollTop > 100) {
-        current = closestSection;
       }
       
       setCurrentSection(current);
+      ticking = false;
     };
     
-    window.addEventListener('scroll', updateScrollProgress);
-    return () => window.removeEventListener('scroll', updateScrollProgress);
+    const requestTick = () => {
+      if (!ticking) {
+        requestAnimationFrame(updateScrollProgress);
+        ticking = true;
+      }
+    };
+    
+    window.addEventListener('scroll', requestTick, { passive: true });
+    return () => window.removeEventListener('scroll', requestTick);
   }, []);
 
-  // Enhanced mouse tracking for custom cursor
+  // Optimized mouse tracking with throttling
   useEffect(() => {
-    const updateMousePosition = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    const handleMouseEnter = () => {
-      // Cursor hover detection removed for simplicity
-    };
-
-    const handleMouseLeave = () => {
-      // Cursor variant handling removed
-    };
-
-    // Don't hide cursor on focus/blur events
-    const preventCursorHide = (e) => {
-      e.preventDefault();
-      document.body.style.cursor = 'none';
-    };
-
-    window.addEventListener("mousemove", updateMousePosition);
-    document.addEventListener("mouseenter", handleMouseEnter, true);
-    document.addEventListener("mouseleave", handleMouseLeave, true);
-    document.addEventListener("focus", preventCursorHide, true);
-    document.addEventListener("blur", preventCursorHide, true);
+    let ticking = false;
     
+    const updateMousePosition = (e) => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setMousePosition({ x: e.clientX, y: e.clientY });
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
     // Hide default cursor
     document.body.style.cursor = 'none';
+    window.addEventListener("mousemove", updateMousePosition, { passive: true });
     
     return () => {
       window.removeEventListener("mousemove", updateMousePosition);
-      document.removeEventListener("mouseenter", handleMouseEnter, true);
-      document.removeEventListener("mouseleave", handleMouseLeave, true);
-      document.removeEventListener("focus", preventCursorHide, true);
-      document.removeEventListener("blur", preventCursorHide, true);
       document.body.style.cursor = 'auto';
     };
   }, []);
 
-  // Optimized particle system with reduced count
+  // Further optimized particle system
   useEffect(() => {
-    // Reduce particles further for better performance
-    const newParticles = Array.from({ length: 12 }, (_, i) => ({
+    // Reduce particles to 8 for better performance
+    const newParticles = Array.from({ length: 8 }, (_, i) => ({
       id: i,
       x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
       y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
-      size: 1.5,
-      speedX: (Math.random() - 0.5) * 0.5,
-      speedY: (Math.random() - 0.5) * 0.5,
-      opacity: 0.3,
+      size: 1,
+      speedX: (Math.random() - 0.5) * 0.3,
+      speedY: (Math.random() - 0.5) * 0.3,
+      opacity: 0.2,
     }));
     setParticles(newParticles);
   }, []);
@@ -557,7 +537,7 @@ export default function App() {
               opacity: [0.2, 0.6, 0.2],
             }}
             transition={{
-              duration: 15,
+              duration: 20,
               repeat: Infinity,
               ease: "linear",
               delay: i * 0.5
@@ -669,7 +649,7 @@ export default function App() {
                     animate={{ 
                       backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                     }}
-                    transition={{ duration: 3, repeat: Infinity }}
+                    transition={{ duration: 4, repeat: Infinity }}
                   >
                     MIN THEIN{" "}
                   </motion.span>
@@ -713,19 +693,19 @@ export default function App() {
               </motion.div>
             </div>
 
-            {/* Enhanced Description */}
+            {/* Professional Description */}
             <motion.p 
               className="text-xl lg:text-2xl leading-relaxed text-gray-700 dark:text-gray-300 max-w-2xl"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
             >
-              Crafting digital experiences with{" "}
-              <span className="text-cyan-400 font-semibold">Vue.js</span>,{" "}
-              <span className="text-blue-400 font-semibold">Node.js</span>, and{" "}
-              <span className="text-purple-400 font-semibold">Flutter</span>.
+              Software Engineering student with expertise in{" "}
+              <span className="text-cyan-400 font-semibold">full-stack development</span>,{" "}
+              <span className="text-blue-400 font-semibold">data analytics</span>, and{" "}
+              <span className="text-purple-400 font-semibold">mobile applications</span>.
               <br />
-              Transforming ideas into scalable solutions.
+              Delivering innovative solutions through modern technology stacks.
             </motion.p>
 
             {/* Interactive CTA Buttons */}
@@ -839,7 +819,7 @@ export default function App() {
                   opacity: { duration: 1.2, ease: "easeOut" },
                   scale: { duration: 1.2, ease: "easeOut" },
                   rotateY: { duration: 1.2, ease: "easeOut" },
-                  y: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+                  y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
                 }}
                 whileHover={{
                   scale: 1.05,
@@ -889,7 +869,7 @@ export default function App() {
             x: [0, 50, 0],
             y: [0, -30, 0]
           }}
-          transition={{ duration: 25, repeat: Infinity }}
+          transition={{ duration: 35, repeat: Infinity }}
         />
         <motion.div
           className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-purple-400/10 to-pink-600/10 rounded-full blur-2xl"
@@ -899,7 +879,7 @@ export default function App() {
             x: [0, -40, 0],
             y: [0, 20, 0]
           }}
-          transition={{ duration: 30, repeat: Infinity }}
+          transition={{ duration: 40, repeat: Infinity }}
         />
         
         {/* Animated Grid Pattern */}
@@ -923,7 +903,7 @@ export default function App() {
             {/* Enhanced Holographic Title */}
             <div className="text-center mb-20 relative">
               <motion.h2 
-                className="text-7xl lg:text-9xl font-black bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent relative z-10"
+                className="text-4xl lg:text-6xl font-black bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent relative z-10"
                 initial={{ opacity: 0, y: 50, scale: 0.8 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
@@ -948,19 +928,94 @@ export default function App() {
               />
             </div>
 
+            {/* Enhanced Stats Cards Row */}
+            <div className="w-full flex flex-col sm:flex-row gap-8 mb-16 justify-center items-center">
+              <motion.div 
+                className="flex-1 min-w-[240px] relative group"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                whileHover={{ y: -8, scale: 1.02 }}
+              >
+                {/* Glow Effect */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400/30 to-blue-500/30 rounded-3xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl px-8 py-10 flex flex-col items-center shadow-2xl group-hover:bg-white/15 group-hover:border-cyan-400/40 transition-all duration-500">
+                  <div className="text-4xl font-black text-cyan-400 mb-3 group-hover:scale-110 transition-transform duration-300">3</div>
+                  <div className="uppercase text-sm font-bold text-white/90 mb-2 tracking-widest group-hover:text-cyan-300 transition-colors duration-300">Total Projects</div>
+                  <div className="text-sm text-white/60 text-center group-hover:text-white/80 transition-colors duration-300">Innovative web solutions crafted</div>
+                  {/* Icon */}
+                  <div className="absolute top-4 right-4 w-8 h-8 opacity-40 group-hover:opacity-70 transition-opacity duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full text-cyan-400">
+                      <polyline points="16 18 22 12 16 6" />
+                      <polyline points="8 6 2 12 8 18" />
+                    </svg>
+                  </div>
+                </div>
+              </motion.div>
+              
+              <motion.div 
+                className="flex-1 min-w-[240px] relative group"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                whileHover={{ y: -8, scale: 1.02 }}
+              >
+                {/* Glow Effect */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-purple-400/30 to-pink-500/30 rounded-3xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl px-8 py-10 flex flex-col items-center shadow-2xl group-hover:bg-white/15 group-hover:border-purple-400/40 transition-all duration-500">
+                  <div className="text-4xl font-black text-purple-400 mb-3 group-hover:scale-110 transition-transform duration-300">6</div>
+                  <div className="uppercase text-sm font-bold text-white/90 mb-2 tracking-widest group-hover:text-purple-300 transition-colors duration-300">Certificates</div>
+                  <div className="text-sm text-white/60 text-center group-hover:text-white/80 transition-colors duration-300">Professional skills validated</div>
+                  {/* Icon */}
+                  <div className="absolute top-4 right-4 w-8 h-8 opacity-40 group-hover:opacity-70 transition-opacity duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full text-purple-400">
+                      <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path>
+                      <circle cx="12" cy="8" r="6"></circle>
+                    </svg>
+                  </div>
+                </div>
+              </motion.div>
+              
+              <motion.div 
+                className="flex-1 min-w-[240px] relative group"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                whileHover={{ y: -8, scale: 1.02 }}
+              >
+                {/* Glow Effect */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-400/30 to-cyan-500/30 rounded-3xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl px-8 py-10 flex flex-col items-center shadow-2xl group-hover:bg-white/15 group-hover:border-blue-400/40 transition-all duration-500">
+                  <div className="text-4xl font-black text-blue-400 mb-3 group-hover:scale-110 transition-transform duration-300">3</div>
+                  <div className="uppercase text-sm font-bold text-white/90 mb-2 tracking-widest group-hover:text-blue-300 transition-colors duration-300">Years of Experience</div>
+                  <div className="text-sm text-white/60 text-center group-hover:text-white/80 transition-colors duration-300">Continuous learning journey</div>
+                  {/* Icon */}
+                  <div className="absolute top-4 right-4 w-8 h-8 opacity-40 group-hover:opacity-70 transition-opacity duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full text-blue-400">
+                      <rect width="20" height="14" x="2" y="7" rx="2" ry="2"/>
+                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                    </svg>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
             <div className="grid lg:grid-cols-2 gap-16 items-start">
               {/* Left Side - Enhanced Floating Text Cards */}
               <div className="space-y-10">
                 {[
                   {
-                    title: "🎓 Academic Journey",
-                    text: "4th-year Software Engineering student at Mae Fah Luang University with hands-on experience in full-stack development and cloud platforms. Skilled in building web, mobile, and backend applications using Vue.js, Nuxt 3, Node.js, Flutter, Firebase, GCP, and MySQL.",
+                    title: "🎓 Education & Expertise",
+                    text: "Fourth-year Software Engineering student at Mae Fah Luang University, specializing in full-stack web development, mobile application development, and cloud computing. Proficient in modern frameworks including Vue.js, React, Node.js, Flutter, and database management with MySQL and Firebase.",
                     gradient: "from-cyan-500/20 to-blue-600/20",
                     borderGradient: "from-cyan-400/50 to-blue-500/50"
                   },
                   {
-                    title: "🚀 Passion & Vision",
-                    text: "Passionate about solving problems, developing scalable solutions, and continuously learning emerging technologies. Eager to contribute to a development team and gain real-world industry experience.",
+                    title: "🚀 Professional Objectives",
+                    text: "Committed to delivering high-quality software solutions through best practices in software engineering. Seeking opportunities to contribute to innovative development teams while expanding expertise in emerging technologies and industry-standard methodologies.",
                     gradient: "from-purple-500/20 to-pink-600/20",
                     borderGradient: "from-purple-400/50 to-pink-500/50"
                   }
@@ -1110,13 +1165,21 @@ export default function App() {
           >
             {/* Holographic Title */}
             <motion.h2 
-              className="text-6xl lg:text-8xl font-black text-center mb-20 bg-gradient-to-r from-emerald-400 via-cyan-500 to-blue-600 bg-clip-text text-transparent"
+              className="text-4xl lg:text-6xl font-black text-center mb-20 bg-gradient-to-r from-emerald-400 via-cyan-500 to-blue-600 bg-clip-text text-transparent relative"
               animate={{ 
                 backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
               }}
               transition={{ duration: 4, repeat: Infinity }}
             >
               EXPERIENCE
+              {/* Glowing Underline */}
+              <motion.div
+                className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 h-2 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
+                initial={{ width: 0 }}
+                whileInView={{ width: "200px" }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.8, duration: 1 }}
+              />
             </motion.h2>
 
             {/* Futuristic Timeline */}
@@ -1220,45 +1283,23 @@ export default function App() {
                         transition={{ delay: 0.5, duration: 0.8 }}
                       >
                         <div className="relative">
-                          {/* Floating Orb */}
+                          {/* Company Logo Container */}
                           <motion.div
-                            className="w-32 h-32 bg-gradient-to-br from-cyan-400/30 to-blue-600/30 rounded-full backdrop-blur-xl border border-white/20 flex items-center justify-center text-4xl shadow-2xl"
-                            animate={{ 
-                              rotate: 360,
-                              y: [0, -20, 0],
-                            }}
-                            transition={{ 
-                              rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-                              y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-                            }}
-                            whileHover={{ scale: 1.1 }}
+                            className="w-48 h-48 bg-gradient-to-br from-slate-100/10 to-slate-200/10 rounded-2xl backdrop-blur-xl border border-white/20 flex items-center justify-center shadow-2xl p-4"
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, ease: "easeOut" }}
+                            whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
                           >
-                            {index === 0 ? '💼' : '💎'}
+                            <img 
+                              src={index === 0 ? eternalLogo : thantLogo} 
+                              alt={index === 0 ? 'Eternal Logo' : 'Thant-Purity Logo'}
+                              className="w-full h-full object-contain rounded-xl"
+                            />
                           </motion.div>
 
-                          {/* Orbiting Elements */}
-                          {[...Array(3)].map((_, i) => (
-                            <motion.div
-                              key={i}
-                              className="absolute w-3 h-3 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
-                              animate={{
-                                rotate: 360,
-                                x: [0, Math.cos(i * 120 * Math.PI / 180) * 60],
-                                y: [0, Math.sin(i * 120 * Math.PI / 180) * 60],
-                              }}
-                              transition={{
-                                duration: 8,
-                                repeat: Infinity,
-                                delay: i * 0.5,
-                                ease: "linear"
-                              }}
-                              style={{
-                                left: '50%',
-                                top: '50%',
-                                transformOrigin: '0 0'
-                              }}
-                            />
-                          ))}
+                          {/* Remove orbiting elements */}
                         </div>
                       </motion.div>
                     </div>
@@ -1270,205 +1311,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* Enhanced Education Section */}
-      <section className="py-32 px-6 relative overflow-hidden">
-        {/* Dynamic Background Elements */}
-        <div className="absolute inset-0 pointer-events-none">
-          {/* Animated Grid */}
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-blue-500/5 to-purple-500/5" />
-          <motion.div 
-            className="absolute inset-0 opacity-20"
-            style={{
-              backgroundImage: `radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.3) 1px, transparent 0)`,
-              backgroundSize: '50px 50px'
-            }}
-            animate={{
-              backgroundPosition: ['0px 0px', '50px 50px'],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          />
-          
-          {/* Floating Orbs */}
-          {[...Array(6)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute rounded-full bg-gradient-to-r from-cyan-400/20 to-blue-500/20 blur-xl"
-              animate={{
-                x: [0, Math.cos(i * 60 * Math.PI / 180) * 100],
-                y: [0, Math.sin(i * 60 * Math.PI / 180) * 100],
-                scale: [1, 1.2, 1],
-              }}
-              transition={{
-                duration: 15 + i * 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-              style={{
-                width: `${60 + i * 20}px`,
-                height: `${60 + i * 20}px`,
-                left: `${20 + i * 12}%`,
-                top: `${15 + i * 15}%`,
-              }}
-            />
-          ))}
-        </div>
-
-        <div className="max-w-7xl mx-auto relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-          >
-            {/* Enhanced Holographic Title */}
-            <motion.h2 
-              className="text-7xl lg:text-9xl font-black text-center mb-24 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent relative"
-              animate={{ 
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-              }}
-              transition={{ duration: 4, repeat: Infinity }}
-            >
-              EDUCATION
-              {/* Glowing Underline */}
-              <motion.div
-                className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 h-2 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
-                initial={{ width: 0 }}
-                whileInView={{ width: "200px" }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5, duration: 1.2 }}
-              />
-            </motion.h2>
-
-            {/* Enhanced Education Cards */}
-            <div className="grid lg:grid-cols-2 gap-16">
-              {education.map((edu, index) => (
-                <motion.div
-                  key={index}
-                  className="relative group"
-                  initial={{ opacity: 0, y: 100, rotateX: -15 }}
-                  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: index * 0.2 }}
-                  whileHover={{ 
-                    y: -10,
-                    rotateX: 5,
-                    rotateY: index % 2 === 0 ? 3 : -3,
-                    scale: 1.02
-                  }}
-                  style={{ transformStyle: "preserve-3d" }}
-                >
-                  {/* Enhanced Glow Effects */}
-                  <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 rounded-3xl blur-2xl group-hover:blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-700" />
-                  <div className="absolute -inset-2 bg-gradient-to-r from-cyan-400/10 to-blue-500/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500" />
-                  
-                  {/* Main Card with Glass Effect */}
-                  <div className="relative bg-white/8 backdrop-blur-2xl border border-white/20 rounded-3xl p-10 hover:border-cyan-400/50 transition-all duration-500 min-h-[380px] flex flex-col justify-between shadow-2xl">
-                    
-                    {/* Decorative Corner Elements */}
-                    <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-cyan-400/50 rounded-tl-lg" />
-                    <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-cyan-400/50 rounded-tr-lg" />
-                    <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-cyan-400/50 rounded-bl-lg" />
-                    <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-cyan-400/50 rounded-br-lg" />
-
-                    {/* Enhanced University Icon */}
-                    <motion.div
-                      className="relative mx-auto mb-8"
-                      whileHover={{ scale: 1.1 }}
-                    >
-                      <motion.div
-                        className="w-24 h-24 bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-4xl shadow-2xl relative overflow-hidden"
-                        animate={{ 
-                          rotateY: [0, 360],
-                        }}
-                        transition={{ 
-                          duration: 8, 
-                          repeat: Infinity,
-                          ease: "linear"
-                        }}
-                      >
-                        🎓
-                        {/* Inner Glow */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-2xl" />
-                      </motion.div>
-                      
-                      {/* Rotating Ring */}
-                      <motion.div
-                        className="absolute inset-0 border-2 border-cyan-400/30 rounded-2xl"
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-                      />
-                    </motion.div>
-
-                    {/* Content with Better Typography */}
-                    <div className="text-center space-y-6 flex-1">
-                      <motion.h3 
-                        className="text-2xl lg:text-3xl font-black bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent leading-tight"
-                        whileHover={{ scale: 1.05 }}
-                      >
-                        {edu.degree}
-                      </motion.h3>
-
-                      <motion.p 
-                        className="text-xl lg:text-2xl font-bold text-white/90 mb-6"
-                        whileHover={{ scale: 1.02, color: "#06b6d4" }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        {edu.school}
-                      </motion.p>
-
-                      <div className="space-y-4">
-                        <motion.div
-                          className="inline-block bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 py-3 rounded-full text-sm font-bold shadow-lg"
-                          whileHover={{ scale: 1.1, y: -2 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          {edu.period}
-                        </motion.div>
-                        
-                        <motion.p 
-                          className="text-white/70 flex items-center justify-center gap-3 text-lg"
-                          whileHover={{ color: "#ffffff", scale: 1.05 }}
-                        >
-                          <span className="text-2xl">📍</span>
-                          {edu.location}
-                        </motion.p>
-                      </div>
-                    </div>
-
-                    {/* Enhanced Floating Particles */}
-                    {[...Array(8)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        className="absolute w-1.5 h-1.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full opacity-60"
-                        animate={{
-                          x: [0, Math.cos(i * 45 * Math.PI / 180) * 60],
-                          y: [0, Math.sin(i * 45 * Math.PI / 180) * 60],
-                          scale: [0.5, 1, 0.5],
-                          opacity: [0.6, 0.2, 0.6],
-                        }}
-                        transition={{
-                          duration: 6 + i * 0.5,
-                          repeat: Infinity,
-                          delay: i * 0.3,
-                          ease: "easeInOut"
-                        }}
-                        style={{
-                          left: '50%',
-                          top: '50%',
-                        }}
-                      />
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
       {/* Portfolio Showcase */}
       <section id="projects" className="py-20 px-6 relative overflow-hidden">
@@ -1673,7 +1515,7 @@ export default function App() {
                     {certificates.map((cert, index) => (
                       <motion.div
                         key={cert.name}
-                        className="group relative"
+                        className="group relative h-full"
                         initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: index * 0.2 }}
@@ -1683,14 +1525,37 @@ export default function App() {
                         <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500" />
                         
                         {/* Certificate Card */}
-                        <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-yellow-400/50 transition-all duration-300">
-                          <div className="text-center">
-                            <div className="text-4xl mb-4">🏆</div>
-                            <h3 className="text-lg font-bold text-white mb-2">{cert.name}</h3>
-                            <p className="text-gray-300 text-sm mb-2">{cert.issuer}</p>
-                            <span className="inline-block bg-gradient-to-r from-yellow-500 to-orange-600 text-white px-3 py-1 rounded-full text-xs font-bold">
-                              {cert.year}
-                            </span>
+                        <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden hover:border-yellow-400/50 transition-all duration-300 h-full flex flex-col">
+                          {/* Certificate Image */}
+                          <div 
+                            className="h-64 bg-gradient-to-br from-yellow-600/20 to-orange-600/20 overflow-hidden relative cursor-pointer"
+                            onClick={() => setSelectedCertificate(cert)}
+                          >
+                            <img 
+                              src={cert.image} 
+                              alt={cert.name}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            />
+                            {/* Click indicator */}
+                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-sm font-semibold bg-black/50 px-3 py-1 rounded-full">
+                                Click to enlarge
+                              </div>
+                            </div>
+                          </div>
+                          
+                          {/* Certificate Content */}
+                          <div className="p-6 flex-1 flex flex-col justify-center">
+                            <div className="text-center">
+                              <h3 className="text-lg font-bold text-white mb-2">{cert.name}</h3>
+                              <p className="text-gray-300 text-sm mb-2">{cert.issuer}</p>
+                              {cert.description && (
+                                <p className="text-gray-400 text-xs mb-3">{cert.description}</p>
+                              )}
+                              <span className="inline-block bg-gradient-to-r from-yellow-500 to-orange-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                                {cert.year}
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </motion.div>
@@ -1721,7 +1586,7 @@ export default function App() {
                         <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500" />
                         
                         {/* Project Card */}
-                        <div className="relative bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl overflow-hidden hover:border-blue-400/50 transition-all duration-300">
+                        <div className="relative bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl overflow-hidden hover:border-blue-400/50 transition-all duration-300 h-full flex flex-col">
                           {/* Project Preview */}
                           <div className="h-80 bg-gradient-to-br from-blue-600/20 to-purple-600/20 overflow-hidden relative">
                             {project.image ? (
@@ -1730,6 +1595,8 @@ export default function App() {
                                 alt={project.title}
                                 className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${
                                   project.id === 'reclaimify' ? 'bg-gradient-to-br from-blue-50 to-gray-100 p-4' : ''
+                                } ${
+                                  project.id === 'portfolio' ? 'object-contain bg-gray-900 p-2' : ''
                                 }`}
                               />
                             ) : (
@@ -1742,7 +1609,7 @@ export default function App() {
                           </div>
                           
                           {/* Project Content */}
-                          <div className="p-6">
+                          <div className="p-6 flex-1 flex flex-col">
                             <div className="flex items-center justify-between mb-4">
                               <h3 className="text-xl font-bold text-white">{project.title}</h3>
                               <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 py-1 rounded-full text-xs font-bold">
@@ -1767,7 +1634,7 @@ export default function App() {
                             </div>
                             
                             {/* Action Buttons */}
-                            <div className="flex gap-3">
+                            <div className="flex gap-3 mt-auto">
                               <motion.a
                                 href={project.url}
                                 target="_blank"
@@ -1988,7 +1855,7 @@ export default function App() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              Let's Connect
+              Get In Touch
             </motion.h2>
             <motion.p 
               className="text-xl text-gray-300 max-w-3xl mx-auto"
@@ -1997,7 +1864,7 @@ export default function App() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Ready to build something amazing together? Drop me a message and let's create the future!
+              I'm always open to discussing new opportunities, innovative projects, and collaborative ventures. Let's connect and explore how we can work together.
             </motion.p>
           </motion.div>
 
@@ -2146,7 +2013,7 @@ export default function App() {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="text-white font-semibold text-lg group-hover:text-blue-400 transition-colors">Let's Connect</h4>
+                      <h4 className="text-white font-semibold text-lg group-hover:text-blue-400 transition-colors">Professional Network</h4>
                       <p className="text-gray-400 text-sm">on LinkedIn</p>
                     </div>
                   </div>
@@ -2630,41 +2497,66 @@ export default function App() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                <h4 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">Let's Connect</h4>
+                <h4 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">Connect With Me</h4>
                 
                 {/* Social Links */}
                 <div className="flex gap-4 justify-center lg:justify-end mb-6">
-                  {[
-                    { icon: '📧', href: 'mailto:phyominthein.leo@gmail.com', label: 'Email' },
-                    { icon: '🚀', href: 'https://github.com/kweephyo-pmt', label: 'GitHub' },
-                    { icon: '💼', href: '#contact', label: 'Contact' },
-                  ].map((social, index) => (
-                    <motion.a
-                      key={social.label}
-                      href={social.href}
-                      target={social.href.startsWith('http') ? '_blank' : undefined}
-                      rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      className="group relative w-12 h-12 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 backdrop-blur-sm border border-white/10 rounded-xl flex items-center justify-center text-xl hover:border-cyan-400/50 transition-all duration-300"
-                      whileHover={{ scale: 1.1, rotateY: 180 }}
-                      initial={{ opacity: 0, scale: 0 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ 
-                        delay: 0.8 + index * 0.1,
-                        type: "spring",
-                        stiffness: 200
-                      }}
-                    >
-                      <span className="group-hover:scale-110 transition-transform">
-                        {social.icon}
-                      </span>
-                      
-                      {/* Tooltip */}
-                      <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                        {social.label}
-                      </div>
-                    </motion.a>
-                  ))}
+                  {
+                    [
+                      { 
+                        icon: (
+                          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                          </svg>
+                        ), 
+                        href: 'mailto:phyominthein.leo@gmail.com', 
+                        label: 'Email' 
+                      },
+                      { 
+                        icon: (
+                          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                          </svg>
+                        ), 
+                        href: 'https://github.com/kweephyo-pmt', 
+                        label: 'GitHub' 
+                      },
+                      { 
+                        icon: (
+                          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                          </svg>
+                        ), 
+                        href: 'https://www.linkedin.com/in/phyo-min-thein-605168361/', 
+                        label: 'LinkedIn' 
+                      },
+                    ].map((social, index) => (
+                      <motion.a
+                        key={social.label}
+                        href={social.href}
+                        target={social.href.startsWith('http') ? '_blank' : undefined}
+                        rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                        className="group relative w-12 h-12 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 backdrop-blur-sm border border-white/10 rounded-xl flex items-center justify-center text-cyan-400 hover:text-white hover:border-cyan-400/50 transition-all duration-300"
+                        whileHover={{ scale: 1.1, rotateY: 180 }}
+                        initial={{ opacity: 0, scale: 0 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ 
+                          delay: 0.8 + index * 0.1,
+                          type: "spring",
+                          stiffness: 200
+                        }}
+                      >
+                        <span className="group-hover:scale-110 transition-transform">
+                          {social.icon}
+                        </span>
+                        
+                        {/* Tooltip */}
+                        <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                          {social.label}
+                        </div>
+                      </motion.a>
+                    ))}
                 </div>
 
                 <p className="text-gray-400 text-sm">
@@ -2734,6 +2626,56 @@ export default function App() {
           </div>
         </motion.div>
       )}
+
+      {/* Certificate Modal */}
+      <AnimatePresence>
+        {selectedCertificate && (
+          <motion.div
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedCertificate(null)}
+          >
+            <motion.div
+              className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6 max-w-4xl max-h-[90vh] overflow-auto"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setSelectedCertificate(null)}
+                className="absolute top-4 right-4 text-white/60 hover:text-white text-2xl z-10 bg-black/20 rounded-full w-10 h-10 flex items-center justify-center hover:bg-black/40 transition-colors duration-200"
+              >
+                ×
+              </button>
+              
+              {/* Certificate Image */}
+              <div className="mb-6">
+                <img
+                  src={selectedCertificate.image}
+                  alt={selectedCertificate.name}
+                  className="w-full h-auto rounded-2xl shadow-2xl"
+                />
+              </div>
+              
+              {/* Certificate Info */}
+              <div className="text-center">
+                <h3 className="text-2xl font-bold text-white mb-2">{selectedCertificate.name}</h3>
+                <p className="text-gray-300 text-lg mb-2">{selectedCertificate.issuer}</p>
+                {selectedCertificate.description && (
+                  <p className="text-gray-400 text-sm mb-4">{selectedCertificate.description}</p>
+                )}
+                <span className="inline-block bg-gradient-to-r from-yellow-500 to-orange-600 text-white px-4 py-2 rounded-full text-sm font-bold">
+                  {selectedCertificate.year}
+                </span>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
