@@ -928,77 +928,149 @@ export default function App() {
               />
             </div>
 
-            {/* Enhanced Stats Cards Row */}
-            <div className="w-full flex flex-col sm:flex-row gap-8 mb-16 justify-center items-center">
+            {/* Enhanced 3D Stats Cards Row - Mobile Optimized */}
+            <div className="w-full flex flex-col sm:flex-row gap-4 sm:gap-8 mb-12 sm:mb-16 justify-center items-stretch perspective-1000 px-4 sm:px-0">
               <motion.div 
-                className="flex-1 min-w-[240px] relative group"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                className="flex-1 min-w-[280px] sm:min-w-[240px] max-w-[320px] sm:max-w-[280px] mx-auto sm:mx-0 relative group transform-gpu"
+                initial={{ opacity: 0, y: 50, rotateX: 15 }}
+                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ duration: 0.8, delay: 0.1 }}
+                whileHover={{ 
+                  y: -8, 
+                  scale: 1.02, 
+                  rotateX: -3,
+                  rotateY: 3,
+                  z: 30
+                }}
+                whileTap={{ 
+                  scale: 0.98,
+                  y: -4
+                }}
+                style={{ transformStyle: 'preserve-3d' }}
               >
-                {/* Glow Effect */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400/30 to-blue-500/30 rounded-3xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500" />
-                <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl px-8 py-10 flex flex-col items-center shadow-2xl group-hover:bg-white/15 group-hover:border-cyan-400/40 transition-all duration-500">
-                  <div className="text-4xl font-black text-cyan-400 mb-3 group-hover:scale-110 transition-transform duration-300">4</div>
-                  <div className="uppercase text-sm font-bold text-white/90 mb-2 tracking-widest group-hover:text-cyan-300 transition-colors duration-300">Total Projects</div>
-                  <div className="text-sm text-white/60 text-center group-hover:text-white/80 transition-colors duration-300">Innovative web solutions crafted</div>
-                  {/* Icon */}
-                  <div className="absolute top-4 right-4 w-8 h-8 opacity-40 group-hover:opacity-70 transition-opacity duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full text-cyan-400">
+                {/* Enhanced Glow Effect */}
+                <div className="absolute -inset-2 bg-gradient-to-r from-cyan-400/40 to-blue-500/40 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700" />
+                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400/20 to-blue-500/20 rounded-3xl blur-lg opacity-60 group-hover:opacity-100 transition-all duration-500" />
+                
+                {/* 3D Card Body - Mobile Optimized */}
+                <div className="relative bg-gradient-to-br from-white/15 via-white/10 to-white/5 backdrop-blur-xl border border-white/30 rounded-2xl sm:rounded-3xl px-6 sm:px-8 py-8 sm:py-10 h-[160px] sm:h-[180px] flex flex-col items-center justify-center shadow-[0_15px_35px_rgba(0,0,0,0.2),0_0_0_1px_rgba(255,255,255,0.1),inset_0_1px_0_rgba(255,255,255,0.2)] group-hover:shadow-[0_25px_60px_rgba(6,182,212,0.25),0_0_0_1px_rgba(6,182,212,0.3),inset_0_1px_0_rgba(255,255,255,0.3)] transition-all duration-700 transform-gpu">
+                  
+                  {/* 3D Number with depth - Mobile Optimized */}
+                  <div className="relative text-3xl sm:text-4xl font-black text-cyan-400 mb-2 sm:mb-3 group-hover:scale-105 sm:group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_3px_6px_rgba(6,182,212,0.4)]" style={{ textShadow: '0 1px 3px rgba(6,182,212,0.3), 0 0 15px rgba(6,182,212,0.2)' }}>
+                    4
+                    <div className="absolute inset-0 text-cyan-300/30 transform translate-x-0.5 translate-y-0.5 sm:translate-x-1 sm:translate-y-1 -z-10">4</div>
+                  </div>
+                  
+                  <div className="uppercase text-xs sm:text-sm font-bold text-white/90 mb-1 sm:mb-2 tracking-wider sm:tracking-widest group-hover:text-cyan-300 transition-colors duration-300 text-center drop-shadow-lg">Total Projects</div>
+                  <div className="text-xs sm:text-sm text-white/60 text-center group-hover:text-white/80 transition-colors duration-300 line-clamp-2 drop-shadow-md px-2 sm:px-0">Innovative web solutions crafted</div>
+                  
+                  {/* 3D Icon with depth - Mobile Optimized */}
+                  <div className="absolute top-3 sm:top-4 right-3 sm:right-4 w-6 sm:w-8 h-6 sm:h-8 opacity-40 group-hover:opacity-80 transition-all duration-300 transform group-hover:scale-105 sm:group-hover:scale-110 drop-shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full text-cyan-400 filter drop-shadow-[0_1px_3px_rgba(6,182,212,0.3)]">
                       <polyline points="16 18 22 12 16 6" />
                       <polyline points="8 6 2 12 8 18" />
                     </svg>
                   </div>
+                  
+                  {/* 3D Edge highlight */}
+                  <div className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-50 pointer-events-none" />
                 </div>
               </motion.div>
               
               <motion.div 
-                className="flex-1 min-w-[240px] relative group"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                className="flex-1 min-w-[280px] sm:min-w-[240px] max-w-[320px] sm:max-w-[280px] mx-auto sm:mx-0 relative group transform-gpu"
+                initial={{ opacity: 0, y: 50, rotateX: 15 }}
+                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                whileHover={{ 
+                  y: -8, 
+                  scale: 1.02, 
+                  rotateX: -3,
+                  rotateY: -3,
+                  z: 30
+                }}
+                whileTap={{ 
+                  scale: 0.98,
+                  y: -4
+                }}
+                style={{ transformStyle: 'preserve-3d' }}
               >
-                {/* Glow Effect */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-purple-400/30 to-pink-500/30 rounded-3xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500" />
-                <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl px-8 py-10 flex flex-col items-center shadow-2xl group-hover:bg-white/15 group-hover:border-purple-400/40 transition-all duration-500">
-                  <div className="text-4xl font-black text-purple-400 mb-3 group-hover:scale-110 transition-transform duration-300">3</div>
-                  <div className="uppercase text-sm font-bold text-white/90 mb-2 tracking-widest group-hover:text-purple-300 transition-colors duration-300">Certificates</div>
-                  <div className="text-sm text-white/60 text-center group-hover:text-white/80 transition-colors duration-300">Professional skills validated</div>
-                  {/* Icon */}
-                  <div className="absolute top-4 right-4 w-8 h-8 opacity-40 group-hover:opacity-70 transition-opacity duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full text-purple-400">
+                {/* Enhanced Glow Effect */}
+                <div className="absolute -inset-2 bg-gradient-to-r from-purple-400/40 to-pink-500/40 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700" />
+                <div className="absolute -inset-1 bg-gradient-to-r from-purple-400/20 to-pink-500/20 rounded-3xl blur-lg opacity-60 group-hover:opacity-100 transition-all duration-500" />
+                
+                {/* 3D Card Body - Mobile Optimized */}
+                <div className="relative bg-gradient-to-br from-white/15 via-white/10 to-white/5 backdrop-blur-xl border border-white/30 rounded-2xl sm:rounded-3xl px-6 sm:px-8 py-8 sm:py-10 h-[160px] sm:h-[180px] flex flex-col items-center justify-center shadow-[0_15px_35px_rgba(0,0,0,0.2),0_0_0_1px_rgba(255,255,255,0.1),inset_0_1px_0_rgba(255,255,255,0.2)] group-hover:shadow-[0_25px_60px_rgba(168,85,247,0.25),0_0_0_1px_rgba(168,85,247,0.3),inset_0_1px_0_rgba(255,255,255,0.3)] transition-all duration-700 transform-gpu">
+                  
+                  {/* 3D Number with depth - Mobile Optimized */}
+                  <div className="relative text-3xl sm:text-4xl font-black text-purple-400 mb-2 sm:mb-3 group-hover:scale-105 sm:group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_3px_6px_rgba(168,85,247,0.4)]" style={{ textShadow: '0 1px 3px rgba(168,85,247,0.3), 0 0 15px rgba(168,85,247,0.2)' }}>
+                    3
+                    <div className="absolute inset-0 text-purple-300/30 transform translate-x-0.5 translate-y-0.5 sm:translate-x-1 sm:translate-y-1 -z-10">3</div>
+                  </div>
+                  
+                  <div className="uppercase text-xs sm:text-sm font-bold text-white/90 mb-1 sm:mb-2 tracking-wider sm:tracking-widest group-hover:text-purple-300 transition-colors duration-300 text-center drop-shadow-lg">Certificates</div>
+                  <div className="text-xs sm:text-sm text-white/60 text-center group-hover:text-white/80 transition-colors duration-300 line-clamp-2 drop-shadow-md px-2 sm:px-0">Professional skills validated</div>
+                  
+                  {/* 3D Icon with depth - Mobile Optimized */}
+                  <div className="absolute top-3 sm:top-4 right-3 sm:right-4 w-6 sm:w-8 h-6 sm:h-8 opacity-40 group-hover:opacity-80 transition-all duration-300 transform group-hover:scale-105 sm:group-hover:scale-110 drop-shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full text-purple-400 filter drop-shadow-[0_1px_3px_rgba(168,85,247,0.3)]">
                       <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path>
                       <circle cx="12" cy="8" r="6"></circle>
                     </svg>
                   </div>
+                  
+                  {/* 3D Edge highlight */}
+                  <div className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-50 pointer-events-none" />
                 </div>
               </motion.div>
               
               <motion.div 
-                className="flex-1 min-w-[240px] relative group"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                className="flex-1 min-w-[280px] sm:min-w-[240px] max-w-[320px] sm:max-w-[280px] mx-auto sm:mx-0 relative group transform-gpu"
+                initial={{ opacity: 0, y: 50, rotateX: 15 }}
+                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                whileHover={{ 
+                  y: -8, 
+                  scale: 1.02, 
+                  rotateX: -3,
+                  rotateY: 3,
+                  z: 30
+                }}
+                whileTap={{ 
+                  scale: 0.98,
+                  y: -4
+                }}
+                style={{ transformStyle: 'preserve-3d' }}
               >
-                {/* Glow Effect */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-blue-400/30 to-cyan-500/30 rounded-3xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500" />
-                <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl px-8 py-10 flex flex-col items-center shadow-2xl group-hover:bg-white/15 group-hover:border-blue-400/40 transition-all duration-500">
-                  <div className="text-4xl font-black text-blue-400 mb-3 group-hover:scale-110 transition-transform duration-300">5</div>
-                  <div className="uppercase text-sm font-bold text-white/90 mb-2 tracking-widest group-hover:text-blue-300 transition-colors duration-300">Years of Experience</div>
-                  <div className="text-sm text-white/60 text-center group-hover:text-white/80 transition-colors duration-300">Continuous learning journey</div>
-                  {/* Icon */}
-                  <div className="absolute top-4 right-4 w-8 h-8 opacity-40 group-hover:opacity-70 transition-opacity duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full text-blue-400">
+                {/* Enhanced Glow Effect */}
+                <div className="absolute -inset-2 bg-gradient-to-r from-blue-400/40 to-cyan-500/40 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700" />
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-400/20 to-cyan-500/20 rounded-3xl blur-lg opacity-60 group-hover:opacity-100 transition-all duration-500" />
+                
+                {/* 3D Card Body - Mobile Optimized */}
+                <div className="relative bg-gradient-to-br from-white/15 via-white/10 to-white/5 backdrop-blur-xl border border-white/30 rounded-2xl sm:rounded-3xl px-6 sm:px-8 py-8 sm:py-10 h-[160px] sm:h-[180px] flex flex-col items-center justify-center shadow-[0_15px_35px_rgba(0,0,0,0.2),0_0_0_1px_rgba(255,255,255,0.1),inset_0_1px_0_rgba(255,255,255,0.2)] group-hover:shadow-[0_25px_60px_rgba(59,130,246,0.25),0_0_0_1px_rgba(59,130,246,0.3),inset_0_1px_0_rgba(255,255,255,0.3)] transition-all duration-700 transform-gpu">
+                  
+                  {/* 3D Number with depth - Mobile Optimized */}
+                  <div className="relative text-3xl sm:text-4xl font-black text-blue-400 mb-2 sm:mb-3 group-hover:scale-105 sm:group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_3px_6px_rgba(59,130,246,0.4)]" style={{ textShadow: '0 1px 3px rgba(59,130,246,0.3), 0 0 15px rgba(59,130,246,0.2)' }}>
+                    5
+                    <div className="absolute inset-0 text-blue-300/30 transform translate-x-0.5 translate-y-0.5 sm:translate-x-1 sm:translate-y-1 -z-10">5</div>
+                  </div>
+                  
+                  <div className="uppercase text-xs sm:text-sm font-bold text-white/90 mb-1 sm:mb-2 tracking-wider sm:tracking-widest group-hover:text-blue-300 transition-colors duration-300 text-center drop-shadow-lg">Years of Experience</div>
+                  <div className="text-xs sm:text-sm text-white/60 text-center group-hover:text-white/80 transition-colors duration-300 line-clamp-2 drop-shadow-md px-2 sm:px-0">Continuous learning journey</div>
+                  
+                  {/* 3D Icon with depth - Mobile Optimized */}
+                  <div className="absolute top-3 sm:top-4 right-3 sm:right-4 w-6 sm:w-8 h-6 sm:h-8 opacity-40 group-hover:opacity-80 transition-all duration-300 transform group-hover:scale-105 sm:group-hover:scale-110 drop-shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full text-blue-400 filter drop-shadow-[0_1px_3px_rgba(59,130,246,0.3)]">
                       <rect width="20" height="14" x="2" y="7" rx="2" ry="2"/>
                       <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
                     </svg>
                   </div>
+                  
+                  {/* 3D Edge highlight */}
+                  <div className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-50 pointer-events-none" />
                 </div>
               </motion.div>
             </div>
