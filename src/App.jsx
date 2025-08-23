@@ -32,6 +32,7 @@ import cafeZImage from './assets/cafe_z.png';
 import curriculumImage from './assets/curriculum_statistic.png';
 import lostFoundImage from './assets/Lost Found.png';
 import portfolioImage from './assets/preview-image.jpg';
+import weflixImage from './assets/WeFlix.png';
 
 // Certificate Images
 import aceAdvancedCert from './assets/certificates/Ace Inspiration(Advanced).jpg';
@@ -75,6 +76,24 @@ export default function App() {
 
   const projects = [
     {
+      id: "weflix",
+      title: "WeFlix Movie Streaming Platform",
+      tech: "React, JavaScript, CSS, Movie API",
+      technologies: ["React", "JavaScript", "CSS", "Movie API"],
+      desc: "Modern movie streaming platform with comprehensive movie database integration. Features advanced search functionality, detailed movie information, responsive design, and intuitive user interface for seamless movie discovery and browsing experience.",
+      url: "https://weflixmovie.netlify.app/",
+      githubUrl: "https://github.com/kweephyo-pmt/WeFlix",
+      category: "web",
+      year: "2025",
+      image: weflixImage,
+      features: [
+        "Comprehensive movie database integration with real-time search and filtering capabilities",
+        "Responsive design architecture optimized for desktop, tablet, and mobile viewing experiences",
+        "Interactive movie details with ratings, cast information, and trailer integration",
+        "Modern UI/UX design with smooth animations and intuitive navigation system"
+      ]
+    },
+    {
       id: "curriculum",
       title: "Curriculum Statistics Website",
       tech: "HTML, CSS, Vue.js, Chart.js, Node.js, MySQL, Firebase",
@@ -83,7 +102,7 @@ export default function App() {
       url: "https://app.som-bi.work.gd/",
       githubUrl: "https://github.com/kweephyo-pmt/senior_project",
       category: "web",
-      year: "2024",
+      year: "2025",
       image: curriculumImage,
       features: [
         "Advanced data visualization using Chart.js with dynamic filtering and export capabilities",
@@ -101,12 +120,30 @@ export default function App() {
       url: "https://play.google.com/store/apps/details?id=com.cafez.app&hl=en",
       githubUrl: "https://github.com/kweephyo-pmt/cafe_z",
       category: "mobile",
-      year: "2023",
+      year: "2024",
       image: cafeZImage,
       features: [
         "Intuitive mobile interface with seamless ordering workflow and integrated payment gateway",
         "Cross-platform development using Flutter framework for iOS and Android deployment",
         "Cloud-based backend infrastructure with Firebase for real-time synchronization and secure user management"
+      ]
+    },
+    {
+      id: "portfolio",
+      title: "Personal Portfolio Website",
+      tech: "React, Tailwind CSS, Framer Motion, Vite",
+      technologies: ["React", "Tailwind CSS", "Framer Motion", "Vite"],
+      desc: "Professional portfolio website demonstrating full-stack development capabilities and project management skills. Features performance-optimized architecture, modern UI/UX design principles, and comprehensive project documentation.",
+      url: "https://phyominthein-portfolio.netlify.app/",
+      githubUrl: "https://github.com/kweephyo-pmt/phyominthein-portfolio",
+      category: "web",
+      year: "2025",
+      image: portfolioImage,
+      features: [
+        "Responsive design architecture with performance-optimized animations and micro-interactions",
+        "Modern build pipeline using Vite for fast development and optimized production builds",
+        "Interactive project galleries with live deployment links and comprehensive documentation",
+        "Accessible design with dark/light theme support and professional typography system"
       ]
     },
     {
@@ -125,24 +162,6 @@ export default function App() {
         "Advanced image processing and machine learning for item categorization and matching",
         "Push notification system with intelligent matching algorithms for item recovery",
         "Responsive user interface with accessibility features and multilingual support"
-      ]
-    },
-    {
-      id: "portfolio",
-      title: "Personal Portfolio Website",
-      tech: "React, Tailwind CSS, Framer Motion, Vite",
-      technologies: ["React", "Tailwind CSS", "Framer Motion", "Vite"],
-      desc: "Professional portfolio website demonstrating full-stack development capabilities and project management skills. Features performance-optimized architecture, modern UI/UX design principles, and comprehensive project documentation.",
-      url: "https://phyominthein-portfolio.netlify.app/",
-      githubUrl: "https://github.com/kweephyo-pmt/phyominthein-portfolio",
-      category: "web",
-      year: "2024",
-      image: portfolioImage,
-      features: [
-        "Responsive design architecture with performance-optimized animations and micro-interactions",
-        "Modern build pipeline using Vite for fast development and optimized production builds",
-        "Interactive project galleries with live deployment links and comprehensive documentation",
-        "Accessible design with dark/light theme support and professional typography system"
       ]
     },
   ];
@@ -1665,10 +1684,12 @@ export default function App() {
                               <img 
                                 src={project.image} 
                                 alt={project.title}
-                                className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${
-                                  project.id === 'reclaimify' ? 'bg-gradient-to-br from-blue-50 to-gray-100 p-4' : ''
+                                className={`w-full h-full group-hover:scale-105 transition-transform duration-500 ${
+                                  project.id === 'reclaimify' ? 'bg-gradient-to-br from-blue-50 to-gray-100 p-4 object-contain' : ''
                                 } ${
                                   project.id === 'portfolio' ? 'object-cover' : ''
+                                } ${
+                                  project.id === 'weflix' ? 'object-cover' : 'object-cover'
                                 }`}
                               />
                             ) : (
