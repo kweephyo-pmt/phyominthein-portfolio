@@ -33,6 +33,7 @@ import curriculumImage from './assets/curriculum_statistic.png';
 import lostFoundImage from './assets/Lost Found.png';
 import portfolioImage from './assets/preview-image.jpg';
 import weflixImage from './assets/WeFlix.png';
+import linkClubImage from './assets/LinkClub.png';
 
 // Certificate Images
 import aceAdvancedCert from './assets/certificates/Ace Inspiration(Advanced).jpg';
@@ -91,6 +92,24 @@ export default function App() {
         "Responsive design architecture optimized for desktop, tablet, and mobile viewing experiences",
         "Interactive movie details with ratings, cast information, and trailer integration",
         "Modern UI/UX design with smooth animations and intuitive navigation system"
+      ]
+    },
+    {
+      id: "linkclub",
+      title: "LinkClub Real-Time Chat Application",
+      tech: "React, MERN Stack, Socket.io, JWT, Stream.io",
+      technologies: ["React", "Node.js", "Express.js", "MongoDB", "Socket.io", "JWT", "Cloudinary", "TailwindCSS", "DaisyUI", "Zustand"],
+      desc: "Modern, full-stack real-time chat application built with the MERN stack, featuring instant messaging and comprehensive user management. Implements Socket.io for real-time bidirectional communication, JWT authentication, and Cloudinary for image management.",
+      url: "https://linkclub.netlify.app/",
+      githubUrl: "https://github.com/kweephyo-pmt/linkclub",
+      category: "web",
+      year: "2025",
+      image: linkClubImage,
+      features: [
+        "Real-time bidirectional communication using Socket.io with instant message delivery and typing indicators",
+        "Comprehensive user authentication system with JWT tokens and bcryptjs password hashing for security",
+        "Modern React 18 frontend with Vite build tool, TailwindCSS styling, and DaisyUI components",
+        "Full-stack MERN architecture with Express.js API, MongoDB database, and Cloudinary image upload integration"
       ]
     },
     {
@@ -977,7 +996,7 @@ export default function App() {
                   
                   {/* 3D Number with depth - Mobile Optimized */}
                   <div className="relative text-3xl sm:text-4xl font-black text-cyan-400 mb-2 sm:mb-3 group-hover:scale-105 sm:group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_3px_6px_rgba(6,182,212,0.4)]" style={{ textShadow: '0 1px 3px rgba(6,182,212,0.3), 0 0 15px rgba(6,182,212,0.2)' }}>
-                    4
+                    6
                     <div className="absolute inset-0 text-cyan-300/30 transform translate-x-0.5 translate-y-0.5 sm:translate-x-1 sm:translate-y-1 -z-10">4</div>
                   </div>
                   
