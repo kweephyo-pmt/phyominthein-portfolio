@@ -46,7 +46,6 @@ const App = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedCertificate, setSelectedCertificate] = useState(null);
 
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollProgress, setScrollProgress] = useState(0);
   const [currentSection, setCurrentSection] = useState('home');
   const [particles, setParticles] = useState([]);
@@ -58,7 +57,7 @@ const App = () => {
   const [scrollTimeout, setScrollTimeout] = useState(null);
 
   // Memoized constants
-  const sections = useMemo(() => ['home', 'about', 'skills', 'projects', 'contact'], []);
+  const sections = useMemo(() => ['home', 'about', 'projects', 'contact'], []);
   const navigationItems = useMemo(() => [
     { id: 'home', icon: '🏠', label: 'Home' },
     { id: 'about', icon: '👨‍💻', label: 'About' },
@@ -403,33 +402,6 @@ const App = () => {
     };
   }, [updateScrollProgress, handleScrollStart, handleScrollEnd, scrollTimeout]);
 
-  // Optimized mouse tracking with throttling - memoized callback
-  const updateMousePosition = useCallback((e) => {
-    setMousePosition({ x: e.clientX, y: e.clientY });
-  }, []);
-
-  useEffect(() => {
-    let ticking = false;
-    
-    const throttledMouseMove = (e) => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          updateMousePosition(e);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    // Hide default cursor
-    document.body.style.cursor = 'none';
-    window.addEventListener("mousemove", throttledMouseMove, { passive: true });
-    
-    return () => {
-      window.removeEventListener("mousemove", throttledMouseMove);
-      document.body.style.cursor = 'auto';
-    };
-  }, [updateMousePosition]);
 
   // Further optimized particle system with scroll-based visibility
   
@@ -447,25 +419,43 @@ const App = () => {
     setParticles(newParticles);
   }, []);
 
-  // Optimized typing animation effect with useCallback
-  const typeWriter = useCallback(() => {
-    const text = "Full-Stack Developer";
-    let index = 0;
+  // Typing animation effect
+  useEffect(() => {
+    const texts = ["Full-Stack Developer", "Mobile Developer"];
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let timeoutId;
     
     const type = () => {
-      if (index < text.length) {
-        setTypedText(text.slice(0, index + 1));
-        index++;
-        setTimeout(type, 100);
+      const currentText = texts[textIndex];
+      
+      if (isDeleting) {
+        setTypedText(currentText.slice(0, charIndex - 1));
+        charIndex--;
+        
+        if (charIndex === 0) {
+          isDeleting = false;
+          textIndex = (textIndex + 1) % texts.length;
+          timeoutId = setTimeout(type, 500); // Pause before typing next text
+          return;
+        }
+        timeoutId = setTimeout(type, 50); // Faster deletion
+      } else {
+        setTypedText(currentText.slice(0, charIndex + 1));
+        charIndex++;
+        
+        if (charIndex === currentText.length) {
+          isDeleting = true;
+          timeoutId = setTimeout(type, 2000); // Pause before deleting
+          return;
+        }
+        timeoutId = setTimeout(type, 75); // Typing speed
       }
     };
     
-    const timer = setTimeout(type, 1000);
-    return timer;
-  }, []);
-
-  useEffect(() => {
-    const timer = typeWriter();
+    // Start typing after initial delay
+    timeoutId = setTimeout(type, 1000);
     
     // Cursor blinking
     const cursorTimer = setInterval(() => {
@@ -473,10 +463,10 @@ const App = () => {
     }, 530);
     
     return () => {
-      clearTimeout(timer);
+      clearTimeout(timeoutId);
       clearInterval(cursorTimer);
     };
-  }, [typeWriter]);
+  }, []); // Empty dependency array - only run once on mount
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
@@ -497,25 +487,8 @@ const App = () => {
 
 
   return (
-    <div className={`min-h-screen font-sans transition-all duration-700 ${dark ? 'bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 text-white' : 'bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 text-gray-900'} relative overflow-hidden`}>
+    <div className={`min-h-screen font-sans transition-all duration-700 ${dark ? 'bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 text-white' : 'bg-gradient-to-br from-white via-slate-50 to-blue-50 text-gray-800'} relative overflow-hidden`}>
       
-      {/* Custom Cursor - Hidden on Mobile */}
-      <motion.div
-        className="fixed top-0 left-0 w-6 h-6 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full pointer-events-none z-[9999] mix-blend-difference hidden md:block"
-        style={{
-          x: mousePosition.x - 12,
-          y: mousePosition.y - 12,
-        }}
-        animate={{
-          scale: 1,
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 500,
-          damping: 28,
-          mass: 0.5,
-        }}
-      />
 
       {/* Scroll Progress Indicator - CSS Transform for better performance */}
       <div
@@ -600,11 +573,11 @@ const App = () => {
       <motion.nav 
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-white/10 dark:bg-gray-900/10 backdrop-blur-xl border border-white/20 rounded-full px-8 py-3 shadow-2xl"
+        className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-white/80 dark:bg-gray-900/10 backdrop-blur-xl border border-gray-200/50 dark:border-white/20 rounded-full px-8 py-3 shadow-2xl"
       >
         <div className="flex items-center gap-8">
           <motion.button 
-            className="font-bold text-xl bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent cursor-none"
+            className="font-bold text-xl bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => {
@@ -619,7 +592,7 @@ const App = () => {
             {headerNavItems.map((item) => (
               <motion.button
                 key={item}
-                className="relative text-sm font-medium hover:text-cyan-400 transition-colors cursor-none"
+                className="relative text-sm font-medium hover:text-cyan-400 transition-colors"
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={(e) => {
@@ -744,14 +717,14 @@ const App = () => {
 
             {/* Professional Description */}
             <motion.p 
-              className="text-xl lg:text-2xl leading-relaxed text-gray-700 dark:text-gray-300 max-w-2xl"
+              className="text-xl lg:text-2xl leading-relaxed text-gray-600 dark:text-gray-300 max-w-2xl"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
             >
               Software Engineering student with expertise in{" "}
               <span className="text-cyan-400 font-semibold">full-stack development</span>,{" "}
-              <span className="text-blue-400 font-semibold">data analytics</span>, and{" "}
+              and{" "}
               <span className="text-purple-400 font-semibold">mobile applications</span>.
               <br />
               Delivering innovative solutions through modern technology stacks.
@@ -1341,7 +1314,7 @@ const App = () => {
                         <div className={`absolute inset-0 bg-gradient-to-r ${tech.color} rounded-3xl blur-xl opacity-0 group-hover:opacity-40 transition-all duration-500`} />
                         
                         {/* Tech Card */}
-                        <div className="relative bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 hover:border-blue-400/50 transition-all duration-300 h-full flex flex-col justify-center hover:bg-gray-700/50">
+                        <div className="relative bg-white/80 dark:bg-gray-800/40 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 hover:border-blue-400/50 transition-all duration-300 h-full flex flex-col justify-center hover:bg-gray-100/80 dark:hover:bg-gray-700/50">
                           {/* Tech Icon */}
                           <motion.div
                             className="mb-4 flex justify-center"
@@ -1433,7 +1406,7 @@ const App = () => {
                           {/* Certificate Content */}
                           <div className="p-6 flex-1 flex flex-col justify-center">
                             <div className="text-center">
-                              <h3 className="text-lg font-bold text-white mb-2">{cert.name}</h3>
+                              <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">{cert.name}</h3>
                               <p className="text-gray-300 text-sm mb-2">{cert.issuer}</p>
                               {cert.description && (
                                 <p className="text-gray-400 text-xs mb-3">{cert.description}</p>
@@ -1472,7 +1445,7 @@ const App = () => {
                         <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500" />
                         
                         {/* Project Card */}
-                        <div className="relative bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl overflow-hidden hover:border-blue-400/50 transition-all duration-300 h-full flex flex-col">
+                        <div className="relative bg-white/80 dark:bg-gray-800/40 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 rounded-3xl overflow-hidden hover:border-blue-400/50 transition-all duration-300 h-full flex flex-col">
                           {/* Project Preview */}
                           <div className="h-48 sm:h-64 md:h-80 bg-gradient-to-br from-blue-600/20 to-purple-600/20 overflow-hidden relative">
                             {project.image ? (
@@ -1495,13 +1468,13 @@ const App = () => {
                           {/* Project Content */}
                           <div className="p-6 flex-1 flex flex-col">
                             <div className="flex items-center justify-between mb-4">
-                              <h3 className="text-xl font-bold text-white">{project.title}</h3>
+                              <h3 className="text-2xl font-bold text-gray-800 dark:text-white">{project.title}</h3>
                               <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 py-1 rounded-full text-xs font-bold">
                                 {project.year}
                               </span>
                             </div>
                             
-                            <p className="text-gray-300 text-sm mb-4 leading-relaxed">
+                            <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 leading-relaxed">
                               {project.desc}
                             </p>
                             
@@ -1597,7 +1570,7 @@ const App = () => {
                 <div className="space-y-6">
                   <div>
                     <h1 className="text-4xl font-bold text-white mb-4">{selectedProject.title}</h1>
-                    <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                    <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-6">
                       {selectedProject.desc}
                     </p>
                   </div>
@@ -1608,13 +1581,13 @@ const App = () => {
                       <div className="text-2xl font-bold text-blue-400 mb-1">
                         {selectedProject.technologies.length}
                       </div>
-                      <div className="text-sm text-gray-400">Total Technology</div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">Total Technology</div>
                     </div>
                     <div className="bg-gray-800/50 rounded-2xl p-4 text-center">
                       <div className="text-2xl font-bold text-purple-400 mb-1">
                         {selectedProject.features.length}
                       </div>
-                      <div className="text-sm text-gray-400">Features</div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">Features</div>
                     </div>
                   </div>
 
@@ -1652,7 +1625,7 @@ const App = () => {
                   <div>
                     <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                       <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4M6 16l-4-4 4-4" />
                       </svg>
                       Technologies Used
                     </h3>
@@ -1699,7 +1672,7 @@ const App = () => {
                       {selectedProject.features.map((feature, index) => (
                         <div key={index} className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <p className="text-gray-300 leading-relaxed">{feature}</p>
+                          <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{feature}</p>
                         </div>
                       ))}
                     </div>
@@ -1902,7 +1875,7 @@ const App = () => {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="text-white font-semibold text-lg group-hover:text-blue-400 transition-colors">Professional Network</h4>
+                      <h4 className="text-white font-semibold text-lg group-hover:text-cyan-400 transition-colors">Professional Network</h4>
                       <p className="text-gray-400 text-sm">on LinkedIn</p>
                     </div>
                   </div>

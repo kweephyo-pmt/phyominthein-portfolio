@@ -4,9 +4,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-* {
-  cursor: none !important;
-}
 
 body {
   margin: 0;
@@ -18,16 +15,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Force hide cursor on all touch devices */
-@media (any-pointer: coarse) {
-  * {
-    cursor: none !important;
-  }
-  
-  body {
-    cursor: none !important;
-  }
-}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -73,18 +60,8 @@ code {
   background: rgba(139, 92, 246, 0.7);
 }
 
-/* Hide cursor completely on mobile devices */
+/* Disable hover effects on mobile */
 @media (hover: none) and (pointer: coarse) {
-  *, *::before, *::after {
-    cursor: none !important;
-  }
-  
-  /* Target specific elements that might override cursor */
-  body, html, div, span, button, a, input, textarea {
-    cursor: none !important;
-  }
-  
-  /* Disable hover effects on mobile */
   *:hover {
     transform: none !important;
     scale: none !important;
@@ -93,13 +70,6 @@ code {
   /* Remove hover animations for Framer Motion */
   [data-framer-component-type] {
     pointer-events: auto;
-  }
-}
-
-/* Additional mobile cursor hiding for touch devices */
-@media (pointer: coarse) {
-  * {
-    cursor: none !important;
   }
 }
 
