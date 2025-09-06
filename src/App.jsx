@@ -126,8 +126,8 @@ const App = () => {
     {
       id: "curriculum",
       title: "Curriculum Statistics Website",
-      tech: "HTML, CSS, Vue.js, Chart.js, Node.js, MySQL, Firebase",
-      technologies: ["Vue.js", "Chart.js", "Node.js", "MySQL", "Firebase", "HTML", "CSS"],
+      tech: "Vue.js, Chart.js, Node.js, MySQL, Firebase, GCP",
+      technologies: ["Vue.js", "Chart.js", "Node.js", "MySQL", "Firebase", "GCP"],
       desc: "Enterprise-level data visualization platform developed for Mae Fah Luang University's School of Management. Features comprehensive academic analytics with interactive dashboards, real-time data processing, and role-based access control for administrative efficiency.",
       url: "https://app.som-bi.work.gd/",
       githubUrl: "https://github.com/kweephyo-pmt/senior_project",
@@ -1474,17 +1474,13 @@ const App = () => {
                         {/* Project Card */}
                         <div className="relative bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl overflow-hidden hover:border-blue-400/50 transition-all duration-300 h-full flex flex-col">
                           {/* Project Preview */}
-                          <div className="h-80 bg-gradient-to-br from-blue-600/20 to-purple-600/20 overflow-hidden relative">
+                          <div className="h-48 sm:h-64 md:h-80 bg-gradient-to-br from-blue-600/20 to-purple-600/20 overflow-hidden relative">
                             {project.image ? (
                               <img 
                                 src={project.image} 
                                 alt={project.title}
                                 className={`w-full h-full group-hover:scale-105 transition-transform duration-500 ${
-                                  project.id === 'reclaimify' ? 'bg-gradient-to-br from-blue-50 to-gray-100 p-4 object-contain' : ''
-                                } ${
-                                  project.id === 'portfolio' ? 'object-cover' : ''
-                                } ${
-                                  project.id === 'weflix' ? 'object-cover' : 'object-cover'
+                                  project.id === 'reclaimify' ? 'bg-gradient-to-br from-blue-50 to-gray-100 p-2 sm:p-4 object-contain' : 'object-cover'
                                 }`}
                               />
                             ) : (
