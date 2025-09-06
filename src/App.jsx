@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import profileImage from './assets/profile.JPG';
 import softwareEngineeringGif from './assets/software enginnering.gif';
 import cvFile from './assets/Phyo Min Thein(CV).jpg';
@@ -23,9 +23,6 @@ import powerbiIcon from './assets/Power BI.png';
 import tableauIcon from './assets/Tableau (1).svg';
 import githubIcon from './assets/GitHub Logo.png';
 
-// Company Logos
-import eternalLogo from './assets/Eternal.JPG';
-import thantLogo from './assets/Thant.JPG';
 
 // Project Images
 import cafeZImage from './assets/cafe_z.png';
@@ -36,11 +33,12 @@ import weflixImage from './assets/WeFlix.png';
 import linkClubImage from './assets/LinkClub.png';
 
 // Certificate Images
-import aceAdvancedCert from './assets/certificates/Ace Inspiration(Advanced).jpg';
-import aceBasicCert from './assets/certificates/Ace Inspiration(Basic).jpg';
-import fairwayTechCert from './assets/certificates/Fairway Technology.jpg';
+import nodejsExpressCert from './assets/certificates/Developing Backend Apps With Nodejs and Expressjs.png';
+import reactFrontendCert from './assets/certificates/Developing Frontend with React.png';
+import digitalMarketingCert from './assets/certificates/Foundation of Digital Marketing & E-Commerce.png';
+import googleAICert from './assets/certificates/Google AI Essentials.png';
 
-export default function App() {
+const App = () => {
   const [dark, setDark] = useState(true);
   const [showTop, setShowTop] = useState(false);
 
@@ -55,6 +53,20 @@ export default function App() {
   const [typedText, setTypedText] = useState('');
   const [showCursor, setShowCursor] = useState(true);
 
+  // Scroll state management
+  const [isScrolling, setIsScrolling] = useState(false);
+  const [scrollTimeout, setScrollTimeout] = useState(null);
+
+  // Memoized constants
+  const sections = useMemo(() => ['home', 'about', 'skills', 'projects', 'contact'], []);
+  const navigationItems = useMemo(() => [
+    { id: 'home', icon: '🏠', label: 'Home' },
+    { id: 'about', icon: '👨‍💻', label: 'About' },
+    { id: 'projects', icon: '🚀', label: 'Projects' },
+    { id: 'contact', icon: '📧', label: 'Contact' }
+  ], []);
+  const headerNavItems = useMemo(() => ['About', 'Projects', 'Contact'], []);
+
   // Contact form hook
   const { formData, loading, success, error, handleChange, submitForm } = useContactForm();
   
@@ -64,16 +76,15 @@ export default function App() {
   // Notification state
   const [notification, setNotification] = useState({ show: false, message: '', type: 'success' });
   
-  // Show custom notification
-  const showNotification = (message, type = 'success') => {
+  // Show custom notification - memoized
+  const showNotification = useCallback((message, type = 'success') => {
     setNotification({ show: true, message, type });
     setTimeout(() => {
       setNotification({ show: false, message: '', type: 'success' });
-    }, 4000);
-  };
+    }, 3000);
+  }, []);
 
-  const { scrollYProgress } = useScroll();
-  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  // Remove unused scroll transform for better performance
 
   const projects = [
     {
@@ -185,129 +196,136 @@ export default function App() {
     },
   ];
 
-  const workExperience = [
-    {
-      company: "Eternal",
-      position: "Digital Marketing Manager & Systems Administrator",
-      period: "2020 - 2022",
-      responsibilities: [
-        "Developed and implemented comprehensive digital marketing strategies, resulting in increased brand visibility and customer engagement",
-        "Managed multi-platform content management systems and maintained website infrastructure with 99.9% uptime",
-        "Provided technical customer support and resolved complex inquiries with average response time under 2 hours"
-      ]
-    },
-    {
-      company: "Thant-Purity Diamonds & Jewelry Shop",
-      position: "Customer Relations Specialist",
-      period: "2017 - 2020",
-      responsibilities: [
-        "Delivered exceptional customer service across multiple digital channels including live chat, email, and social media platforms",
-        "Managed order processing, inventory inquiries, and policy compliance while maintaining 95% customer satisfaction rating"
-      ]
-    }
-  ];
 
-  const techStack = [
+  // Memoized tech stack data for better performance
+  const techStack = useMemo(() => [
     { 
       name: "HTML", 
-      icon: <img src={htmlIcon} alt="HTML" className="w-16 h-16 rounded-lg" />, 
+      icon: htmlIcon,
+      alt: "HTML",
       color: "from-orange-500 to-red-600" 
     },
     { 
       name: "CSS", 
-      icon: <img src={cssIcon} alt="CSS" className="w-16 h-16 rounded-lg" />, 
-      color: "from-blue-500 to-indigo-600" 
+      icon: cssIcon,
+      alt: "CSS",
+      color: "from-blue-500 to-cyan-600" 
     },
     { 
       name: "Tailwind CSS", 
-      icon: <img src={tailwindIcon} alt="Tailwind CSS" className="w-16 h-16 rounded-lg bg-cyan-400 p-3" />, 
-      color: "from-cyan-500 to-blue-600" 
+      icon: tailwindIcon,
+      alt: "Tailwind CSS",
+      color: "from-teal-500 to-blue-600" 
     },
     { 
       name: "JavaScript", 
-      icon: <img src={jsIcon} alt="JavaScript" className="w-16 h-16 rounded-lg" />, 
+      icon: jsIcon,
+      alt: "JavaScript",
       color: "from-yellow-500 to-orange-600" 
     },
     { 
       name: "Python", 
-      icon: <img src={pythonIcon} alt="Python" className="w-16 h-16 rounded-lg" />, 
-      color: "from-green-500 to-blue-600" 
+      icon: pythonIcon,
+      alt: "Python",
+      color: "from-blue-600 to-indigo-700" 
     },
     { 
-      name: "ReactJS", 
-      icon: <img src={reactIcon} alt="ReactJS" className="w-16 h-16 rounded-lg" />, 
-      color: "from-blue-500 to-cyan-600" 
+      name: "React", 
+      icon: reactIcon,
+      alt: "React",
+      color: "from-cyan-500 to-blue-600" 
     },
     { 
-      name: "Node.JS", 
-      icon: <img src={nodeIcon} alt="Node.JS" className="w-16 h-16 rounded-lg" />, 
+      name: "Node.js", 
+      icon: nodeIcon,
+      alt: "Node.js",
       color: "from-green-500 to-emerald-600" 
     },
     { 
       name: "Vite", 
-      icon: <img src={viteIcon} alt="Vite" className="w-16 h-16 rounded-lg" />, 
+      icon: viteIcon,
+      alt: "Vite",
       color: "from-purple-500 to-pink-600" 
     },
     { 
       name: "Vue.js", 
-      icon: <img src={vueIcon} alt="Vue.js" className="w-16 h-16 rounded-lg" />, 
-      color: "from-emerald-500 to-green-600" 
+      icon: vueIcon,
+      alt: "Vue.js",
+      color: "from-green-400 to-emerald-600" 
     },
     { 
       name: "Flutter", 
-      icon: <img src={flutterIcon} alt="Flutter" className="w-16 h-16 rounded-lg" />, 
-      color: "from-blue-500 to-indigo-600" 
+      icon: flutterIcon,
+      alt: "Flutter",
+      color: "from-blue-400 to-cyan-600" 
     },
     { 
       name: "Firebase", 
-      icon: <img src={firebaseIcon} alt="Firebase" className="w-16 h-16 rounded-lg" />, 
-      color: "from-orange-500 to-red-600" 
+      icon: firebaseIcon,
+      alt: "Firebase",
+      color: "from-yellow-500 to-orange-600" 
     },
     { 
       name: "MySQL", 
-      icon: <img src={mysqlIcon} alt="MySQL" className="w-16 h-16 rounded-lg" />, 
-      color: "from-blue-500 to-indigo-600" 
+      icon: mysqlIcon,
+      alt: "MySQL",
+      color: "from-blue-600 to-indigo-700" 
     },
     { 
       name: "Power BI", 
-      icon: <img src={powerbiIcon} alt="Power BI" className="w-16 h-16 rounded-lg" />, 
+      icon: powerbiIcon,
+      alt: "Power BI",
       color: "from-yellow-500 to-orange-600" 
     },
     { 
       name: "Tableau", 
-      icon: <img src={tableauIcon} alt="Tableau" className="w-16 h-16 rounded-lg" />, 
-      color: "from-blue-500 to-purple-600" 
+      icon: tableauIcon,
+      alt: "Tableau",
+      color: "from-blue-500 to-indigo-600" 
     },
     { 
       name: "GitHub", 
-      icon: <img src={githubIcon} alt="GitHub" className="w-16 h-16 rounded-lg" />, 
+      icon: githubIcon,
+      alt: "GitHub",
       color: "from-gray-700 to-gray-900" 
     }
-  ];
+  ], []);
 
-  const certificates = [
-    { 
-      name: "Ace Inspiration Advanced Certificate", 
-      issuer: "Ace Inspiration", 
-      year: "2024",
-      image: aceAdvancedCert,
-      description: "Advanced level certification in professional development"
+  // Memoized certificates data
+  const certificates = useMemo(() => [
+    {
+      id: 1,
+      name: "Developing Backend Apps with Node.js and Express.js",
+      issuer: "IBM",
+      year: "2025",
+      image: nodejsExpressCert,
+      description: "Professional certification in backend development using Node.js and Express.js frameworks"
     },
-    { 
-      name: "Ace Inspiration Basic Certificate", 
-      issuer: "Ace Inspiration", 
-      year: "2024",
-      image: aceBasicCert,
-      description: "Basic level certification in professional development"
+    {
+      id: 2,
+      name: "Developing Frontend with React",
+      issuer: "IBM",
+      year: "2025",
+      image: reactFrontendCert,
+      description: "Comprehensive certification in React.js frontend development and modern JavaScript"
     },
-    { 
-      name: "Fairway Technology Certificate", 
-      issuer: "Fairway Technology", 
-      year: "2023",
-      image: fairwayTechCert,
-      description: "Technology certification in Web Development"
+    {
+      id: 3,
+      name: "Foundation of Digital Marketing & E-Commerce",
+      issuer: "Google",
+      year: "2025",
+      image: digitalMarketingCert,
+      description: "Google certification covering digital marketing fundamentals and e-commerce strategies"
+    },
+    {
+      id: 4,
+      name: "Google AI Essentials",
+      issuer: "Google",
+      year: "2025",
+      image: googleAICert,
+      description: "Essential certification in artificial intelligence concepts and Google AI tools"
     }
-  ];
+  ], []);
 
 
 
@@ -327,51 +345,76 @@ export default function App() {
     }
   }, []);
 
-  // Optimized scroll progress tracking with throttling
+  // Optimized scroll progress tracking with throttling - memoized callbacks
+  const updateScrollProgress = useCallback(() => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / docHeight) * 100;
+    setScrollProgress(progress);
+    
+    // Simplified section detection using offsetTop instead of getBoundingClientRect
+    let current = 'home';
+    
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const element = document.getElementById(sections[i]);
+      if (element && scrollTop >= element.offsetTop - 200) {
+        current = sections[i];
+        break;
+      }
+    }
+    
+    setCurrentSection(current);
+    setShowTop(scrollTop > 300);
+  }, [sections]);
+
+  const handleScrollStart = useCallback(() => {
+    setIsScrolling(true);
+    if (scrollTimeout) {
+      clearTimeout(scrollTimeout);
+    }
+  }, [scrollTimeout]);
+
+  const handleScrollEnd = useCallback(() => {
+    const timeout = setTimeout(() => {
+      setIsScrolling(false);
+    }, 150);
+    setScrollTimeout(timeout);
+  }, []);
+
   useEffect(() => {
     let ticking = false;
-    
-    const updateScrollProgress = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (scrollTop / docHeight) * 100;
-      setScrollProgress(progress);
-      
-      // Simplified section detection using offsetTop instead of getBoundingClientRect
-      const sections = ['home', 'about', 'experience', 'skills', 'projects', 'contact'];
-      let current = 'home';
-      
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const element = document.getElementById(sections[i]);
-        if (element && scrollTop >= element.offsetTop - 200) {
-          current = sections[i];
-          break;
-        }
-      }
-      
-      setCurrentSection(current);
-      ticking = false;
-    };
     
     const requestTick = () => {
       if (!ticking) {
-        requestAnimationFrame(updateScrollProgress);
+        requestAnimationFrame(() => {
+          updateScrollProgress();
+          ticking = false;
+        });
         ticking = true;
       }
+      handleScrollStart();
+      handleScrollEnd();
     };
     
     window.addEventListener('scroll', requestTick, { passive: true });
-    return () => window.removeEventListener('scroll', requestTick);
+    return () => {
+      window.removeEventListener('scroll', requestTick);
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+    };
+  }, [updateScrollProgress, handleScrollStart, handleScrollEnd, scrollTimeout]);
+
+  // Optimized mouse tracking with throttling - memoized callback
+  const updateMousePosition = useCallback((e) => {
+    setMousePosition({ x: e.clientX, y: e.clientY });
   }, []);
 
-  // Optimized mouse tracking with throttling
   useEffect(() => {
     let ticking = false;
     
-    const updateMousePosition = (e) => {
+    const throttledMouseMove = (e) => {
       if (!ticking) {
         requestAnimationFrame(() => {
-          setMousePosition({ x: e.clientX, y: e.clientY });
+          updateMousePosition(e);
           ticking = false;
         });
         ticking = true;
@@ -380,80 +423,60 @@ export default function App() {
 
     // Hide default cursor
     document.body.style.cursor = 'none';
-    window.addEventListener("mousemove", updateMousePosition, { passive: true });
+    window.addEventListener("mousemove", throttledMouseMove, { passive: true });
     
     return () => {
-      window.removeEventListener("mousemove", updateMousePosition);
+      window.removeEventListener("mousemove", throttledMouseMove);
       document.body.style.cursor = 'auto';
     };
-  }, []);
+  }, [updateMousePosition]);
 
-  // Further optimized particle system
+  // Further optimized particle system with scroll-based visibility
+  
   useEffect(() => {
-    // Reduce particles to 8 for better performance
-    const newParticles = Array.from({ length: 8 }, (_, i) => ({
+    // Reduce particles to 6 for better performance
+    const newParticles = Array.from({ length: 6 }, (_, i) => ({
       id: i,
       x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
       y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
       size: 1,
-      speedX: (Math.random() - 0.5) * 0.3,
-      speedY: (Math.random() - 0.5) * 0.3,
-      opacity: 0.2,
+      speedX: (Math.random() - 0.5) * 0.2,
+      speedY: (Math.random() - 0.5) * 0.2,
+      opacity: 0.15,
     }));
     setParticles(newParticles);
   }, []);
 
-  // Looping typing effect for roles
-  useEffect(() => {
-    const roles = ["Full-Stack Developer", "Data Analyst"];
-    let currentRoleIndex = 0;
-    let currentCharIndex = 0;
-    let isDeleting = false;
-    let timeoutId;
-
-    const typeEffect = () => {
-      const currentRole = roles[currentRoleIndex];
-      let typeSpeed = 100;
-      
-      if (isDeleting) {
-        // Deleting characters
-        setTypedText(currentRole.slice(0, currentCharIndex - 1));
-        currentCharIndex--;
-        typeSpeed = 50; // Faster deletion
-        
-        if (currentCharIndex === 0) {
-          isDeleting = false;
-          currentRoleIndex = (currentRoleIndex + 1) % roles.length;
-          typeSpeed = 500; // Pause before typing next role
-        }
-      } else {
-        // Typing characters
-        setTypedText(currentRole.slice(0, currentCharIndex + 1));
-        currentCharIndex++;
-        typeSpeed = 100; // Normal typing speed
-        
-        if (currentCharIndex === currentRole.length) {
-          isDeleting = true;
-          typeSpeed = 2000; // Pause when role is complete
-        }
+  // Optimized typing animation effect with useCallback
+  const typeWriter = useCallback(() => {
+    const text = "Full-Stack Developer";
+    let index = 0;
+    
+    const type = () => {
+      if (index < text.length) {
+        setTypedText(text.slice(0, index + 1));
+        index++;
+        setTimeout(type, 100);
       }
-
-      timeoutId = setTimeout(typeEffect, typeSpeed);
     };
+    
+    const timer = setTimeout(type, 1000);
+    return timer;
+  }, []);
 
-    // Start the typing effect
-    timeoutId = setTimeout(typeEffect, 1000); // Initial delay
-
-    // Cursor blinking effect
+  useEffect(() => {
+    const timer = typeWriter();
+    
+    // Cursor blinking
     const cursorTimer = setInterval(() => {
       setShowCursor(prev => !prev);
-    }, 500);
-
+    }, 530);
+    
     return () => {
-      clearTimeout(timeoutId);
+      clearTimeout(timer);
       clearInterval(cursorTimer);
     };
-  }, []);
+  }, [typeWriter]);
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
@@ -494,13 +517,13 @@ export default function App() {
         }}
       />
 
-      {/* Scroll Progress Indicator */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 z-50 origin-left"
-        style={{ scaleX: scrollProgress / 100 }}
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: scrollProgress / 100 }}
-        transition={{ duration: 0.1 }}
+      {/* Scroll Progress Indicator - CSS Transform for better performance */}
+      <div
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 z-50 origin-left transition-transform duration-75 ease-out"
+        style={{ 
+          transform: `scaleX(${scrollProgress / 100})`,
+          willChange: 'transform'
+        }}
       />
 
       {/* Floating Section Navigator */}
@@ -511,13 +534,7 @@ export default function App() {
         transition={{ duration: 0.5, delay: 1 }}
       >
         <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-4 shadow-2xl">
-          {[
-            { id: 'home', icon: '🏠', label: 'Home' },
-            { id: 'about', icon: '👨‍💻', label: 'About' },
-            { id: 'experience', icon: '💼', label: 'Experience' },
-            { id: 'projects', icon: '🚀', label: 'Projects' },
-            { id: 'contact', icon: '📧', label: 'Contact' }
-          ].map((section) => (
+          {navigationItems.map((section) => (
             <motion.button
               key={section.id}
               className={`relative w-12 h-12 rounded-xl mb-2 flex items-center justify-center transition-all duration-300 group ${
@@ -563,26 +580,17 @@ export default function App() {
         </div>
       </motion.div>
       
-      {/* Optimized Floating Particles Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {particles.slice(0, 15).map((particle, i) => (
-          <motion.div
+      {/* Optimized Floating Particles Background - Hidden during scroll */}
+      <div className={`absolute inset-0 overflow-hidden pointer-events-none transition-opacity duration-300 ${isScrolling ? 'opacity-0' : 'opacity-100'}`}>
+        {particles.slice(0, 6).map((particle, i) => (
+          <div
             key={i}
-            className="absolute w-1 h-1 bg-cyan-400/40 rounded-full"
-            animate={{
-              x: [particle.x, particle.x + 50],
-              y: [particle.y, particle.y + 50],
-              opacity: [0.2, 0.6, 0.2],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "linear",
-              delay: i * 0.5
-            }}
+            className="absolute w-1 h-1 bg-cyan-400/30 rounded-full animate-float"
             style={{
               left: particle.x,
               top: particle.y,
+              animationDelay: `${i * 2}s`,
+              animationDuration: '25s'
             }}
           />
         ))}
@@ -608,7 +616,7 @@ export default function App() {
             LEO
           </motion.button>
           <div className="hidden md:flex items-center gap-6">
-            {['About', 'Experience', 'Projects', 'Contact'].map((item) => (
+            {headerNavItems.map((item) => (
               <motion.button
                 key={item}
                 className="relative text-sm font-medium hover:text-cyan-400 transition-colors cursor-none"
@@ -654,14 +662,17 @@ export default function App() {
 
       {/* Revolutionary Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative pt-20 overflow-hidden">
-        {/* Animated Background Elements */}
-        <motion.div
-          className="absolute inset-0"
-          style={{ y: yBg }}
+        {/* Animated Background Elements - Reduced during scroll */}
+        <div
+          className={`absolute inset-0 transition-opacity duration-300 ${isScrolling ? 'opacity-30' : 'opacity-100'}`}
+          style={{ 
+            transform: `translateY(${scrollProgress * 0.5}px)`,
+            willChange: 'transform'
+          }}
         >
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-cyan-400/20 to-blue-600/20 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-purple-400/20 to-pink-600/20 rounded-full blur-3xl animate-pulse delay-1000" />
-        </motion.div>
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-cyan-400/15 to-blue-600/15 rounded-full blur-3xl animate-pulse-slow" />
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-purple-400/15 to-pink-600/15 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }} />
+        </div>
 
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center relative z-20">
           {/* Left Content */}
@@ -932,60 +943,19 @@ export default function App() {
         </div>
         
         <div className="max-w-7xl mx-auto relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-          >
+          <div className="animate-fade-in-up">
             {/* Enhanced Holographic Title */}
             <div className="text-center mb-20 relative">
-              <motion.h2 
-                className="text-4xl lg:text-6xl font-black bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent relative z-10"
-                initial={{ opacity: 0, y: 50, scale: 0.8 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.2, ease: "easeOut" }}
-                animate={{ 
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                }}
-                style={{
-                  backgroundSize: '200% 200%'
-                }}
-              >
-                ABOUT ME
-              </motion.h2>
-              
-              {/* Glowing Underline */}
-              <motion.div
-                className="h-2 bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full mx-auto mt-6"
-                initial={{ width: 0, opacity: 0 }}
-                whileInView={{ width: '200px', opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.8, duration: 1 }}
-              />
+              <h2 className="text-4xl lg:text-6xl font-black bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent relative z-10 gradient-text">
+                About Me
+              </h2>
+              <div className="h-2 bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full mx-auto mt-6 animate-width-expand" style={{ width: '200px' }} />
             </div>
 
-            {/* Enhanced 3D Stats Cards Row - Mobile Optimized */}
-            <div className="w-full flex flex-col sm:flex-row gap-4 sm:gap-8 mb-12 sm:mb-16 justify-center items-stretch perspective-1000 px-4 sm:px-0">
-              <motion.div 
-                className="flex-1 min-w-[280px] sm:min-w-[240px] max-w-[320px] sm:max-w-[280px] mx-auto sm:mx-0 relative group transform-gpu"
-                initial={{ opacity: 0, y: 50, rotateX: 15 }}
-                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.1 }}
-                whileHover={{ 
-                  y: -8, 
-                  scale: 1.02, 
-                  rotateX: -3,
-                  rotateY: 3,
-                  z: 30
-                }}
-                whileTap={{ 
-                  scale: 0.98,
-                  y: -4
-                }}
-                style={{ transformStyle: 'preserve-3d' }}
+            {/* Stats Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 mb-20">
+              <div className="flex-1 min-w-[280px] sm:min-w-[240px] max-w-[320px] sm:max-w-[280px] mx-auto sm:mx-0 relative group transform-gpu animate-fade-in-up"
+                style={{ animationDelay: '0.1s', transformStyle: 'preserve-3d' }}
               >
                 {/* Enhanced Glow Effect */}
                 <div className="absolute -inset-2 bg-gradient-to-r from-cyan-400/40 to-blue-500/40 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700" />
@@ -1014,26 +984,10 @@ export default function App() {
                   {/* 3D Edge highlight */}
                   <div className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-50 pointer-events-none" />
                 </div>
-              </motion.div>
+              </div>
               
-              <motion.div 
-                className="flex-1 min-w-[280px] sm:min-w-[240px] max-w-[320px] sm:max-w-[280px] mx-auto sm:mx-0 relative group transform-gpu"
-                initial={{ opacity: 0, y: 50, rotateX: 15 }}
-                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                whileHover={{ 
-                  y: -8, 
-                  scale: 1.02, 
-                  rotateX: -3,
-                  rotateY: -3,
-                  z: 30
-                }}
-                whileTap={{ 
-                  scale: 0.98,
-                  y: -4
-                }}
-                style={{ transformStyle: 'preserve-3d' }}
+              <div className="flex-1 min-w-[280px] sm:min-w-[240px] max-w-[320px] sm:max-w-[280px] mx-auto sm:mx-0 relative group transform-gpu animate-fade-in-up"
+                style={{ animationDelay: '0.2s', transformStyle: 'preserve-3d' }}
               >
                 {/* Enhanced Glow Effect */}
                 <div className="absolute -inset-2 bg-gradient-to-r from-purple-400/40 to-pink-500/40 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700" />
@@ -1062,26 +1016,10 @@ export default function App() {
                   {/* 3D Edge highlight */}
                   <div className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-50 pointer-events-none" />
                 </div>
-              </motion.div>
+              </div>
               
-              <motion.div 
-                className="flex-1 min-w-[280px] sm:min-w-[240px] max-w-[320px] sm:max-w-[280px] mx-auto sm:mx-0 relative group transform-gpu"
-                initial={{ opacity: 0, y: 50, rotateX: 15 }}
-                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                whileHover={{ 
-                  y: -8, 
-                  scale: 1.02, 
-                  rotateX: -3,
-                  rotateY: 3,
-                  z: 30
-                }}
-                whileTap={{ 
-                  scale: 0.98,
-                  y: -4
-                }}
-                style={{ transformStyle: 'preserve-3d' }}
+              <div className="flex-1 min-w-[280px] sm:min-w-[240px] max-w-[320px] sm:max-w-[280px] mx-auto sm:mx-0 relative group transform-gpu animate-fade-in-up"
+                style={{ animationDelay: '0.3s', transformStyle: 'preserve-3d' }}
               >
                 {/* Enhanced Glow Effect */}
                 <div className="absolute -inset-2 bg-gradient-to-r from-blue-400/40 to-cyan-500/40 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700" />
@@ -1110,7 +1048,7 @@ export default function App() {
                   {/* 3D Edge highlight */}
                   <div className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-50 pointer-events-none" />
                 </div>
-              </motion.div>
+              </div>
             </div>
 
             <div className="grid lg:grid-cols-2 gap-16 items-start">
@@ -1249,177 +1187,10 @@ export default function App() {
                 </motion.div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Futuristic Experience Timeline */}
-      <section id="experience" className="py-20 px-6 relative overflow-hidden">
-        {/* Animated Grid Background */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `
-              linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
-          }} />
-        </div>
-
-        <div className="max-w-7xl mx-auto relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-          >
-            {/* Holographic Title */}
-            <motion.h2 
-              className="text-4xl lg:text-6xl font-black text-center mb-20 bg-gradient-to-r from-emerald-400 via-cyan-500 to-blue-600 bg-clip-text text-transparent relative"
-              animate={{ 
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-              }}
-              transition={{ duration: 4, repeat: Infinity }}
-            >
-              EXPERIENCE
-              {/* Glowing Underline */}
-              <motion.div
-                className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 h-2 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
-                initial={{ width: 0 }}
-                whileInView={{ width: "200px" }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.8, duration: 1 }}
-              />
-            </motion.h2>
-
-            {/* Futuristic Timeline */}
-            <div className="relative">
-              {/* Central Timeline Line */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-cyan-400 via-blue-500 to-purple-600 rounded-full" />
-              
-              <div className="space-y-20">
-                {workExperience.map((job, index) => (
-                  <motion.div
-                    key={index}
-                    className="relative"
-                    initial={{ opacity: 0, x: index % 2 === 0 ? -200 : 200 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: index * 0.3 }}
-                  >
-                    {/* Timeline Node */}
-                    <motion.div
-                      className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-gradient-to-r from-cyan-400 to-blue-600 rounded-full z-20 shadow-2xl"
-                      whileHover={{ scale: 1.5 }}
-                      animate={{ 
-                        boxShadow: [
-                          "0 0 20px rgba(6, 182, 212, 0.5)",
-                          "0 0 40px rgba(6, 182, 212, 0.8)",
-                          "0 0 20px rgba(6, 182, 212, 0.5)"
-                        ]
-                      }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    />
-
-                    {/* Experience Card */}
-                    <div className={`grid lg:grid-cols-2 gap-8 items-center ${index % 2 === 0 ? '' : 'lg:grid-flow-col-dense'}`}>
-                      {/* Content Side */}
-                      <motion.div
-                        className="lg:text-left lg:pl-16"
-                        whileHover={{ scale: 1.02 }}
-                      >
-                        <div className="relative group">
-                          {/* Glow Effect */}
-                          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500" />
-                          
-                          {/* Main Card */}
-                          <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:border-cyan-400/50 transition-all duration-300">
-                            {/* Period Badge */}
-                            <motion.div
-                              className="inline-block bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-bold mb-4 shadow-lg"
-                              whileHover={{ scale: 1.1 }}
-                            >
-                              {job.period}
-                            </motion.div>
-
-                            {/* Job Title */}
-                            <motion.h3 
-                              className="text-3xl font-black mb-2 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
-                              whileHover={{ scale: 1.05 }}
-                            >
-                              {job.position}
-                            </motion.h3>
-
-                            {/* Company */}
-                            <motion.p 
-                              className="text-xl font-bold text-purple-400 mb-6"
-                              whileHover={{ scale: 1.05 }}
-                            >
-                              {job.company}
-                            </motion.p>
-
-                            {/* Responsibilities */}
-                            <div className="space-y-3">
-                              {job.responsibilities.map((resp, idx) => (
-                                <motion.div
-                                  key={idx}
-                                  className="flex items-start gap-3"
-                                  initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
-                                  whileInView={{ opacity: 1, x: 0 }}
-                                  viewport={{ once: true }}
-                                  transition={{ delay: idx * 0.1, duration: 0.5 }}
-                                >
-                                  <motion.div
-                                    className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mt-2 flex-shrink-0"
-                                    animate={{ scale: [1, 1.2, 1] }}
-                                    transition={{ duration: 2, repeat: Infinity, delay: idx * 0.2 }}
-                                  />
-                                  <p className="text-gray-700 dark:text-gray-200 leading-relaxed">
-                                    {resp}
-                                  </p>
-                                </motion.div>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-
-                      {/* Visual Side */}
-                      <motion.div
-                        className={`flex ${index % 2 === 0 ? 'justify-start lg:pl-16' : 'justify-start lg:pl-16 lg:order-1'}`}
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.5, duration: 0.8 }}
-                      >
-                        <div className="relative">
-                          {/* Company Logo Container */}
-                          <motion.div
-                            className="w-48 h-48 bg-gradient-to-br from-slate-100/10 to-slate-200/10 rounded-2xl backdrop-blur-xl border border-white/20 flex items-center justify-center shadow-2xl p-4"
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, ease: "easeOut" }}
-                            whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-                          >
-                            <img 
-                              src={index === 0 ? eternalLogo : thantLogo} 
-                              alt={index === 0 ? 'Eternal Logo' : 'Thant-Purity Logo'}
-                              className="w-full h-full object-contain rounded-xl"
-                            />
-                          </motion.div>
-
-                          {/* Remove orbiting elements */}
-                        </div>
-                      </motion.div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
 
       {/* Portfolio Showcase */}
@@ -1570,14 +1341,19 @@ export default function App() {
                         <div className={`absolute inset-0 bg-gradient-to-r ${tech.color} rounded-3xl blur-xl opacity-0 group-hover:opacity-40 transition-all duration-500`} />
                         
                         {/* Tech Card */}
-                        <div className="relative bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 hover:border-blue-400/50 transition-all duration-300 text-center min-h-[120px] sm:min-h-[150px] lg:min-h-[180px] flex flex-col justify-center hover:bg-gray-700/50">
+                        <div className="relative bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 hover:border-blue-400/50 transition-all duration-300 h-full flex flex-col justify-center hover:bg-gray-700/50">
                           {/* Tech Icon */}
                           <motion.div
                             className="mb-4 flex justify-center"
                             whileHover={{ scale: 1.1, rotate: 5 }}
                             transition={{ type: "spring", stiffness: 300 }}
                           >
-                            {tech.icon}
+                            <img 
+                              src={tech.icon} 
+                              alt={tech.alt} 
+                              className="w-16 h-16 rounded-lg"
+                              loading="lazy"
+                            />
                           </motion.div>
                           
                           {/* Tech Name */}
@@ -1904,9 +1680,14 @@ export default function App() {
                     <img
                       src={selectedProject.image}
                       alt={selectedProject.title}
-                      className={`w-full h-80 object-cover ${
-                        selectedProject.id === 'reclaimify' ? 'bg-gradient-to-br from-blue-50 to-gray-100 p-4' : ''
+                      className={`w-full object-contain bg-white/5 ${
+                        selectedProject.id === 'reclaimify' ? 'bg-gradient-to-br from-blue-50 to-gray-100 p-4' : 'p-2'
                       }`}
+                      style={{ 
+                        minHeight: '300px',
+                        maxHeight: '400px',
+                        aspectRatio: 'auto'
+                      }}
                     />
                   </div>
 
@@ -2456,69 +2237,23 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* Futuristic Footer */}
-      <footer className="relative py-16 px-6 overflow-hidden">
+      {/* Footer */}
+      <footer className="relative py-16 px-6">
         {/* Footer Background Effects */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-800 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/10 via-purple-900/10 to-pink-900/10" />
-          
-          {/* Animated Grid */}
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute inset-0" style={{
-              backgroundImage: `
-                linear-gradient(rgba(6, 182, 212, 0.3) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(6, 182, 212, 0.3) 1px, transparent 1px)
-              `,
-              backgroundSize: '40px 40px',
-            }} />
-          </div>
-
-          {/* Floating Footer Particles */}
-          {[...Array(6)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-cyan-400/30 rounded-full"
-              animate={{
-                y: [0, -50, 0],
-                opacity: [0.3, 0.8, 0.3],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                delay: i * 1,
-              }}
-              style={{
-                left: `${15 + i * 15}%`,
-                bottom: `${10 + (i % 2) * 20}%`,
-              }}
-            />
-          ))}
         </div>
 
         <div className="max-w-6xl mx-auto relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-          >
+          <div>
             {/* Footer Content */}
             <div className="grid lg:grid-cols-3 gap-12 mb-12">
               {/* Brand Section */}
-              <motion.div
-                className="text-center lg:text-left"
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                <motion.h3 
-                  className="text-3xl font-black mb-4 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-600 bg-clip-text text-transparent"
-                  whileHover={{ scale: 1.05 }}
-                >
+              <div className="text-center lg:text-left">
+                <h3 className="text-3xl font-black mb-4 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-600 bg-clip-text text-transparent">
                   PHYO MIN THEIN
-                </motion.h3>
+                </h3>
                 <p className="text-gray-300 leading-relaxed mb-6">
                   Full-Stack Developer crafting the future with innovative web solutions. 
                   <span className="text-blue-600 dark:text-cyan-400 font-semibold"> Ready to build tomorrow's technology today.</span>
@@ -2526,38 +2261,25 @@ export default function App() {
                 
                 {/* Tech Stack Badges */}
                 <div className="flex flex-wrap gap-2 justify-center lg:justify-start mb-6">
-                  {['React', 'Node.js', 'Python', 'TypeScript'].map((tech, index) => (
-                    <motion.span
+                  {['React', 'Node.js', 'Python', 'TypeScript'].map((tech) => (
+                    <span
                       key={tech}
                       className="px-3 py-1 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 backdrop-blur-sm border border-white/10 rounded-full text-xs font-bold text-cyan-400"
-                      whileHover={{ scale: 1.1, y: -2 }}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.4 + index * 0.1 }}
                     >
                       {tech}
-                    </motion.span>
+                    </span>
                   ))}
                 </div>
 
                 {/* Download CV Button */}
-                <motion.div
-                  className="flex justify-center lg:justify-start"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.8 }}
-                >
-                  <motion.a
+                <div className="flex justify-center lg:justify-start">
+                  <a
                     href={cvFile}
                     download="Phyo_Min_Thein_CV.jpg"
                     className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 group"
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
                   >
                     <svg 
-                      className="w-5 h-5 mr-2 group-hover:animate-bounce" 
+                      className="w-5 h-5 mr-2" 
                       fill="none" 
                       stroke="currentColor" 
                       viewBox="0 0 24 24"
@@ -2570,45 +2292,28 @@ export default function App() {
                       />
                     </svg>
                     Download CV
-                  </motion.a>
-                </motion.div>
-              </motion.div>
+                  </a>
+                </div>
+              </div>
 
               {/* Quick Links */}
-              <motion.div
-                className="text-center"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-              >
+              <div className="text-center">
                 <h4 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">Quick Navigation</h4>
                 <div className="space-y-3">
-                  {['About', 'Experience', 'Projects', 'Contact'].map((item, index) => (
-                    <motion.a
+                  {headerNavItems.map((item) => (
+                    <a
                       key={item}
                       href={`#${item.toLowerCase()}`}
                       className="block text-gray-300 hover:text-cyan-400 transition-colors font-medium"
-                      whileHover={{ x: 10, scale: 1.05 }}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.6 + index * 0.1 }}
                     >
                       {item}
-                    </motion.a>
+                    </a>
                   ))}
                 </div>
-              </motion.div>
+              </div>
 
               {/* Connect Section */}
-              <motion.div
-                className="text-center lg:text-right"
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-              >
+              <div className="text-center lg:text-right">
                 <h4 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">Connect With Me</h4>
                 
                 {/* Social Links */}
@@ -2617,8 +2322,8 @@ export default function App() {
                     [
                       { 
                         icon: (
-                          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                           </svg>
                         ), 
                         href: 'mailto:phyominthein.leo@gmail.com', 
@@ -2628,85 +2333,62 @@ export default function App() {
                         icon: (
                           <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                          </svg>
-                        ), 
-                        href: 'https://github.com/kweephyo-pmt', 
-                        label: 'GitHub' 
-                      },
-                      { 
-                        icon: (
-                          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                          </svg>
-                        ), 
-                        href: 'https://www.linkedin.com/in/phyo-min-thein-605168361/', 
-                        label: 'LinkedIn' 
-                      },
-                    ].map((social, index) => (
-                      <motion.a
-                        key={social.label}
-                        href={social.href}
-                        target={social.href.startsWith('http') ? '_blank' : undefined}
-                        rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                        className="group relative w-12 h-12 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 backdrop-blur-sm border border-white/10 rounded-xl flex items-center justify-center text-cyan-400 hover:text-white hover:border-cyan-400/50 transition-all duration-300"
-                        whileHover={{ scale: 1.1, rotateY: 180 }}
-                        initial={{ opacity: 0, scale: 0 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ 
-                          delay: 0.8 + index * 0.1,
-                          type: "spring",
-                          stiffness: 200
-                        }}
-                      >
-                        <span className="group-hover:scale-110 transition-transform">
-                          {social.icon}
-                        </span>
-                        
-                        {/* Tooltip */}
-                        <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                          {social.label}
-                        </div>
-                      </motion.a>
-                    ))}
+                      </svg>
+                      ), 
+                      href: 'https://github.com/kweephyo-pmt', 
+                      label: 'GitHub' 
+                    },
+  
+                    { 
+                      icon: (
+                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                      ), 
+                      href: 'https://www.linkedin.com/in/phyo-min-thein-605168361/', 
+                      label: 'LinkedIn' 
+                    },
+              ].map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target={social.href.startsWith('http') ? '_blank' : undefined}
+                  rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="group relative w-12 h-12 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 backdrop-blur-sm border border-white/10 rounded-xl flex items-center justify-center text-cyan-400 hover:text-white hover:border-cyan-400/50 transition-all duration-300"
+                >
+                  <span className="transition-transform">
+                    {social.icon}
+                  </span>
+                  
+                  {/* Tooltip */}
+                  <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                    {social.label}
+                  </div>
+                </a>
+              ))
+            }
                 </div>
 
                 <p className="text-gray-400 text-sm">
                   Available for exciting opportunities
                 </p>
-              </motion.div>
+              </div>
             </div>
 
             {/* Divider */}
-            <motion.div
-              className="relative mb-8"
-              initial={{ opacity: 0, scaleX: 0 }}
-              whileInView={{ opacity: 1, scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.8 }}
-            >
+            <div className="relative mb-8">
               <div className="h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
-              <motion.div
-                className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-cyan-400 rounded-full"
-                animate={{ scale: [1, 1.5, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-            </motion.div>
+              <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-cyan-400 rounded-full" />
+            </div>
 
             {/* Copyright & Credits */}
-            <motion.div
-              className="text-center"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 1 }}
-            >
+            <div className="text-center">
               <p className="text-gray-400 mb-2">
                 &copy; 2025 <span className="text-cyan-400 font-semibold">Phyo Min Thein</span>. 
                 All rights reserved.
               </p>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </footer>
       
@@ -2790,4 +2472,6 @@ export default function App() {
       </AnimatePresence>
     </div>
   );
-}
+};
+
+export default App;
