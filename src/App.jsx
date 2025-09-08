@@ -1464,7 +1464,8 @@ const App = () => {
                                 src={project.image} 
                                 alt={project.title}
                                 className={`w-full h-full group-hover:scale-105 transition-transform duration-500 ${
-                                  project.id === 'reclaimify' ? 'bg-gradient-to-br from-blue-50 to-gray-100 p-2 sm:p-4 object-contain' : 'object-cover'
+                                  project.id === 'reclaimify' ? 'bg-gradient-to-br from-blue-50 to-gray-100 p-2 sm:p-4 object-contain' : 
+                                  project.id === 'linkclub' ? 'object-contain bg-white' : 'object-cover'
                                 }`}
                               />
                             ) : (
