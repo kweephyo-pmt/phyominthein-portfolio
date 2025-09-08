@@ -33,8 +33,7 @@ import weflixImage from './assets/WeFlix.png';
 import linkClubImage from './assets/LinkClub.png';
 
 // Certificate Images
-import nodejsExpressCert from './assets/certificates/Developing Backend Apps With Nodejs and Expressjs.png';
-import reactFrontendCert from './assets/certificates/Developing Frontend with React.png';
+import ibmFullStackCert from './assets/certificates/IBM FullStack.jpeg';
 import digitalMarketingCert from './assets/certificates/Foundation of Digital Marketing & E-Commerce.png';
 import googleAICert from './assets/certificates/Google AI Essentials.png';
 
@@ -294,35 +293,30 @@ const App = () => {
   const certificates = useMemo(() => [
     {
       id: 1,
-      name: "Developing Backend Apps with Node.js and Express.js",
+      name: "IBM FullStack Software Developer",
       issuer: "IBM",
       year: "2025",
-      image: nodejsExpressCert,
-      description: "Professional certification in backend development using Node.js and Express.js frameworks"
+      image: ibmFullStackCert,
+      description: "Professional certification in full-stack software development covering both frontend and backend technologies",
+      credentialUrl: "https://coursera.org/share/40b4858ad6371b82352207c45d2860c3"
     },
     {
       id: 2,
-      name: "Developing Frontend with React",
-      issuer: "IBM",
-      year: "2025",
-      image: reactFrontendCert,
-      description: "Comprehensive certification in React.js frontend development and modern JavaScript"
-    },
-    {
-      id: 3,
       name: "Foundation of Digital Marketing & E-Commerce",
       issuer: "Google",
       year: "2025",
       image: digitalMarketingCert,
-      description: "Google certification covering digital marketing fundamentals and e-commerce strategies"
+      description: "Google certification covering digital marketing fundamentals and e-commerce strategies",
+      credentialUrl: "https://coursera.org/share/89ab619cbadf335ba8d8bc3a7f4b688b"
     },
     {
-      id: 4,
+      id: 3,
       name: "Google AI Essentials",
       issuer: "Google",
       year: "2025",
       image: googleAICert,
-      description: "Essential certification in artificial intelligence concepts and Google AI tools"
+      description: "Essential certification in artificial intelligence concepts and Google AI tools",
+      credentialUrl: "https://coursera.org/share/6a8123f02bb4ba5578285fd82e580839"
     }
   ], []);
 
@@ -1404,16 +1398,33 @@ const App = () => {
                           </div>
                           
                           {/* Certificate Content */}
-                          <div className="p-6 flex-1 flex flex-col justify-center">
+                          <div className="p-6 flex-1 flex flex-col justify-between">
                             <div className="text-center">
                               <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">{cert.name}</h3>
                               <p className="text-gray-300 text-sm mb-2">{cert.issuer}</p>
                               {cert.description && (
                                 <p className="text-gray-400 text-xs mb-3">{cert.description}</p>
                               )}
-                              <span className="inline-block bg-gradient-to-r from-yellow-500 to-orange-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                              <span className="inline-block bg-gradient-to-r from-yellow-500 to-orange-600 text-white px-3 py-1 rounded-full text-xs font-bold mb-4">
                                 {cert.year}
                               </span>
+                            </div>
+                            
+                            {/* Verify Credential Button */}
+                            <div className="text-center mt-4">
+                              <motion.a
+                                href={cert.credentialUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                              >
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                Verify Credential
+                              </motion.a>
                             </div>
                           </div>
                         </div>
