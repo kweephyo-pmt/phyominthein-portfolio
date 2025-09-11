@@ -437,7 +437,7 @@ const App = () => {
 
   // Typing animation effect
   useEffect(() => {
-    const texts = ["Full-Stack Developer", "Mobile Developer"];
+    const texts = ["Full-Stack Developer", "DevOps"];
     let textIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
@@ -741,7 +741,7 @@ const App = () => {
               Software Engineering student with expertise in{" "}
               <span className="text-cyan-400 font-semibold">full-stack development</span>,{" "}
               and{" "}
-              <span className="text-purple-400 font-semibold">mobile applications</span>.
+              <span className="text-purple-400 font-semibold">DevOps</span>.
               <br />
               Delivering innovative solutions through modern technology stacks.
             </motion.p>
