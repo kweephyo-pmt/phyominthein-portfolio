@@ -1480,14 +1480,16 @@ const App = () => {
                         {/* Project Card */}
                         <div className="relative bg-white/80 dark:bg-gray-800/40 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 rounded-3xl overflow-hidden hover:border-blue-400/50 transition-all duration-300 h-full flex flex-col">
                           {/* Project Preview */}
-                          <div className="h-48 sm:h-64 md:h-80 bg-gradient-to-br from-blue-600/20 to-purple-600/20 overflow-hidden relative">
+                          <div className="h-40 xs:h-48 sm:h-56 md:h-64 lg:h-72 bg-gradient-to-br from-blue-600/20 to-purple-600/20 overflow-hidden relative">
                             {project.image ? (
                               <img 
                                 src={project.image} 
                                 alt={project.title}
                                 className={`w-full h-full group-hover:scale-105 transition-transform duration-500 ${
-                                  project.id === 'reclaimify' ? 'bg-gradient-to-br from-blue-50 to-gray-100 p-2 sm:p-4 object-contain' : 
-                                  project.id === 'linkclub' ? 'object-contain bg-white' : 'object-cover'
+                                  project.id === 'reclaimify' ? 'bg-gradient-to-br from-blue-50 to-gray-100 p-1 xs:p-2 sm:p-3 md:p-4 object-contain' : 
+                                  project.id === 'linkclub' ? 'object-cover object-top bg-white' : 
+                                  project.id === 'trackpoint' ? 'object-cover object-top' :
+                                  'object-cover object-top'
                                 }`}
                               />
                             ) : (
@@ -1500,24 +1502,24 @@ const App = () => {
                           </div>
                           
                           {/* Project Content */}
-                          <div className="p-6 flex-1 flex flex-col">
-                            <div className="flex items-center justify-between mb-4">
-                              <h3 className="text-2xl font-bold text-gray-800 dark:text-white">{project.title}</h3>
+                          <div className="p-3 xs:p-4 sm:p-5 md:p-6 flex-1 flex flex-col">
+                            <div className="flex items-start justify-between mb-3 sm:mb-4 gap-2">
+                              <h3 className="text-lg xs:text-xl sm:text-2xl font-bold text-gray-800 dark:text-white leading-tight">{project.title}</h3>
                               <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 py-1 rounded-full text-xs font-bold">
                                 {project.year}
                               </span>
                             </div>
                             
-                            <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 leading-relaxed">
+                            <p className="text-gray-600 dark:text-gray-300 text-xs xs:text-sm mb-3 sm:mb-4 leading-relaxed line-clamp-3 sm:line-clamp-none">
                               {project.desc}
                             </p>
                             
                             {/* Tech Stack */}
-                            <div className="flex flex-wrap gap-2 mb-4">
-                              {project.tech.split(', ').slice(0, 3).map((tech, idx) => (
+                            <div className="flex flex-wrap gap-1 xs:gap-2 mb-3 sm:mb-4">
+                              {project.tech.split(', ').slice(0, window.innerWidth < 640 ? 2 : 3).map((tech, idx) => (
                                 <span
                                   key={idx}
-                                  className="bg-white/10 text-gray-300 px-2 py-1 rounded-lg text-xs"
+                                  className="bg-white/10 text-gray-300 px-1.5 xs:px-2 py-0.5 xs:py-1 rounded-md xs:rounded-lg text-xs"
                                 >
                                   {tech}
                                 </span>
@@ -1525,12 +1527,12 @@ const App = () => {
                             </div>
                             
                             {/* Action Buttons */}
-                            <div className="flex gap-3 mt-auto">
+                            <div className="flex gap-2 xs:gap-3 mt-auto">
                               <motion.a
                                 href={project.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-xl font-bold text-center text-sm hover:shadow-lg transition-all duration-300"
+                                className="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-2 xs:px-3 sm:px-4 py-1.5 xs:py-2 rounded-lg xs:rounded-xl font-bold text-center text-xs xs:text-sm hover:shadow-lg transition-all duration-300"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                               >
@@ -1538,7 +1540,7 @@ const App = () => {
                               </motion.a>
                               <motion.button
                                 onClick={() => setSelectedProject(project)}
-                                className="bg-white/10 text-gray-300 px-4 py-2 rounded-xl font-bold text-sm hover:bg-white/20 transition-all duration-300"
+                                className="bg-white/10 text-gray-300 px-2 xs:px-3 sm:px-4 py-1.5 xs:py-2 rounded-lg xs:rounded-xl font-bold text-xs xs:text-sm hover:bg-white/20 transition-all duration-300"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                               >
