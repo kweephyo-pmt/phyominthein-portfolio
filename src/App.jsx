@@ -31,6 +31,7 @@ import lostFoundImage from './assets/Lost Found.png';
 import portfolioImage from './assets/preview-image.jpg';
 import weflixImage from './assets/WeFlix.png';
 import linkClubImage from './assets/LinkClub.png';
+import trackPointImage from './assets/TrackPoint Attendance Tracker.png';
 
 // Certificate Images
 import ibmFullStackCert from './assets/certificates/IBM FullStack.jpeg';
@@ -44,6 +45,7 @@ const App = () => {
   const [activeTab, setActiveTab] = useState("projects");
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedCertificate, setSelectedCertificate] = useState(null);
+  const [showAllProjects, setShowAllProjects] = useState(false);
 
   const [scrollProgress, setScrollProgress] = useState(0);
   const [currentSection, setCurrentSection] = useState('home');
@@ -85,6 +87,26 @@ const App = () => {
   // Remove unused scroll transform for better performance
 
   const projects = [
+    {
+      id: "trackpoint",
+      title: "TrackPoint - Professional Attendance Tracking System",
+      tech: "React, TypeScript, Supabase, Facial Recognition",
+      technologies: ["React", "TypeScript", "Supabase", "Facial Recognition", "Location Services", "Real-time Analytics"],
+      desc: "A comprehensive, modern attendance tracking application built with React, TypeScript, and Supabase. Features advanced facial recognition, location-based restrictions, real-time analytics, and a complete admin management system.",
+      url: "https://trackpoint-attendance.vercel.app/",
+      githubUrl: "https://github.com/kweephyo-pmt/TrackPoint",
+      category: "web",
+      year: "2025",
+      image: trackPointImage,
+      features: [
+        "Advanced facial recognition technology for secure and accurate attendance tracking",
+        "Location-based restrictions ensuring attendance can only be marked from designated areas",
+        "Real-time analytics dashboard with comprehensive reporting and data visualization",
+        "Complete admin management system with user roles, permissions, and attendance oversight",
+        "Modern TypeScript architecture with Supabase backend for scalable data management",
+        "Responsive design optimized for both desktop and mobile attendance marking"
+      ]
+    },
     {
       id: "weflix",
       title: "WeFlix Movie Streaming Platform",
@@ -933,8 +955,8 @@ const App = () => {
                   
                   {/* 3D Number with depth - Mobile Optimized */}
                   <div className="relative text-3xl sm:text-4xl font-black text-cyan-400 mb-2 sm:mb-3 group-hover:scale-105 sm:group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_3px_6px_rgba(6,182,212,0.4)]" style={{ textShadow: '0 1px 3px rgba(6,182,212,0.3), 0 0 15px rgba(6,182,212,0.2)' }}>
-                    6
-                    <div className="absolute inset-0 text-cyan-300/30 transform translate-x-0.5 translate-y-0.5 sm:translate-x-1 sm:translate-y-1 -z-10">4</div>
+                    7
+                    <div className="absolute inset-0 text-cyan-300/30 transform translate-x-0.5 translate-y-0.5 sm:translate-x-1 sm:translate-y-1 -z-10">7</div>
                   </div>
                   
                   <div className="uppercase text-xs sm:text-sm font-bold text-white/90 mb-1 sm:mb-2 tracking-wider sm:tracking-widest group-hover:text-cyan-300 transition-colors duration-300 text-center drop-shadow-lg">Total Projects</div>
@@ -1443,7 +1465,7 @@ const App = () => {
                   transition={{ duration: 0.5 }}
                 >
                   <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-                    {projects.map((project, index) => (
+                    {(showAllProjects ? projects : projects.slice(0, 4)).map((project, index) => (
                       <motion.div
                         key={project.id}
                         className="group relative"
@@ -1528,6 +1550,47 @@ const App = () => {
                       </motion.div>
                     ))}
                   </div>
+                  
+                  {/* View All / Show Less Button */}
+                  {projects.length > 4 && (
+                    <motion.div 
+                      className="flex justify-center mt-12"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.8 }}
+                    >
+                      <motion.button
+                        onClick={() => setShowAllProjects(!showAllProjects)}
+                        className="group relative px-8 py-4 bg-gradient-to-r from-blue-500/20 to-purple-600/20 backdrop-blur-xl border border-blue-400/30 text-white font-bold rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+                        whileHover={{ scale: 1.05, y: -2 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <span className="relative z-10 flex items-center gap-2">
+                          {showAllProjects ? (
+                            <>
+                              Show Less
+                              <svg className="w-5 h-5 transform rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                              </svg>
+                            </>
+                          ) : (
+                            <>
+                              View All Projects ({projects.length})
+                              <svg className="w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                              </svg>
+                            </>
+                          )}
+                        </span>
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-r from-blue-600/30 to-purple-600/30"
+                          initial={{ x: "100%" }}
+                          whileHover={{ x: "0%" }}
+                          transition={{ duration: 0.3 }}
+                        />
+                      </motion.button>
+                    </motion.div>
+                  )}
                 </motion.div>
               )}
             </AnimatePresence>
