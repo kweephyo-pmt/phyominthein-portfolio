@@ -95,7 +95,7 @@ const App = () => {
       technologies: ["React", "TypeScript", "AI/ML", "Real-time APIs", "Weather API", "Maps Integration", "Social Features"],
       desc: "Comprehensive AI-powered travel planning platform that revolutionizes trip organization. Features intelligent itinerary generation, real-time updates based on weather and traffic, vibrant community engagement, and seamless travel experience management.",
       url: "https://new-life-ai.vercel.app/",
-      githubUrl: "https://github.com/kweephyo-pmt/newlife-ai",
+      githubUrl: "https://github.com/kweephyo-pmt/new_life",
       category: "web",
       year: "2025",
       image: newlifeImage,
