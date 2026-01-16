@@ -32,6 +32,7 @@ import portfolioImage from './assets/preview-image.jpg';
 import weflixImage from './assets/WeFlix.png';
 import linkClubImage from './assets/LinkClub.png';
 import trackPointImage from './assets/TrackPoint Attendance Tracker.png';
+import newlifeImage from './assets/newlife_ai.png';
 
 // Certificate Images
 import ibmFullStackCert from './assets/certificates/IBM FullStack.jpeg';
@@ -69,13 +70,13 @@ const App = () => {
 
   // Contact form hook
   const { formData, loading, success, error, handleChange, submitForm } = useContactForm();
-  
+
   // Comments hook
   const { comments, loading: commentsLoading, error: commentsError, addComment, formatTimeAgo } = useComments();
-  
+
   // Notification state
   const [notification, setNotification] = useState({ show: false, message: '', type: 'success' });
-  
+
   // Show custom notification - memoized
   const showNotification = useCallback((message, type = 'success') => {
     setNotification({ show: true, message, type });
@@ -87,6 +88,26 @@ const App = () => {
   // Remove unused scroll transform for better performance
 
   const projects = [
+    {
+      id: "newlife",
+      title: "NewLife - AI-Powered Travel Companion",
+      tech: "React, TypeScript, AI Integration, Real-time APIs",
+      technologies: ["React", "TypeScript", "AI/ML", "Real-time APIs", "Weather API", "Maps Integration", "Social Features"],
+      desc: "Comprehensive AI-powered travel planning platform that revolutionizes trip organization. Features intelligent itinerary generation, real-time updates based on weather and traffic, vibrant community engagement, and seamless travel experience management.",
+      url: "https://new-life-ai.vercel.app/",
+      githubUrl: "https://github.com/kweephyo-pmt/newlife-ai",
+      category: "web",
+      year: "2025",
+      image: newlifeImage,
+      features: [
+        "AI-powered real-time itinerary planning with intelligent suggestions and personalized recommendations",
+        "Smart trip updates that automatically adjust plans based on weather conditions, traffic, and local events",
+        "Vibrant travel community platform with post creation, reactions, comments, and experience sharing",
+        "Comprehensive trip management system for both weekend getaways and international journeys",
+        "Modern TypeScript architecture with responsive design for seamless mobile and desktop experiences",
+        "Integration with multiple APIs for weather forecasting, maps, and real-time travel information"
+      ]
+    },
     {
       id: "trackpoint",
       title: "TrackPoint - Professional Attendance Tracking System",
@@ -219,95 +240,95 @@ const App = () => {
 
   // Memoized tech stack data for better performance
   const techStack = useMemo(() => [
-    { 
-      name: "HTML", 
+    {
+      name: "HTML",
       icon: htmlIcon,
       alt: "HTML",
-      color: "from-orange-500 to-red-600" 
+      color: "from-orange-500 to-red-600"
     },
-    { 
-      name: "CSS", 
+    {
+      name: "CSS",
       icon: cssIcon,
       alt: "CSS",
-      color: "from-blue-500 to-cyan-600" 
+      color: "from-blue-500 to-cyan-600"
     },
-    { 
-      name: "Tailwind CSS", 
+    {
+      name: "Tailwind CSS",
       icon: tailwindIcon,
       alt: "Tailwind CSS",
-      color: "from-teal-500 to-blue-600" 
+      color: "from-teal-500 to-blue-600"
     },
-    { 
-      name: "JavaScript", 
+    {
+      name: "JavaScript",
       icon: jsIcon,
       alt: "JavaScript",
-      color: "from-yellow-500 to-orange-600" 
+      color: "from-yellow-500 to-orange-600"
     },
-    { 
-      name: "Python", 
+    {
+      name: "Python",
       icon: pythonIcon,
       alt: "Python",
-      color: "from-blue-600 to-indigo-700" 
+      color: "from-blue-600 to-indigo-700"
     },
-    { 
-      name: "React", 
+    {
+      name: "React",
       icon: reactIcon,
       alt: "React",
-      color: "from-cyan-500 to-blue-600" 
+      color: "from-cyan-500 to-blue-600"
     },
-    { 
-      name: "Node.js", 
+    {
+      name: "Node.js",
       icon: nodeIcon,
       alt: "Node.js",
-      color: "from-green-500 to-emerald-600" 
+      color: "from-green-500 to-emerald-600"
     },
-    { 
-      name: "Vite", 
+    {
+      name: "Vite",
       icon: viteIcon,
       alt: "Vite",
-      color: "from-purple-500 to-pink-600" 
+      color: "from-purple-500 to-pink-600"
     },
-    { 
-      name: "Vue.js", 
+    {
+      name: "Vue.js",
       icon: vueIcon,
       alt: "Vue.js",
-      color: "from-green-400 to-emerald-600" 
+      color: "from-green-400 to-emerald-600"
     },
-    { 
-      name: "Flutter", 
+    {
+      name: "Flutter",
       icon: flutterIcon,
       alt: "Flutter",
-      color: "from-blue-400 to-cyan-600" 
+      color: "from-blue-400 to-cyan-600"
     },
-    { 
-      name: "Firebase", 
+    {
+      name: "Firebase",
       icon: firebaseIcon,
       alt: "Firebase",
-      color: "from-yellow-500 to-orange-600" 
+      color: "from-yellow-500 to-orange-600"
     },
-    { 
-      name: "MySQL", 
+    {
+      name: "MySQL",
       icon: mysqlIcon,
       alt: "MySQL",
-      color: "from-blue-600 to-indigo-700" 
+      color: "from-blue-600 to-indigo-700"
     },
-    { 
-      name: "Power BI", 
+    {
+      name: "Power BI",
       icon: powerbiIcon,
       alt: "Power BI",
-      color: "from-yellow-500 to-orange-600" 
+      color: "from-yellow-500 to-orange-600"
     },
-    { 
-      name: "Tableau", 
+    {
+      name: "Tableau",
       icon: tableauIcon,
       alt: "Tableau",
-      color: "from-blue-500 to-indigo-600" 
+      color: "from-blue-500 to-indigo-600"
     },
-    { 
-      name: "GitHub", 
+    {
+      name: "GitHub",
       icon: githubIcon,
       alt: "GitHub",
-      color: "from-gray-700 to-gray-900" 
+      color: "from-gray-700 to-gray-900"
     }
   ], []);
 
@@ -348,12 +369,12 @@ const App = () => {
   useEffect(() => {
     // Force scroll to top on page load
     window.scrollTo(0, 0);
-    
+
     // Prevent browser from restoring scroll position
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
-    
+
     // Clear any hash from URL on load
     if (window.location.hash) {
       window.history.replaceState({}, '', window.location.pathname);
@@ -366,10 +387,10 @@ const App = () => {
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const progress = (scrollTop / docHeight) * 100;
     setScrollProgress(progress);
-    
+
     // Simplified section detection using offsetTop instead of getBoundingClientRect
     let current = 'home';
-    
+
     for (let i = sections.length - 1; i >= 0; i--) {
       const element = document.getElementById(sections[i]);
       if (element && scrollTop >= element.offsetTop - 200) {
@@ -377,7 +398,7 @@ const App = () => {
         break;
       }
     }
-    
+
     setCurrentSection(current);
     setShowTop(scrollTop > 300);
   }, [sections]);
@@ -398,7 +419,7 @@ const App = () => {
 
   useEffect(() => {
     let ticking = false;
-    
+
     const requestTick = () => {
       if (!ticking) {
         requestAnimationFrame(() => {
@@ -410,7 +431,7 @@ const App = () => {
       handleScrollStart();
       handleScrollEnd();
     };
-    
+
     window.addEventListener('scroll', requestTick, { passive: true });
     return () => {
       window.removeEventListener('scroll', requestTick);
@@ -420,7 +441,7 @@ const App = () => {
 
 
   // Further optimized particle system with scroll-based visibility
-  
+
   useEffect(() => {
     // Reduce particles to 6 for better performance
     const newParticles = Array.from({ length: 6 }, (_, i) => ({
@@ -442,14 +463,14 @@ const App = () => {
     let charIndex = 0;
     let isDeleting = false;
     let timeoutId;
-    
+
     const type = () => {
       const currentText = texts[textIndex];
-      
+
       if (isDeleting) {
         setTypedText(currentText.slice(0, charIndex - 1));
         charIndex--;
-        
+
         if (charIndex === 0) {
           isDeleting = false;
           textIndex = (textIndex + 1) % texts.length;
@@ -460,7 +481,7 @@ const App = () => {
       } else {
         setTypedText(currentText.slice(0, charIndex + 1));
         charIndex++;
-        
+
         if (charIndex === currentText.length) {
           isDeleting = true;
           timeoutId = setTimeout(type, 2000); // Pause before deleting
@@ -469,15 +490,15 @@ const App = () => {
         timeoutId = setTimeout(type, 75); // Typing speed
       }
     };
-    
+
     // Start typing after initial delay
     timeoutId = setTimeout(type, 1000);
-    
+
     // Cursor blinking
     const cursorTimer = setInterval(() => {
       setShowCursor(prev => !prev);
     }, 530);
-    
+
     return () => {
       clearTimeout(timeoutId);
       clearInterval(cursorTimer);
@@ -504,12 +525,12 @@ const App = () => {
 
   return (
     <div className={`min-h-screen font-sans transition-all duration-700 ${dark ? 'bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 text-white' : 'bg-gradient-to-br from-white via-slate-50 to-blue-50 text-gray-800'} relative overflow-hidden`}>
-      
+
 
       {/* Scroll Progress Indicator - CSS Transform for better performance */}
       <div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 z-50 origin-left transition-transform duration-75 ease-out"
-        style={{ 
+        style={{
           transform: `scaleX(${scrollProgress / 100})`,
           willChange: 'transform'
         }}
@@ -526,11 +547,10 @@ const App = () => {
           {navigationItems.map((section) => (
             <motion.button
               key={section.id}
-              className={`relative w-12 h-12 rounded-xl mb-2 flex items-center justify-center transition-all duration-300 group ${
-                currentSection === section.id 
-                  ? 'bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-lg' 
-                  : 'hover:bg-white/10 text-gray-400 hover:text-white'
-              }`}
+              className={`relative w-12 h-12 rounded-xl mb-2 flex items-center justify-center transition-all duration-300 group ${currentSection === section.id
+                ? 'bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-lg'
+                : 'hover:bg-white/10 text-gray-400 hover:text-white'
+                }`}
               onClick={() => {
                 if (section.id === 'home') {
                   // Scroll to top for home
@@ -540,8 +560,8 @@ const App = () => {
                   // Find the target section
                   const element = document.getElementById(section.id);
                   if (element) {
-                    element.scrollIntoView({ 
-                      behavior: 'smooth', 
+                    element.scrollIntoView({
+                      behavior: 'smooth',
                       block: 'start',
                       inline: 'nearest'
                     });
@@ -553,7 +573,7 @@ const App = () => {
               whileTap={{ scale: 0.95 }}
             >
               <span className="text-lg">{section.icon}</span>
-              
+
               {/* Tooltip */}
               <motion.div
                 className="absolute right-full mr-4 bg-gray-900 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none"
@@ -568,7 +588,7 @@ const App = () => {
           ))}
         </div>
       </motion.div>
-      
+
       {/* Optimized Floating Particles Background - Hidden during scroll */}
       <div className={`absolute inset-0 overflow-hidden pointer-events-none transition-opacity duration-300 ${isScrolling ? 'opacity-0' : 'opacity-100'}`}>
         {particles.slice(0, 6).map((particle, i) => (
@@ -586,13 +606,13 @@ const App = () => {
       </div>
 
       {/* Glassmorphism Navigation */}
-      <motion.nav 
+      <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-white/80 dark:bg-gray-900/10 backdrop-blur-xl border border-gray-200/50 dark:border-white/20 rounded-full px-8 py-3 shadow-2xl"
       >
         <div className="flex items-center gap-8">
-          <motion.button 
+          <motion.button
             className="font-bold text-xl bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -615,15 +635,15 @@ const App = () => {
                   e.preventDefault();
                   const targetId = item.toLowerCase();
                   const targetElement = document.getElementById(targetId);
-                  
+
                   if (targetElement) {
                     // Smooth scroll to target section
-                    targetElement.scrollIntoView({ 
+                    targetElement.scrollIntoView({
                       behavior: 'smooth',
                       block: 'start',
                       inline: 'nearest'
                     });
-                    
+
                     // Update URL with hash
                     window.history.pushState({}, '', `#${targetId}`);
                   }
@@ -654,7 +674,7 @@ const App = () => {
         {/* Animated Background Elements - Reduced during scroll */}
         <div
           className={`absolute inset-0 transition-opacity duration-300 ${isScrolling ? 'opacity-30' : 'opacity-100'}`}
-          style={{ 
+          style={{
             transform: `translateY(${scrollProgress * 0.5}px)`,
             willChange: 'transform'
           }}
@@ -682,9 +702,9 @@ const App = () => {
                     PHYO
                   </span>
                   <br />
-                  <motion.span 
+                  <motion.span
                     className="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent"
-                    animate={{ 
+                    animate={{
                       backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                     }}
                     transition={{ duration: 4, repeat: Infinity }}
@@ -692,16 +712,16 @@ const App = () => {
                     MIN THEIN{" "}
                   </motion.span>
                 </h1>
-                
+
                 {/* Reflection Effect */}
                 <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-                  <h1 className="text-6xl lg:text-8xl font-black mb-4 relative transform scale-y-[-1] translate-y-full opacity-30 blur-[1px] italic" 
-                      style={{
-                        background: 'linear-gradient(to bottom, transparent 0%, rgba(6, 182, 212, 0.3) 50%, transparent 100%)',
-                        WebkitBackgroundClip: 'text',
-                        backgroundClip: 'text',
-                        filter: 'blur(1px) brightness(0.7)'
-                      }}>
+                  <h1 className="text-6xl lg:text-8xl font-black mb-4 relative transform scale-y-[-1] translate-y-full opacity-30 blur-[1px] italic"
+                    style={{
+                      background: 'linear-gradient(to bottom, transparent 0%, rgba(6, 182, 212, 0.3) 50%, transparent 100%)',
+                      WebkitBackgroundClip: 'text',
+                      backgroundClip: 'text',
+                      filter: 'blur(1px) brightness(0.7)'
+                    }}>
                     <span className="bg-gradient-to-r from-cyan-400/50 via-blue-500/50 to-purple-600/50 bg-clip-text text-transparent">
                       PHYO
                     </span>
@@ -712,13 +732,13 @@ const App = () => {
                   </h1>
                 </div>
               </div>
-              
+
 
             </motion.div>
 
             {/* Static Professional Title */}
             <div className="h-20 flex items-center">
-              <motion.div 
+              <motion.div
                 className="text-2xl lg:text-4xl font-bold"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -732,7 +752,7 @@ const App = () => {
             </div>
 
             {/* Professional Description */}
-            <motion.p 
+            <motion.p
               className="text-xl lg:text-2xl leading-relaxed text-gray-600 dark:text-gray-300 max-w-2xl"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -747,7 +767,7 @@ const App = () => {
             </motion.p>
 
             {/* Interactive CTA Buttons */}
-            <motion.div 
+            <motion.div
               className="flex flex-wrap gap-6 pt-4"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
@@ -780,7 +800,7 @@ const App = () => {
               </motion.a>
 
               {/* Social Media Buttons */}
-              <motion.div 
+              <motion.div
                 className="flex gap-4 mt-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -796,7 +816,7 @@ const App = () => {
                   whileTap={{ scale: 0.95 }}
                 >
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                    <path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
                   </svg>
                 </motion.a>
 
@@ -810,7 +830,7 @@ const App = () => {
                   whileTap={{ scale: 0.95 }}
                 >
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                   </svg>
                 </motion.a>
 
@@ -824,7 +844,7 @@ const App = () => {
                   whileTap={{ scale: 0.95 }}
                 >
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                   </svg>
                 </motion.a>
               </motion.div>
@@ -847,13 +867,13 @@ const App = () => {
                 alt="Software Engineering Animation"
                 className="w-96 h-96 object-cover rounded-2xl"
                 initial={{ opacity: 0, scale: 0.8, rotateY: 15 }}
-                animate={{ 
-                  opacity: 1, 
-                  scale: 1, 
+                animate={{
+                  opacity: 1,
+                  scale: 1,
                   rotateY: 0,
                   y: [0, -10, 0]
                 }}
-                transition={{ 
+                transition={{
                   opacity: { duration: 1.2, ease: "easeOut" },
                   scale: { duration: 1.2, ease: "easeOut" },
                   rotateY: { duration: 1.2, ease: "easeOut" },
@@ -868,7 +888,7 @@ const App = () => {
                 whileTap={{
                   scale: 0.98
                 }}
-                style={{ 
+                style={{
                   imageRendering: 'auto',
                   transformStyle: "preserve-3d"
                 }}
@@ -897,11 +917,11 @@ const App = () => {
       <section id="about" className="py-32 px-6 relative overflow-hidden">
         {/* Enhanced Animated Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/30 to-cyan-900/20" />
-        
+
         {/* Multiple Floating Orbs */}
         <motion.div
           className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-cyan-400/15 to-blue-600/15 rounded-full blur-3xl"
-          animate={{ 
+          animate={{
             scale: [1, 1.3, 1],
             rotate: [0, 180, 360],
             x: [0, 50, 0],
@@ -911,7 +931,7 @@ const App = () => {
         />
         <motion.div
           className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-purple-400/10 to-pink-600/10 rounded-full blur-2xl"
-          animate={{ 
+          animate={{
             scale: [1.2, 1, 1.2],
             rotate: [360, 180, 0],
             x: [0, -40, 0],
@@ -919,7 +939,7 @@ const App = () => {
           }}
           transition={{ duration: 40, repeat: Infinity }}
         />
-        
+
         {/* Animated Grid Pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
@@ -930,7 +950,7 @@ const App = () => {
             backgroundSize: '50px 50px'
           }} />
         </div>
-        
+
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="animate-fade-in-up">
             {/* Enhanced Holographic Title */}
@@ -949,19 +969,19 @@ const App = () => {
                 {/* Enhanced Glow Effect */}
                 <div className="absolute -inset-2 bg-gradient-to-r from-cyan-400/40 to-blue-500/40 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700" />
                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400/20 to-blue-500/20 rounded-3xl blur-lg opacity-60 group-hover:opacity-100 transition-all duration-500" />
-                
+
                 {/* 3D Card Body - Mobile Optimized */}
                 <div className="relative bg-gradient-to-br from-white/15 via-white/10 to-white/5 backdrop-blur-xl border border-white/30 rounded-2xl sm:rounded-3xl px-6 sm:px-8 py-8 sm:py-10 h-[160px] sm:h-[180px] flex flex-col items-center justify-center shadow-[0_15px_35px_rgba(0,0,0,0.2),0_0_0_1px_rgba(255,255,255,0.1),inset_0_1px_0_rgba(255,255,255,0.2)] group-hover:shadow-[0_25px_60px_rgba(6,182,212,0.25),0_0_0_1px_rgba(6,182,212,0.3),inset_0_1px_0_rgba(255,255,255,0.3)] transition-all duration-700 transform-gpu">
-                  
+
                   {/* 3D Number with depth - Mobile Optimized */}
                   <div className="relative text-3xl sm:text-4xl font-black text-cyan-400 mb-2 sm:mb-3 group-hover:scale-105 sm:group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_3px_6px_rgba(6,182,212,0.4)]" style={{ textShadow: '0 1px 3px rgba(6,182,212,0.3), 0 0 15px rgba(6,182,212,0.2)' }}>
                     7
                     <div className="absolute inset-0 text-cyan-300/30 transform translate-x-0.5 translate-y-0.5 sm:translate-x-1 sm:translate-y-1 -z-10">7</div>
                   </div>
-                  
+
                   <div className="uppercase text-xs sm:text-sm font-bold text-white/90 mb-1 sm:mb-2 tracking-wider sm:tracking-widest group-hover:text-cyan-300 transition-colors duration-300 text-center drop-shadow-lg">Total Projects</div>
                   <div className="text-xs sm:text-sm text-white/60 text-center group-hover:text-white/80 transition-colors duration-300 line-clamp-2 drop-shadow-md px-2 sm:px-0">Innovative web solutions crafted</div>
-                  
+
                   {/* 3D Icon with depth - Mobile Optimized */}
                   <div className="absolute top-3 sm:top-4 right-3 sm:right-4 w-6 sm:w-8 h-6 sm:h-8 opacity-40 group-hover:opacity-80 transition-all duration-300 transform group-hover:scale-105 sm:group-hover:scale-110 drop-shadow-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full text-cyan-400 filter drop-shadow-[0_1px_3px_rgba(6,182,212,0.3)]">
@@ -969,31 +989,31 @@ const App = () => {
                       <polyline points="8 6 2 12 8 18" />
                     </svg>
                   </div>
-                  
+
                   {/* 3D Edge highlight */}
                   <div className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-50 pointer-events-none" />
                 </div>
               </div>
-              
+
               <div className="flex-1 min-w-[280px] sm:min-w-[240px] max-w-[320px] sm:max-w-[280px] mx-auto sm:mx-0 relative group transform-gpu animate-fade-in-up"
                 style={{ animationDelay: '0.2s', transformStyle: 'preserve-3d' }}
               >
                 {/* Enhanced Glow Effect */}
                 <div className="absolute -inset-2 bg-gradient-to-r from-purple-400/40 to-pink-500/40 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700" />
                 <div className="absolute -inset-1 bg-gradient-to-r from-purple-400/20 to-pink-500/20 rounded-3xl blur-lg opacity-60 group-hover:opacity-100 transition-all duration-500" />
-                
+
                 {/* 3D Card Body - Mobile Optimized */}
                 <div className="relative bg-gradient-to-br from-white/15 via-white/10 to-white/5 backdrop-blur-xl border border-white/30 rounded-2xl sm:rounded-3xl px-6 sm:px-8 py-8 sm:py-10 h-[160px] sm:h-[180px] flex flex-col items-center justify-center shadow-[0_15px_35px_rgba(0,0,0,0.2),0_0_0_1px_rgba(255,255,255,0.1),inset_0_1px_0_rgba(255,255,255,0.2)] group-hover:shadow-[0_25px_60px_rgba(168,85,247,0.25),0_0_0_1px_rgba(168,85,247,0.3),inset_0_1px_0_rgba(255,255,255,0.3)] transition-all duration-700 transform-gpu">
-                  
+
                   {/* 3D Number with depth - Mobile Optimized */}
                   <div className="relative text-3xl sm:text-4xl font-black text-purple-400 mb-2 sm:mb-3 group-hover:scale-105 sm:group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_3px_6px_rgba(168,85,247,0.4)]" style={{ textShadow: '0 1px 3px rgba(168,85,247,0.3), 0 0 15px rgba(168,85,247,0.2)' }}>
                     3
                     <div className="absolute inset-0 text-purple-300/30 transform translate-x-0.5 translate-y-0.5 sm:translate-x-1 sm:translate-y-1 -z-10">3</div>
                   </div>
-                  
+
                   <div className="uppercase text-xs sm:text-sm font-bold text-white/90 mb-1 sm:mb-2 tracking-wider sm:tracking-widest group-hover:text-purple-300 transition-colors duration-300 text-center drop-shadow-lg">Certificates</div>
                   <div className="text-xs sm:text-sm text-white/60 text-center group-hover:text-white/80 transition-colors duration-300 line-clamp-2 drop-shadow-md px-2 sm:px-0">Professional skills validated</div>
-                  
+
                   {/* 3D Icon with depth - Mobile Optimized */}
                   <div className="absolute top-3 sm:top-4 right-3 sm:right-4 w-6 sm:w-8 h-6 sm:h-8 opacity-40 group-hover:opacity-80 transition-all duration-300 transform group-hover:scale-105 sm:group-hover:scale-110 drop-shadow-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full text-purple-400 filter drop-shadow-[0_1px_3px_rgba(168,85,247,0.3)]">
@@ -1001,39 +1021,39 @@ const App = () => {
                       <circle cx="12" cy="8" r="6"></circle>
                     </svg>
                   </div>
-                  
+
                   {/* 3D Edge highlight */}
                   <div className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-50 pointer-events-none" />
                 </div>
               </div>
-              
+
               <div className="flex-1 min-w-[280px] sm:min-w-[240px] max-w-[320px] sm:max-w-[280px] mx-auto sm:mx-0 relative group transform-gpu animate-fade-in-up"
                 style={{ animationDelay: '0.3s', transformStyle: 'preserve-3d' }}
               >
                 {/* Enhanced Glow Effect */}
                 <div className="absolute -inset-2 bg-gradient-to-r from-blue-400/40 to-cyan-500/40 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700" />
                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-400/20 to-cyan-500/20 rounded-3xl blur-lg opacity-60 group-hover:opacity-100 transition-all duration-500" />
-                
+
                 {/* 3D Card Body - Mobile Optimized */}
                 <div className="relative bg-gradient-to-br from-white/15 via-white/10 to-white/5 backdrop-blur-xl border border-white/30 rounded-2xl sm:rounded-3xl px-6 sm:px-8 py-8 sm:py-10 h-[160px] sm:h-[180px] flex flex-col items-center justify-center shadow-[0_15px_35px_rgba(0,0,0,0.2),0_0_0_1px_rgba(255,255,255,0.1),inset_0_1px_0_rgba(255,255,255,0.2)] group-hover:shadow-[0_25px_60px_rgba(59,130,246,0.25),0_0_0_1px_rgba(59,130,246,0.3),inset_0_1px_0_rgba(255,255,255,0.3)] transition-all duration-700 transform-gpu">
-                  
+
                   {/* 3D Number with depth - Mobile Optimized */}
                   <div className="relative text-3xl sm:text-4xl font-black text-blue-400 mb-2 sm:mb-3 group-hover:scale-105 sm:group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_3px_6px_rgba(59,130,246,0.4)]" style={{ textShadow: '0 1px 3px rgba(59,130,246,0.3), 0 0 15px rgba(59,130,246,0.2)' }}>
                     5
                     <div className="absolute inset-0 text-blue-300/30 transform translate-x-0.5 translate-y-0.5 sm:translate-x-1 sm:translate-y-1 -z-10">5</div>
                   </div>
-                  
+
                   <div className="uppercase text-xs sm:text-sm font-bold text-white/90 mb-1 sm:mb-2 tracking-wider sm:tracking-widest group-hover:text-blue-300 transition-colors duration-300 text-center drop-shadow-lg">Years of Experience</div>
                   <div className="text-xs sm:text-sm text-white/60 text-center group-hover:text-white/80 transition-colors duration-300 line-clamp-2 drop-shadow-md px-2 sm:px-0">Continuous learning journey</div>
-                  
+
                   {/* 3D Icon with depth - Mobile Optimized */}
                   <div className="absolute top-3 sm:top-4 right-3 sm:right-4 w-6 sm:w-8 h-6 sm:h-8 opacity-40 group-hover:opacity-80 transition-all duration-300 transform group-hover:scale-105 sm:group-hover:scale-110 drop-shadow-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full text-blue-400 filter drop-shadow-[0_1px_3px_rgba(59,130,246,0.3)]">
-                      <rect width="20" height="14" x="2" y="7" rx="2" ry="2"/>
-                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                      <rect width="20" height="14" x="2" y="7" rx="2" ry="2" />
+                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
                     </svg>
                   </div>
-                  
+
                   {/* 3D Edge highlight */}
                   <div className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-50 pointer-events-none" />
                 </div>
@@ -1064,8 +1084,8 @@ const App = () => {
                     whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.4, duration: 1, ease: "easeOut" }}
-                    whileHover={{ 
-                      scale: 1.03, 
+                    whileHover={{
+                      scale: 1.03,
                       z: 30,
                       rotateY: 2,
                       rotateX: 2
@@ -1074,30 +1094,30 @@ const App = () => {
                   >
                     {/* Enhanced Glow Effect */}
                     <div className={`absolute inset-0 bg-gradient-to-r ${item.gradient} rounded-3xl blur-xl group-hover:blur-2xl opacity-60 group-hover:opacity-80 transition-all duration-500`} />
-                    
+
                     {/* Main Card with Better Design */}
                     <div className="relative bg-white/8 backdrop-blur-2xl border border-white/15 rounded-3xl p-8 group-hover:bg-white/12 transition-all duration-500 shadow-2xl">
                       {/* Card Header */}
-                      <motion.h3 
+                      <motion.h3
                         className={`text-2xl font-bold mb-4 bg-gradient-to-r ${item.borderGradient} bg-clip-text text-transparent`}
                         whileHover={{ scale: 1.05 }}
                       >
                         {item.title}
                       </motion.h3>
-                      
+
                       {/* Enhanced Text */}
                       <p className="text-lg leading-relaxed text-gray-200 group-hover:text-white transition-colors duration-300">
                         {item.text}
                       </p>
-                      
+
                       {/* Decorative Corner Elements */}
                       <div className="absolute top-4 right-4 w-2 h-2 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
                       <div className="absolute bottom-4 left-4 w-1 h-1 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full opacity-40 group-hover:opacity-80 transition-opacity duration-300" />
                     </div>
                   </motion.div>
                 ))}
-                
-  
+
+
               </div>
 
               {/* Right Side - Profile Photo */}
@@ -1108,7 +1128,7 @@ const App = () => {
                   whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 1.2, ease: "easeOut" }}
-                  whileHover={{ 
+                  whileHover={{
                     scale: 1.05,
                     rotateY: -5,
                     rotateX: 5,
@@ -1119,26 +1139,26 @@ const App = () => {
                   {/* Animated Glow Ring */}
                   <motion.div
                     className="absolute -inset-4 bg-gradient-to-r from-cyan-400/30 via-blue-500/30 to-purple-600/30 rounded-full blur-2xl"
-                    animate={{ 
+                    animate={{
                       rotate: [0, 360],
                       scale: [1, 1.1, 1]
                     }}
-                    transition={{ 
+                    transition={{
                       rotate: { duration: 20, repeat: Infinity, ease: "linear" },
                       scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
                     }}
                   />
-                  
+
                   {/* Profile Photo Container */}
                   <motion.div
                     className="relative w-80 h-80 lg:w-96 lg:h-96 rounded-3xl overflow-hidden bg-gradient-to-br from-cyan-400/20 to-purple-600/20 backdrop-blur-xl border border-white/20 shadow-2xl"
-                    animate={{ 
+                    animate={{
                       y: [0, -10, 0]
                     }}
-                    transition={{ 
-                      duration: 6, 
-                      repeat: Infinity, 
-                      ease: "easeInOut" 
+                    transition={{
+                      duration: 6,
+                      repeat: Infinity,
+                      ease: "easeInOut"
                     }}
                   >
                     {/* Profile Image */}
@@ -1152,14 +1172,14 @@ const App = () => {
                         transition: { duration: 0.4 }
                       }}
                     />
-                    
+
                     {/* Overlay Gradient */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none" />
-                    
+
                     {/* Decorative Corner Elements */}
                     <div className="absolute top-4 right-4 w-3 h-3 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
                     <div className="absolute bottom-4 left-4 w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
-                    
+
                     {/* Animated Border */}
                     <motion.div
                       className="absolute inset-0 rounded-3xl border-2 border-cyan-400/30 opacity-0 group-hover:opacity-70 transition-opacity duration-500 pointer-events-none"
@@ -1186,7 +1206,7 @@ const App = () => {
       <section id="projects" className="py-20 px-6 relative overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900/50 via-purple-900/30 to-blue-900/50" />
-        
+
         <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -1196,7 +1216,7 @@ const App = () => {
           >
             {/* Title */}
             <div className="text-center mb-12">
-              <motion.h2 
+              <motion.h2
                 className="text-4xl lg:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-600 bg-clip-text text-transparent"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -1205,7 +1225,7 @@ const App = () => {
               >
                 Portfolio Showcase
               </motion.h2>
-              <motion.p 
+              <motion.p
                 className="text-xl text-gray-300 max-w-3xl mx-auto"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -1217,7 +1237,7 @@ const App = () => {
             </div>
 
             {/* Tab Navigation */}
-            <motion.div 
+            <motion.div
               className="flex justify-center mb-12 px-4"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -1228,9 +1248,9 @@ const App = () => {
                 <div className="flex gap-2 sm:gap-3 min-w-max sm:min-w-0 justify-center">
                   {
                     [
-                      { 
-                        key: "projects", 
-                        label: "Projects", 
+                      {
+                        key: "projects",
+                        label: "Projects",
                         icon: (
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
                             <polyline points="16 18 22 12 16 6"></polyline>
@@ -1238,9 +1258,9 @@ const App = () => {
                           </svg>
                         )
                       },
-                      { 
-                        key: "certificates", 
-                        label: "Certificates", 
+                      {
+                        key: "certificates",
+                        label: "Certificates",
                         icon: (
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
                             <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path>
@@ -1248,9 +1268,9 @@ const App = () => {
                           </svg>
                         )
                       },
-                      { 
-                        key: "techstack", 
-                        label: "Tech Stack", 
+                      {
+                        key: "techstack",
+                        label: "Tech Stack",
                         icon: (
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
                             <path d="M2.97 12.92A2 2 0 0 0 2 14.63v3.24a2 2 0 0 0 .97 1.71l3 1.8a2 2 0 0 0 2.06 0L12 19v-5.5l-5-3-4.03 2.42Z"></path>
@@ -1272,11 +1292,10 @@ const App = () => {
                       <motion.button
                         key={tab.key}
                         onClick={() => setActiveTab(tab.key)}
-                        className={`relative px-4 sm:px-8 lg:px-12 py-3 sm:py-4 lg:py-6 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-base lg:text-lg transition-all duration-300 ${
-                          activeTab === tab.key
-                            ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-2xl'
-                            : 'text-gray-300 hover:text-white hover:bg-white/10'
-                        }`}
+                        className={`relative px-4 sm:px-8 lg:px-12 py-3 sm:py-4 lg:py-6 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-base lg:text-lg transition-all duration-300 ${activeTab === tab.key
+                          ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-2xl'
+                          : 'text-gray-300 hover:text-white hover:bg-white/10'
+                          }`}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
@@ -1284,15 +1303,15 @@ const App = () => {
                           <span className="text-lg sm:text-xl lg:text-2xl">{tab.icon}</span>
                           <span className="hidden sm:inline">{tab.label}</span>
                         </span>
-                      {activeTab === tab.key && (
-                        <motion.div
-                          className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-600/20 rounded-xl blur-xl"
-                          layoutId="activeTab"
-                          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                        />
-                      )}
-                    </motion.button>
-                  ))}
+                        {activeTab === tab.key && (
+                          <motion.div
+                            className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-600/20 rounded-xl blur-xl"
+                            layoutId="activeTab"
+                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                          />
+                        )}
+                      </motion.button>
+                    ))}
                 </div>
               </div>
             </motion.div>
@@ -1314,21 +1333,21 @@ const App = () => {
                         className="group relative"
                         initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
                         animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                        transition={{ 
-                          duration: 0.6, 
+                        transition={{
+                          duration: 0.6,
                           delay: index * 0.1,
                           type: "spring",
                           stiffness: 100
                         }}
-                        whileHover={{ 
-                          scale: 1.05, 
+                        whileHover={{
+                          scale: 1.05,
                           rotateY: 5,
-                          z: 50 
+                          z: 50
                         }}
                       >
                         {/* Tech Card Glow */}
                         <div className={`absolute inset-0 bg-gradient-to-r ${tech.color} rounded-3xl blur-xl opacity-0 group-hover:opacity-40 transition-all duration-500`} />
-                        
+
                         {/* Tech Card */}
                         <div className="relative bg-white/80 dark:bg-gray-800/40 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 hover:border-blue-400/50 transition-all duration-300 h-full flex flex-col justify-center hover:bg-gray-100/80 dark:hover:bg-gray-700/50">
                           {/* Tech Icon */}
@@ -1337,19 +1356,19 @@ const App = () => {
                             whileHover={{ scale: 1.1, rotate: 5 }}
                             transition={{ type: "spring", stiffness: 300 }}
                           >
-                            <img 
-                              src={tech.icon} 
-                              alt={tech.alt} 
+                            <img
+                              src={tech.icon}
+                              alt={tech.alt}
                               className="w-16 h-16 rounded-lg"
                               loading="lazy"
                             />
                           </motion.div>
-                          
+
                           {/* Tech Name */}
                           <h3 className="text-xs sm:text-sm lg:text-base font-bold text-gray-200 group-hover:text-white transition-colors duration-300">
                             {tech.name}
                           </h3>
-                          
+
                           {/* Floating Particles */}
                           {[...Array(2)].map((_, i) => (
                             <motion.div
@@ -1398,16 +1417,16 @@ const App = () => {
                       >
                         {/* Certificate Glow */}
                         <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500" />
-                        
+
                         {/* Certificate Card */}
                         <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden hover:border-yellow-400/50 transition-all duration-300 h-full flex flex-col">
                           {/* Certificate Image */}
-                          <div 
+                          <div
                             className="h-64 bg-gradient-to-br from-yellow-600/20 to-orange-600/20 overflow-hidden relative cursor-pointer"
                             onClick={() => setSelectedCertificate(cert)}
                           >
-                            <img 
-                              src={cert.image} 
+                            <img
+                              src={cert.image}
                               alt={cert.name}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                             />
@@ -1418,7 +1437,7 @@ const App = () => {
                               </div>
                             </div>
                           </div>
-                          
+
                           {/* Certificate Content */}
                           <div className="p-6 flex-1 flex flex-col justify-between">
                             <div className="text-center">
@@ -1431,7 +1450,7 @@ const App = () => {
                                 {cert.year}
                               </span>
                             </div>
-                            
+
                             {/* Verify Credential Button */}
                             <div className="text-center mt-4">
                               <motion.a
@@ -1476,21 +1495,20 @@ const App = () => {
                       >
                         {/* Project Glow */}
                         <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500" />
-                        
+
                         {/* Project Card */}
                         <div className="relative bg-white/80 dark:bg-gray-800/40 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 rounded-3xl overflow-hidden hover:border-blue-400/50 transition-all duration-300 h-full flex flex-col">
                           {/* Project Preview */}
                           <div className="h-40 xs:h-48 sm:h-56 md:h-64 lg:h-72 bg-gradient-to-br from-blue-600/20 to-purple-600/20 overflow-hidden relative">
                             {project.image ? (
-                              <img 
-                                src={project.image} 
+                              <img
+                                src={project.image}
                                 alt={project.title}
-                                className={`w-full h-full group-hover:scale-105 transition-transform duration-500 ${
-                                  project.id === 'reclaimify' ? 'bg-gradient-to-br from-blue-50 to-gray-100 p-1 xs:p-2 sm:p-3 md:p-4 object-contain' : 
-                                  project.id === 'linkclub' ? 'object-cover object-top bg-white' : 
-                                  project.id === 'trackpoint' ? 'object-cover object-top' :
-                                  'object-cover object-top'
-                                }`}
+                                className={`w-full h-full group-hover:scale-105 transition-transform duration-500 ${project.id === 'reclaimify' ? 'bg-gradient-to-br from-blue-50 to-gray-100 p-1 xs:p-2 sm:p-3 md:p-4 object-contain' :
+                                  project.id === 'linkclub' ? 'object-cover object-top bg-white' :
+                                    project.id === 'trackpoint' ? 'object-cover object-top' :
+                                      'object-cover object-top'
+                                  }`}
                               />
                             ) : (
                               <div className="w-full h-full flex items-center justify-center">
@@ -1500,7 +1518,7 @@ const App = () => {
                               </div>
                             )}
                           </div>
-                          
+
                           {/* Project Content */}
                           <div className="p-3 xs:p-4 sm:p-5 md:p-6 flex-1 flex flex-col">
                             <div className="flex items-start justify-between mb-3 sm:mb-4 gap-2">
@@ -1509,11 +1527,11 @@ const App = () => {
                                 {project.year}
                               </span>
                             </div>
-                            
+
                             <p className="text-gray-600 dark:text-gray-300 text-xs xs:text-sm mb-3 sm:mb-4 leading-relaxed line-clamp-3 sm:line-clamp-none">
                               {project.desc}
                             </p>
-                            
+
                             {/* Tech Stack */}
                             <div className="flex flex-wrap gap-1 xs:gap-2 mb-3 sm:mb-4">
                               {project.tech.split(', ').slice(0, window.innerWidth < 640 ? 2 : 3).map((tech, idx) => (
@@ -1525,7 +1543,7 @@ const App = () => {
                                 </span>
                               ))}
                             </div>
-                            
+
                             {/* Action Buttons */}
                             <div className="flex gap-2 xs:gap-3 mt-auto">
                               <motion.a
@@ -1552,10 +1570,10 @@ const App = () => {
                       </motion.div>
                     ))}
                   </div>
-                  
+
                   {/* View All / Show Less Button */}
                   {projects.length > 4 && (
-                    <motion.div 
+                    <motion.div
                       className="flex justify-center mt-12"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -1692,7 +1710,7 @@ const App = () => {
                       whileTap={{ scale: 0.95 }}
                     >
                       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                       </svg>
                       GitHub
                     </motion.a>
@@ -1726,10 +1744,9 @@ const App = () => {
                     <img
                       src={selectedProject.image}
                       alt={selectedProject.title}
-                      className={`w-full object-contain bg-white/5 ${
-                        selectedProject.id === 'reclaimify' ? 'bg-gradient-to-br from-blue-50 to-gray-100 p-4' : 'p-2'
-                      }`}
-                      style={{ 
+                      className={`w-full object-contain bg-white/5 ${selectedProject.id === 'reclaimify' ? 'bg-gradient-to-br from-blue-50 to-gray-100 p-4' : 'p-2'
+                        }`}
+                      style={{
                         minHeight: '300px',
                         maxHeight: '400px',
                         aspectRatio: 'auto'
@@ -1780,14 +1797,14 @@ const App = () => {
 
         <div className="relative z-10 max-w-7xl mx-auto">
           {/* Header */}
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <motion.h2 
+            <motion.h2
               className="text-4xl lg:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-600 bg-clip-text text-transparent"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1796,7 +1813,7 @@ const App = () => {
             >
               Get In Touch
             </motion.h2>
-            <motion.p 
+            <motion.p
               className="text-xl text-gray-300 max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1823,7 +1840,7 @@ const App = () => {
                   <h3 className="text-2xl font-bold text-white mb-2">Contact Me</h3>
                   <p className="text-gray-400">Feel free to contact me. I'm excited to hear from you!</p>
                 </div>
-                <form 
+                <form
                   className="space-y-6"
                   onSubmit={submitForm}
                 >
@@ -1837,7 +1854,7 @@ const App = () => {
                       ✅ Message sent successfully! I'll get back to you soon.
                     </motion.div>
                   )}
-                  
+
                   {/* Error Message */}
                   {error && (
                     <motion.div
@@ -1851,7 +1868,7 @@ const App = () => {
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
                       <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                       </svg>
                     </div>
                     <input
@@ -1948,7 +1965,7 @@ const App = () => {
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
                       <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                       </svg>
                     </div>
                     <div>
@@ -1972,7 +1989,7 @@ const App = () => {
                     <div className="flex flex-col items-start gap-3">
                       <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
                         <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                         </svg>
                       </div>
                       <div>
@@ -1994,7 +2011,7 @@ const App = () => {
                     <div className="flex flex-col items-start gap-3">
                       <div className="w-10 h-10 bg-gray-600 rounded-lg flex items-center justify-center">
                         <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                         </svg>
                       </div>
                       <div>
@@ -2058,31 +2075,31 @@ const App = () => {
               <div className="flex items-center gap-3 mb-8">
                 <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center">
                   <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M21.99 4c0-1.1-.89-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM18 14H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+                    <path d="M21.99 4c0-1.1-.89-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM18 14H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" />
                   </svg>
                 </div>
                 <h3 className="text-2xl font-bold text-white">Comments ({comments.length})</h3>
               </div>
-              
+
               {/* Comment Form */}
-              <form 
+              <form
                 className="mb-8"
                 onSubmit={async (e) => {
                   e.preventDefault();
                   const form = e.target;
                   const formData = new FormData(form);
-                  
+
                   // Handle photo upload
                   const photoFile = formData.get('photo');
                   let photoData = null;
-                  
+
                   if (photoFile && photoFile.size > 0) {
                     // Check file size (5MB limit)
                     if (photoFile.size > 5 * 1024 * 1024) {
                       showNotification('Photo size must be less than 5MB', 'error');
                       return;
                     }
-                    
+
                     // Convert to base64
                     try {
                       photoData = await new Promise((resolve, reject) => {
@@ -2096,20 +2113,20 @@ const App = () => {
                       return;
                     }
                   }
-                  
+
                   const commentData = {
                     name: formData.get('name'),
                     message: formData.get('message'),
                     photo: photoData
                   };
-                  
+
                   if (!commentData.name || !commentData.message) {
                     showNotification('Please fill in both name and message fields.', 'error');
                     return;
                   }
-                  
+
                   const result = await addComment(commentData);
-                  
+
                   if (result.success) {
                     showNotification('Comment posted successfully!', 'success');
                     form.reset();
@@ -2157,10 +2174,10 @@ const App = () => {
                           <p className="mb-2 text-sm text-purple-400 font-semibold">Choose Profile Photo</p>
                           <p className="text-xs text-gray-400">Max file size: 5MB (JPG, PNG, GIF)</p>
                         </div>
-                        <input 
-                          type="file" 
-                          name="photo" 
-                          accept="image/*" 
+                        <input
+                          type="file"
+                          name="photo"
+                          accept="image/*"
                           className="hidden"
                           onChange={(e) => {
                             const file = e.target.files[0];
@@ -2197,8 +2214,8 @@ const App = () => {
                 </div>
               </form>
 
-             
-              
+
+
               {/* Recent Comments */}
               <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2 comments-scroll">
                 {commentsLoading ? (
@@ -2220,21 +2237,19 @@ const App = () => {
                       key={comment.id}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className={`rounded-xl p-4 border ${
-                        comment.isPinned 
-                          ? 'bg-gradient-to-r from-purple-600/20 to-indigo-600/20 border-purple-500/50' 
-                          : 'bg-gray-700/30 border-gray-600/30'
-                      }`}
+                      className={`rounded-xl p-4 border ${comment.isPinned
+                        ? 'bg-gradient-to-r from-purple-600/20 to-indigo-600/20 border-purple-500/50'
+                        : 'bg-gray-700/30 border-gray-600/30'
+                        }`}
                     >
                       <div className="flex items-start gap-3">
-                        <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold overflow-hidden ${
-                          comment.isPinned 
-                            ? 'bg-gradient-to-r from-yellow-500 to-orange-500' 
-                            : 'bg-gradient-to-r from-purple-500 to-indigo-500'
-                        }`}>
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold overflow-hidden ${comment.isPinned
+                          ? 'bg-gradient-to-r from-yellow-500 to-orange-500'
+                          : 'bg-gradient-to-r from-purple-500 to-indigo-500'
+                          }`}>
                           {comment.photo ? (
-                            <img 
-                              src={comment.photo} 
+                            <img
+                              src={comment.photo}
                               alt={`${comment.name}'s avatar`}
                               className="w-full h-full object-cover"
                             />
@@ -2301,10 +2316,10 @@ const App = () => {
                   PHYO MIN THEIN
                 </h3>
                 <p className="text-gray-300 leading-relaxed mb-6">
-                  Full-Stack Developer crafting the future with innovative web solutions. 
+                  Full-Stack Developer crafting the future with innovative web solutions.
                   <span className="text-blue-600 dark:text-cyan-400 font-semibold"> Ready to build tomorrow's technology today.</span>
                 </p>
-                
+
                 {/* Tech Stack Badges */}
                 <div className="flex flex-wrap gap-2 justify-center lg:justify-start mb-6">
                   {['React', 'Node.js', 'Python', 'TypeScript'].map((tech) => (
@@ -2324,17 +2339,17 @@ const App = () => {
                     download="Phyo_Min_Thein_CV.jpg"
                     className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 group"
                   >
-                    <svg 
-                      className="w-5 h-5 mr-2" 
-                      fill="none" 
-                      stroke="currentColor" 
+                    <svg
+                      className="w-5 h-5 mr-2"
+                      fill="none"
+                      stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
-                      <path 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round" 
-                        strokeWidth={2} 
-                        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" 
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                       />
                     </svg>
                     Download CV
@@ -2361,58 +2376,58 @@ const App = () => {
               {/* Connect Section */}
               <div className="text-center lg:text-right">
                 <h4 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">Connect With Me</h4>
-                
+
                 {/* Social Links */}
                 <div className="flex gap-4 justify-center lg:justify-end mb-6">
                   {
                     [
-                      { 
+                      {
                         icon: (
                           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                           </svg>
-                        ), 
-                        href: 'mailto:phyominthein.leo@gmail.com', 
-                        label: 'Email' 
+                        ),
+                        href: 'mailto:phyominthein.leo@gmail.com',
+                        label: 'Email'
                       },
-                      { 
+                      {
                         icon: (
                           <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                      </svg>
-                      ), 
-                      href: 'https://github.com/kweephyo-pmt', 
-                      label: 'GitHub' 
-                    },
-  
-                    { 
-                      icon: (
-                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                        </svg>
-                      ), 
-                      href: 'https://www.linkedin.com/in/phyo-min-thein-605168361/', 
-                      label: 'LinkedIn' 
-                    },
-              ].map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target={social.href.startsWith('http') ? '_blank' : undefined}
-                  rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="group relative w-12 h-12 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 backdrop-blur-sm border border-white/10 rounded-xl flex items-center justify-center text-cyan-400 hover:text-white hover:border-cyan-400/50 transition-all duration-300"
-                >
-                  <span className="transition-transform">
-                    {social.icon}
-                  </span>
-                  
-                  {/* Tooltip */}
-                  <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                    {social.label}
-                  </div>
-                </a>
-              ))
-            }
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                          </svg>
+                        ),
+                        href: 'https://github.com/kweephyo-pmt',
+                        label: 'GitHub'
+                      },
+
+                      {
+                        icon: (
+                          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                          </svg>
+                        ),
+                        href: 'https://www.linkedin.com/in/phyo-min-thein-605168361/',
+                        label: 'LinkedIn'
+                      },
+                    ].map((social) => (
+                      <a
+                        key={social.label}
+                        href={social.href}
+                        target={social.href.startsWith('http') ? '_blank' : undefined}
+                        rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                        className="group relative w-12 h-12 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 backdrop-blur-sm border border-white/10 rounded-xl flex items-center justify-center text-cyan-400 hover:text-white hover:border-cyan-400/50 transition-all duration-300"
+                      >
+                        <span className="transition-transform">
+                          {social.icon}
+                        </span>
+
+                        {/* Tooltip */}
+                        <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                          {social.label}
+                        </div>
+                      </a>
+                    ))
+                  }
                 </div>
 
                 <p className="text-gray-400 text-sm">
@@ -2430,14 +2445,14 @@ const App = () => {
             {/* Copyright & Credits */}
             <div className="text-center">
               <p className="text-gray-400 mb-2">
-                &copy; 2025 <span className="text-cyan-400 font-semibold">Phyo Min Thein</span>. 
+                &copy; 2025 <span className="text-cyan-400 font-semibold">Phyo Min Thein</span>.
                 All rights reserved.
               </p>
             </div>
           </div>
         </div>
       </footer>
-      
+
       {/* Custom Notification */}
       {notification.show && (
         <motion.div
@@ -2446,11 +2461,10 @@ const App = () => {
           exit={{ opacity: 0, y: -50, scale: 0.9 }}
           className="fixed top-4 right-4 z-50 max-w-sm"
         >
-          <div className={`p-4 rounded-lg shadow-lg backdrop-blur-sm border ${
-            notification.type === 'success' 
-              ? 'bg-green-900/90 border-green-500/50 text-green-100' 
-              : 'bg-red-900/90 border-red-500/50 text-red-100'
-          }`}>
+          <div className={`p-4 rounded-lg shadow-lg backdrop-blur-sm border ${notification.type === 'success'
+            ? 'bg-green-900/90 border-green-500/50 text-green-100'
+            : 'bg-red-900/90 border-red-500/50 text-red-100'
+            }`}>
             <div className="flex items-center space-x-3">
               {notification.type === 'success' ? (
                 <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2491,7 +2505,7 @@ const App = () => {
               >
                 ×
               </button>
-              
+
               {/* Certificate Image */}
               <div className="mb-6">
                 <img
@@ -2500,7 +2514,7 @@ const App = () => {
                   className="w-full h-auto rounded-2xl shadow-2xl"
                 />
               </div>
-              
+
               {/* Certificate Info */}
               <div className="text-center">
                 <h3 className="text-2xl font-bold text-white mb-2">{selectedCertificate.name}</h3>
